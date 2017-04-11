@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "teams")
 public class Team implements Serializable{
     private Integer id;
-    private String color;
+    private Integer color;
     private GameTable table;
     private Set<Player> playerSet;
 
@@ -23,11 +23,11 @@ public class Team implements Serializable{
     }
 
     @Column(name = "color", nullable = false)
-    public String getColor() {
+    public Integer getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 

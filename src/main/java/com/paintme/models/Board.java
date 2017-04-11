@@ -10,7 +10,7 @@ public class Board implements Serializable{
     private GameTable table;
     private Short status;
     private String cells;
-    private String winnerColor;
+    private Integer winnerColor;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -53,11 +53,11 @@ public class Board implements Serializable{
     }
 
     @Column(name = "winner_color", nullable = false)
-    public String getWinnerColor() {
+    public Integer getWinnerColor() {
         return winnerColor;
     }
 
-    public void setWinnerColor(String winnerColor) {
+    public void setWinnerColor(Integer winnerColor) {
         this.winnerColor = winnerColor;
     }
 }
