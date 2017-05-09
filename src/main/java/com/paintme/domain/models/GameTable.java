@@ -1,4 +1,4 @@
-package com.paintme.models;
+package com.paintme.domain.models;
 
 import java.io.Serializable;
 import java.util.Set;
