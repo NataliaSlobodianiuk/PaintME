@@ -9,7 +9,6 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
 
         Map<Integer[], Character> combinationsOfTreeDictionary =
                 this.findCombinationOfThree(cells);
-
         if (!combinationsOfTreeDictionary.isEmpty()) {
             winningSymbol = (char) combinationsOfTreeDictionary
                     .values().toArray()[0];
@@ -23,13 +22,19 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
         Map<Integer[], Character> twosColumns = new HashMap<>();
 
         for (int i = 0; i < 3; i++) {
-            if (cells.charAt(i) == cells.charAt(i + 3)) {
+            if (cells.charAt(i) != '-'
+                    && cells.charAt(i) == cells.charAt(i + 3)
+                    && cells.charAt(i + 6) == '-') {
                 twosColumns.put(new Integer[] {i, i + 3}, cells.charAt(i));
             }
-            else if (cells.charAt(i + 3) == cells.charAt(i + 6)) {
+            else if (cells.charAt(i + 3) != '-'
+                    && cells.charAt(i + 3) == cells.charAt(i + 6)
+                    && cells.charAt(i) == '-') {
                 twosColumns.put(new Integer[] {i + 3, i + 6}, cells.charAt(i + 3));
             }
-            else if (cells.charAt(i) == cells.charAt(i + 6)) {
+            else if (cells.charAt(i) != '-'
+                    && cells.charAt(i) == cells.charAt(i + 6)
+                    && cells.charAt(i + 3) == '-') {
                 twosColumns.put(new Integer[]{i, i + 6}, cells.charAt(i));
             }
         }
@@ -47,8 +52,11 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
                 if (i == 4) {
                     continue;
                 }
-                if (symbolToCheck == cells.charAt(i)) {
-                    twosDiagonals.put(new Integer[]{i, 4}, symbolToCheck);
+                if (symbolToCheck == cells.charAt(i)
+                        && cells.charAt(9 - 1 - i) == '-') {
+                    Integer[] two = new Integer[]{i, 4};
+                    Arrays.sort(two);
+                    twosDiagonals.put(two, symbolToCheck);
                 }
             }
         }
@@ -71,13 +79,19 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
         Map<Integer[], Character> twosRows = new HashMap<>();
 
         for (int i = 0; i < 9; i = i + 3) {
-            if (cells.charAt(i) == cells.charAt(i + 1)) {
+            if (cells.charAt(i) != '-'
+                    && cells.charAt(i) == cells.charAt(i + 1)
+                    && cells.charAt(i + 2) == '-') {
                 twosRows.put(new Integer[] {i, i + 1}, cells.charAt(i));
             }
-            else if (cells.charAt(i + 1) == cells.charAt(i + 2)) {
+            else if (cells.charAt(i + 1) != '-'
+                    && cells.charAt(i + 1) == cells.charAt(i + 2)
+                    && cells.charAt(i) == '-') {
                 twosRows.put(new Integer[] {i + 1, i + 2}, cells.charAt(i + 1));
             }
-            else if (cells.charAt(i) == cells.charAt(i + 2)) {
+            else if (cells.charAt(i) != '-'
+                    && cells.charAt(i) == cells.charAt(i + 2)
+                    && cells.charAt(i + 1) == '-') {
                 twosRows.put(new Integer[] {i, i + 2}, cells.charAt(i));
             }
         }

@@ -16,10 +16,8 @@ public class AlgorithmFactory{
                         case 9:
                             switch (difficultyLevel) {
                                 case 1:
-                                    //BlockingThreesInDiagonalsAlgorithm
-                                    break;
                                 case 2:
-                                    //BlockingThreesAlgorithm
+                                    algorithm = new Square3BlockingAlgorithm();
                                     break;
                                 case 3:
                                     //HardModeAlgorithm1

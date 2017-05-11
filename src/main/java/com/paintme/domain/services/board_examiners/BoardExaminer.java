@@ -8,7 +8,7 @@ public interface BoardExaminer {
     char findWinningSymbol(String cells);
 
     default Integer[] findFreeCells(String cells) {
-        List<Integer> freeCells = new ArrayList<Integer>();
+        List<Integer> freeCells = new ArrayList<>();
 
         for (int i = 0; i < cells.length(); i++)
         {
@@ -25,6 +25,6 @@ public interface BoardExaminer {
     Map<Integer[], Character> findCombinationOfThree(String cells);
 
     default boolean isFinished(String cells){
-        return (this.findWinningSymbol(cells) != '\u0000');
+        return (this.findFreeCells(cells).length == 0);
     }
 }
