@@ -7,14 +7,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Square3BlockingAlgorithm extends FindAMoveAlgorithm{
-    public Square3BlockingAlgorithm(){
-        this.setRandomFrequencyNum(ThreadLocalRandom.current().nextInt(1, 4));
-    }
-
+public class Square3TriangleWinningAlgorithm extends FindAMoveAlgorithm{
     @Override
-    public int findAMove(char color, String boardType, String cells)
-            throws PaintMEException {
+    public int findAMove(char color, String boardType, String cells) throws PaintMEException {
         int cellToMarkNum = -1;
 
         if (this.examiner == null) {
@@ -29,19 +24,23 @@ public class Square3BlockingAlgorithm extends FindAMoveAlgorithm{
             }
         }
 
-        Integer[] freeCells = examiner.findFreeCells(cells);
-        if (Arrays.asList(freeCells).contains(4)) {
-            cellToMarkNum = 4;
-        }
-        else if (freeCells.length > 6){
+        Integer[] freeCells = this.examiner.findFreeCells(cells);
+
+        if (ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE) % this.getRandomFrequencyNum() == 0){
             cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
         }
         else {
-            if (ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE) % this.getRandomFrequencyNum() == 0){
-                cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
-            }
-            else {
-                Map<Integer[], Character> twos = examiner.findCombinationOfTwo(cells);
+            if (Arrays.asList(freeCells).contains(4)) {
+                cellToMarkNum = 4;
+            } else if (freeCells.length > 6) {
+                for (int i = 0; i < 9; i = i + 2) {
+                    if (!Arrays.asList(freeCells).contains(i)) {
+                        cellToMarkNum = i;
+                        break;
+                    }
+                }
+            } else {
+                Map<Integer[], Character> twos = this.examiner.findCombinationOfTwo(cells);
                 for (Integer[] two : twos.keySet()) {
                     for (Integer[] pair : StrategyDictionaries.Square3BlockingTwos.keySet()) {
                         if (Arrays.equals(two, pair)) {
@@ -54,8 +53,8 @@ public class Square3BlockingAlgorithm extends FindAMoveAlgorithm{
                     }
                 }
 
-                if (cellToMarkNum == 1) {
-                    cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+                if (cellToMarkNum == -1) {
+                    /*ToDo*/
                 }
             }
         }

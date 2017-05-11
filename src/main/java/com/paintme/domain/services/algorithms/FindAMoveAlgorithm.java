@@ -6,6 +6,7 @@ import com.paintme.domain.services.board_examiners.BoardExaminer;
 
 public abstract class FindAMoveAlgorithm {
     private int randomFrequencyNum = 0;
+    protected BoardExaminer examiner = null;
 
     public int getRandomFrequencyNum() {
         return randomFrequencyNum;
@@ -18,12 +19,11 @@ public abstract class FindAMoveAlgorithm {
     public abstract int findAMove(char color, String boardType, String cells)
             throws PaintMEException;
 
-    protected BoardExaminer getBoardExaminer(String boardType, int cellsLength)
+    protected void setExaminer(String boardType, int cellsLength)
             throws PaintMEException {
         BoardExaminerFactory examinerFactory = new BoardExaminerFactory();
-        BoardExaminer examiner;
         try {
-            examiner = examinerFactory.getBoardExaminer(boardType, cellsLength);
+            this.examiner = examinerFactory.getBoardExaminer(boardType, cellsLength);
         } catch (IllegalArgumentException exception) {
             throw new PaintMEException(
                     "BoardExaminerFactory couldn't create a board examiner." +
@@ -31,7 +31,5 @@ public abstract class FindAMoveAlgorithm {
                             exception.getMessage(),
                     exception);
         }
-
-        return examiner;
     }
 }
