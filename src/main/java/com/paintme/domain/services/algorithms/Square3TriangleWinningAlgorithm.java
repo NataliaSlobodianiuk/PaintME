@@ -1,10 +1,8 @@
 package com.paintme.domain.services.algorithms;
 
 import com.paintme.domain.services.PaintMEException;
-import com.paintme.domain.services.StrategyDictionaries;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Square3TriangleWinningAlgorithm extends FindAMoveAlgorithm{
@@ -40,18 +38,7 @@ public class Square3TriangleWinningAlgorithm extends FindAMoveAlgorithm{
                     }
                 }
             } else {
-                Map<Integer[], Character> twos = this.examiner.findCombinationOfTwo(cells);
-                for (Integer[] two : twos.keySet()) {
-                    for (Integer[] pair : StrategyDictionaries.Square3BlockingTwos.keySet()) {
-                        if (Arrays.equals(two, pair)) {
-                            cellToMarkNum = StrategyDictionaries.Square3BlockingTwos.get(pair);
-                            break;
-                        }
-                    }
-                    if (cellToMarkNum != -1) {
-                        break;
-                    }
-                }
+                cellToMarkNum = this.blockWinningMoves(cells);
 
                 if (cellToMarkNum == -1) {
                     /*ToDo*/

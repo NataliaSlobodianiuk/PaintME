@@ -7,8 +7,11 @@ import java.util.Map;
 
 public class StrategyDictionaries {
     public static final Map<Integer[], Integer> Square3BlockingTwos;
+    public static final Map<Integer[], Integer[]> Square3BTriangleWinningPositions;
+
     static {
         Square3BlockingTwos = Collections.unmodifiableMap(formSquare3BlockingTwos());
+        Square3BTriangleWinningPositions = Collections.unmodifiableMap(formSquare3BTriangleWinningPositions());
     }
 
     private static Map<Integer[], Integer> formSquare3BlockingTwos() {
@@ -33,5 +36,16 @@ public class StrategyDictionaries {
         }
 
         return blockingTwos;
+    }
+
+    private static Map<Integer[], Integer[]> formSquare3BTriangleWinningPositions() {
+        Map<Integer[], Integer[]> triangleWinningPositions = new LinkedHashMap<>();
+
+        triangleWinningPositions.put(new Integer[] {0, 2}, new Integer[] {6, 8});
+        triangleWinningPositions.put(new Integer[] {0, 6}, new Integer[] {0, 8});
+        triangleWinningPositions.put(new Integer[] {6, 8}, new Integer[] {0, 2});
+        triangleWinningPositions.put(new Integer[] {2, 8}, new Integer[] {0, 6});
+
+        return triangleWinningPositions;
     }
 }
