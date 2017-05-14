@@ -21,6 +21,20 @@ public interface BoardExaminer {
         return (Integer[]) freeCells.toArray();
     }
 
+    default Integer[] findCellsByColor(String cells, char color) {
+        List<Integer> cellsByColor = new ArrayList<>();
+
+        for (int i = 0; i < cells.length(); i++)
+        {
+            if (cells.charAt(i) == color)
+            {
+                cellsByColor.add(i);
+            }
+        }
+
+        return (Integer[]) cellsByColor.toArray();
+    }
+
     Map<Integer[], Character> findCombinationOfTwo(String cells);
     Map<Integer[], Character> findCombinationOfThree(String cells);
 

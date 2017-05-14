@@ -20,7 +20,7 @@ public class AlgorithmFactory{
                                     algorithm = new Square3BlockingAlgorithm();
                                     break;
                                 case 3:
-                                    //HardModeAlgorithm1
+                                    algorithm = new Square3TriangleWinningAlgorithm();
                                     break;
                                 case 4:
                                     //HardModeAlgorithm2
