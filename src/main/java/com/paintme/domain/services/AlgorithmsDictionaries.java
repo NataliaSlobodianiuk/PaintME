@@ -4,10 +4,12 @@ import java.util.*;
 
 public class AlgorithmsDictionaries {
     public static final Map<Integer[], Integer> Square3ThirdInARow;
+    public static final List<Integer[]> Square3BAnglesWinningPositions;
     public static final List<Integer[]> Square3BTriangleWinningPositions;
 
     static {
         Square3ThirdInARow = Collections.unmodifiableMap(formSquare3ThirdInARow());
+        Square3BAnglesWinningPositions = Collections.unmodifiableList(formSquare3BAnglesWinningPositions());
         Square3BTriangleWinningPositions = Collections.unmodifiableList(formSquare3BTriangleWinningPositions());
     }
 
@@ -35,13 +37,28 @@ public class AlgorithmsDictionaries {
         return blockingTwos;
     }
 
-    private static List<Integer[]> formSquare3BTriangleWinningPositions() {
+    private static List<Integer[]> formSquare3BAnglesWinningPositions() {
         List<Integer[]> triangleWinningPositions = new ArrayList<>();
 
         triangleWinningPositions.add(new Integer[] {0, 2});
         triangleWinningPositions.add(new Integer[] {0, 6});
         triangleWinningPositions.add(new Integer[] {6, 8});
         triangleWinningPositions.add(new Integer[] {2, 8});
+
+        return triangleWinningPositions;
+    }
+
+    private static List<Integer[]> formSquare3BTriangleWinningPositions() {
+        List<Integer[]> triangleWinningPositions = new ArrayList<>();
+
+        triangleWinningPositions.add(new Integer[] {0, 1});
+        triangleWinningPositions.add(new Integer[] {0, 3});
+        triangleWinningPositions.add(new Integer[] {2, 1});
+        triangleWinningPositions.add(new Integer[] {2, 5});
+        triangleWinningPositions.add(new Integer[] {6, 3});
+        triangleWinningPositions.add(new Integer[] {6, 7});
+        triangleWinningPositions.add(new Integer[] {8, 5});
+        triangleWinningPositions.add(new Integer[] {8, 7});
 
         return triangleWinningPositions;
     }
