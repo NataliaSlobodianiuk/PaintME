@@ -1,11 +1,64 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-<HBox fx:controller="com.paintme.controllers.MainMenuController"
-      xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml"
-      alignment="center">
-    <Button text="Computer" onAction="#playComputerModeButton"/>
-    <Button text="2 Players" onAction="#play2PlayersModeButton"/>
-    <Button text="Online" onAction="#playOnlineModeButton"/>
-</HBox>
+<?import javafx.scene.shape.* ?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.LightBase?>
+<?import javafx.scene.Parent?>
+<?import javafx.scene.PerspectiveCamera ?>
+<?import javafx.scene.paint.PhongMaterial?>
+<?import javafx.scene.PointLight?>
+<?import javafx.scene.transform.Rotate?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+
+<GridPane fx:controller="com.paintme.controllers.MainMenuController"
+          xmlns="http://javafx.com/javafx/8"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="grid"
+          gridLinesVisible="false"
+          vgap="40"
+          style="-fx-background-color: white"
+          alignment="CENTER">
+
+    <children>
+            <SubScene fx:id="boxSubscene"
+                GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+                width="200" height="200"
+                  depthBuffer="true">
+            <root>
+            <Group fx:id="boxGroup">
+                <Box fx:id="cube"
+                    width="200" height="200" depth="200">
+                    <material>
+                        <PhongMaterial diffuseColor="darkmagenta" specularColor="violet"/>
+                    </material>
+                </Box>
+
+                <PerspectiveCamera fx:id="boxCamera"
+                                    translateX="0" translateY="0" translateZ="0">
+                </PerspectiveCamera>
+            </Group>
+            </root>
+        </SubScene>
+
+        <HBox fx:id="buttonsHBox"
+             alignment="center" spacing="20"
+             GridPane.columnIndex="0" GridPane.rowIndex = "1">
+
+            <Button fx:id="computerButton" text="Computer"
+                    alignment="BASELINE_LEFT" onAction="#playComputerModeButton">
+            </Button>
+
+            <Button fx:id="2playersButton" text="2 Players"
+                   alignment="BASELINE_CENTER" onAction="#play2PlayersModeButton">
+            </Button>
+
+            <Button fx:id="onlineButton" text="Online"
+                    alignment="BASELINE_RIGHT" onAction="#playOnlineModeButton">
+            </Button>
+        </HBox>
+    </children>
+</GridPane>

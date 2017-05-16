@@ -1,0 +1,105 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.shape.* ?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.LightBase?>
+<?import javafx.scene.Parent?>
+<?import javafx.scene.PerspectiveCamera ?>
+<?import javafx.scene.paint.PhongMaterial?>
+<?import javafx.scene.PointLight?>
+<?import javafx.collections.FXCollections?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.SubScene?>
+
+<?import java.lang.String?>
+
+<GridPane fx:controller="com.paintme.controllers.GameController"
+          xmlns="http://javafx.com/javafx/8"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="grid"
+          gridLinesVisible="false"
+          vgap="20"
+          hgap="10"
+          style="-fx-background-color: white"
+          alignment="CENTER">
+    <children>
+    <HBox fx:id="sidesHBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+          spacing="10">
+
+    </HBox>
+
+
+    <VBox fx:id="team1VBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="LEFT"
+          spacing="8">
+
+        <ListView fx:id="team1ListView">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="team1" fx:value="Team 1"/>
+                </FXCollections>
+            </items>
+        </ListView>
+
+        <ListView fx:id="team2ListView">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="team2" fx:value="Team 2"/>
+                </FXCollections>
+            </items>
+        </ListView>
+    </VBox>
+
+        <VBox fx:id="cubeVBox"
+              GridPane.columnIndex="1" GridPane.rowIndex="1"
+              GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+              spacing="8">
+
+            <Label fx:id="timeLabel" text="Your turn! Time: 30 sec." alignment="CENTER"/>
+            <HBox fx:id="firstLineHBox" alignment="CENTER"
+                  spacing="3">
+                <Button fx:id="button1" onAction="#button1"/>
+                <Button fx:id="button2" onAction="#button2"/>
+                <Button fx:id="button3" onAction="#button3"/>
+            </HBox>
+
+            <HBox fx:id="secondLineHBox" alignment="CENTER"
+                  spacing="3">
+                <Button fx:id="button4" onAction="#button4"/>
+                <Button fx:id="button5" onAction="#button5"/>
+                <Button fx:id="button6" onAction="#button6"/>
+            </HBox>
+
+            <HBox fx:id="thirdLineHBox" alignment="CENTER"
+                  spacing="3">
+                <Button fx:id="button7" onAction="#button7"/>
+                <Button fx:id="button8" onAction="#button8"/>
+                <Button fx:id="button9" onAction="#button9"/>
+            </HBox>
+        </VBox>
+
+        <SubScene fx:id="boxSubscene"
+                  GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.halignment="RIGHT"
+                  width="100" height="100"
+                  depthBuffer="true">
+            <root>
+                <Group fx:id="boxGroup">
+                    <Box fx:id="cube"
+                         width="100" height="100" depth="100">
+                        <material>
+                            <PhongMaterial diffuseColor="darkmagenta" specularColor="violet"/>
+                        </material>
+                    </Box>
+
+                    <PerspectiveCamera fx:id="boxCamera"
+                                       translateX="0" translateY="0" translateZ="0">
+                    </PerspectiveCamera>
+                </Group>
+            </root>
+        </SubScene>
+    </children>
+</GridPane>

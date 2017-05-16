@@ -1,0 +1,41 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane fx:controller="com.paintme.controllers.SignInController"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+          fx:id="grid"
+          alignment="center"
+          vgap="20">
+
+    <VBox fx:id="loginVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+          spacing="5">
+
+        <Label fx:id="loginLabel" text="Login:" alignment="BASELINE_LEFT"/>
+        <TextField fx:id="loginTextField"/>
+    </VBox>
+
+    <VBox fx:id="passwordVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+          spacing="5">
+
+        <Label fx:id="passwordLabel" text="Password:" alignment="BASELINE_LEFT"/>
+        <PasswordField fx:id="passwordField"/>
+    </VBox>
+
+    <Button fx:id="signInButton"
+            GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+            text="Sign in"
+            onAction="#signInButton">
+    </Button>
+
+    <HBox fx:id="signUpHBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+          spacing="8">
+
+        <Label fx:id="signUpLabel" text="Don't have an account - " alignment="BASELINE_LEFT"/>
+        <Hyperlink fx:id="signUpHyperlink" text="Sign up"
+                   onAction="#signUpHyperlink"/>
+    </HBox>
+</GridPane>
