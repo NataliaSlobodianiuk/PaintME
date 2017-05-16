@@ -39,7 +39,7 @@ public class Square3BlockingAlgorithm extends Square3FindAMoveAlgorithm{
                 cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
             }
             else {
-                cellToMarkNum = this.findWinningMove(cells);
+                cellToMarkNum = this.findAWinningMove(cells);
 
                 if (cellToMarkNum == -1) {
                     cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];

@@ -1,18 +1,18 @@
 package com.paintme.domain.services.algorithms;
 
-import com.paintme.domain.services.AlgorithmsDictionaries;
 import com.paintme.domain.services.PaintMEException;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Square3WinningAlgorithm extends Square3FindAMoveAlgorithm {
+public abstract class Square3WinningAlgorithm extends Square3FindAMoveAlgorithm {
     public Square3WinningAlgorithm(){
         this.setRandomFrequencyNum(ThreadLocalRandom.current().nextInt(10, 100));
     }
 
-    @Override
-    public int findAMove(char color, String boardType, String cells) throws PaintMEException {
+    protected int findAMove(char color, String boardType, String cells, List<Integer[]> winningPositions)
+            throws PaintMEException {
         int cellToMarkNum = -1;
 
         if (this.examiner == null) {
@@ -45,10 +45,10 @@ public class Square3WinningAlgorithm extends Square3FindAMoveAlgorithm {
                     }
                 }
             } else {
-                cellToMarkNum = this.findWinningMove(cells);
+                cellToMarkNum = this.findAWinningMove(cells);
                 if (cellToMarkNum == -1) {
                     cellToMarkNum = this.findAStrategicMove(
-                            color, cells, AlgorithmsDictionaries.Square3BAnglesWinningPositions);
+                            color, cells, winningPositions);
                 }
                 if (cellToMarkNum == -1) {
                     cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];

@@ -4,6 +4,9 @@ import com.paintme.domain.services.BoardExaminerFactory;
 import com.paintme.domain.services.PaintMEException;
 import com.paintme.domain.services.board_examiners.BoardExaminer;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class FindAMoveAlgorithm {
     private int randomFrequencyNum = 0;
     protected BoardExaminer examiner = null;
@@ -31,5 +34,33 @@ public abstract class FindAMoveAlgorithm {
                             exception.getMessage(),
                     exception);
         }
+    }
+
+    protected int findAStrategicMove(char color, String cells, List<Integer[]> winningPositions){
+        int cellToMarkNum = -1;
+
+        Integer[] freeCells = this.examiner.findFreeCells(cells);
+        Integer[] myCells = this.examiner.findCellsByColor(cells, color);
+
+        boolean isAvailable = true;
+        for (Integer[] winningPositionList: winningPositions) {
+            for (Integer winningPosition : winningPositionList) {
+                if (!Arrays.asList(freeCells).contains(winningPosition) &&
+                        !Arrays.asList(myCells).contains(winningPosition)) {
+                    isAvailable = false;
+                    break;
+                }
+            }
+            if (isAvailable) {
+                for (Integer winningPos : winningPositionList) {
+                    if (!Arrays.asList(myCells).contains(winningPos)) {
+                        cellToMarkNum = winningPos;
+                        break;
+                    }
+                }
+            }
+            isAvailable = true;
+        }
+        return cellToMarkNum;
     }
 }
