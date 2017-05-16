@@ -1,6 +1,6 @@
-package com.paintme.domain.services.algorithms;
+package com.paintme.services.algorithms;
 
-import com.paintme.domain.services.PaintMEException;
+import com.paintme.PaintMEException;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;

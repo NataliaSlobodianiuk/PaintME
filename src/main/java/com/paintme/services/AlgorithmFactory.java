@@ -1,6 +1,6 @@
-package com.paintme.domain.services;
+package com.paintme.services;
 
-import com.paintme.domain.services.algorithms.*;
+import com.paintme.services.algorithms.*;
 
 public class AlgorithmFactory{
     public FindAMoveAlgorithm getAlgorithm (String boardType, int cellsLength, int difficultyLevel) {

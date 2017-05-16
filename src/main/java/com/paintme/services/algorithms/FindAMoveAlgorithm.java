@@ -1,8 +1,8 @@
-package com.paintme.domain.services.algorithms;
+package com.paintme.services.algorithms;
 
-import com.paintme.domain.services.BoardExaminerFactory;
-import com.paintme.domain.services.PaintMEException;
-import com.paintme.domain.services.board_examiners.BoardExaminer;
+import com.paintme.services.BoardExaminerFactory;
+import com.paintme.PaintMEException;
+import com.paintme.services.board_examiners.BoardExaminer;
 
 import java.util.Arrays;
 import java.util.List;

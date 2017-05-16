@@ -1,6 +1,7 @@
-package com.paintme.domain.services;
+package com.paintme.services;
 
-import com.paintme.domain.services.board_examiners.*;
+import com.paintme.services.board_examiners.BoardExaminer;
+import com.paintme.services.board_examiners.Square3BoardExaminer;
 
 public class BoardExaminerFactory{
     public BoardExaminer getBoardExaminer (String boardType, int cellsLength) {

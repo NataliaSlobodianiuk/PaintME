@@ -1,6 +1,6 @@
-package com.paintme.domain.services.algorithms;
+package com.paintme.services.algorithms;
 
-import com.paintme.domain.services.AlgorithmsDictionaries;
+import com.paintme.services.AlgorithmsDictionaries;
 
 import java.util.Arrays;
 import java.util.Map;

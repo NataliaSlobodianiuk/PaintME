@@ -1,7 +1,7 @@
-package com.paintme.domain.services.algorithms;
+package com.paintme.services.algorithms;
 
-import com.paintme.domain.services.AlgorithmsDictionaries;
-import com.paintme.domain.services.PaintMEException;
+import com.paintme.services.AlgorithmsDictionaries;
+import com.paintme.PaintMEException;
 
 public class Square3TriangleWinningAlgorithm extends Square3WinningAlgorithm {
     @Override
