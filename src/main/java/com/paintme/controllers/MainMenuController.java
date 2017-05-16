@@ -27,7 +27,7 @@ public class MainMenuController implements Initializable{
 
         Stage gameDetailsStage = new Stage();
         gameDetailsStage.setTitle("Game Details");
-        gameDetailsStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
         gameDetailsStage.setScene(new Scene(root, 450, 350));
         gameDetailsStage.setResizable(false);
         gameDetailsStage.show();
@@ -41,7 +41,7 @@ public class MainMenuController implements Initializable{
 
         Stage gameDetailsStage = new Stage();
         gameDetailsStage.setTitle("Game Details");
-        gameDetailsStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
         gameDetailsStage.setScene(new Scene(root, 450, 350));
         gameDetailsStage.setResizable(false);
         gameDetailsStage.show();
@@ -55,7 +55,7 @@ public class MainMenuController implements Initializable{
 
         Stage signInStage = new Stage();
         signInStage.setTitle("Sign In");
-        signInStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+        signInStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
         signInStage.setScene(new Scene(root, 450, 350));
         signInStage.setResizable(false);
         signInStage.show();

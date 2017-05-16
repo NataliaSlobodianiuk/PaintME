@@ -36,7 +36,7 @@ public class GameDetailsController implements Initializable {
 
         Stage gameDetailsStage = new Stage();
         gameDetailsStage.setTitle("Game");
-        gameDetailsStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
         gameDetailsStage.setScene(new Scene(root, 550, 350));
         gameDetailsStage.setResizable(false);
         gameDetailsStage.show();

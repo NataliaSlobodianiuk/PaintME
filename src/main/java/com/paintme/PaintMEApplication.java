@@ -34,7 +34,7 @@ public class PaintMEApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PaintME");
-		primaryStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+		primaryStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
 		primaryStage.setScene(new Scene(this.root, 450, 350));
 		primaryStage.setResizable(false);
 		primaryStage.show();
