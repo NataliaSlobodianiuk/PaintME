@@ -1,6 +1,6 @@
-package com.paintme.domain.services.algorithms;
+package com.paintme.services.algorithms;
 
-import com.paintme.domain.services.PaintMEException;
+import com.paintme.PaintMEException;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -39,7 +39,7 @@ public class Square3BlockingAlgorithm extends Square3FindAMoveAlgorithm{
                 cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
             }
             else {
-                cellToMarkNum = this.findWinningMove(cells);
+                cellToMarkNum = this.findAWinningMove(cells);
 
                 if (cellToMarkNum == -1) {
                     cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];

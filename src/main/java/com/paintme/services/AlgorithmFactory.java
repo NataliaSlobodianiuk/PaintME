@@ -1,6 +1,6 @@
-package com.paintme.domain.services;
+package com.paintme.services;
 
-import com.paintme.domain.services.algorithms.*;
+import com.paintme.services.algorithms.*;
 
 public class AlgorithmFactory{
     public FindAMoveAlgorithm getAlgorithm (String boardType, int cellsLength, int difficultyLevel) {
@@ -20,10 +20,10 @@ public class AlgorithmFactory{
                                     algorithm = new Square3BlockingAlgorithm();
                                     break;
                                 case 3:
-                                    algorithm = new Square3WinningAlgorithm();
+                                    algorithm = new Square3TriangleWinningAlgorithm();
                                     break;
                                 case 4:
-                                    //HardModeAlgorithm2
+                                    algorithm = new Square3AnglesWinningAlgorithm();
                                     break;
                                 default:
                                     throw new IllegalArgumentException(

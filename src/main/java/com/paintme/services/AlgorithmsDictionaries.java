@@ -1,4 +1,4 @@
-package com.paintme.domain.services;
+package com.paintme.services;
 
 import java.util.*;
 
