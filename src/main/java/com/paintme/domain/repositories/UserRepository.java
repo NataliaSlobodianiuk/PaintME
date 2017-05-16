@@ -1,9 +1,8 @@
-package com.paintme.repositories;
+package com.paintme.domain.repositories;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.repository.*;
 
-import com.paintme.models.*;
+import com.paintme.domain.models.*;
 
 public interface UserRepository extends CrudRepository<User, Integer>{
 }
