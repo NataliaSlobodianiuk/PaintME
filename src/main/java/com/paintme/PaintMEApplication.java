@@ -1,8 +1,10 @@
 package com.paintme;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
@@ -13,7 +15,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class PaintMEApplication extends Application {
 
 	private ConfigurableApplicationContext springContext;
-	private Parent root;
+
+	@FXML
+	private GridPane root;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -30,7 +34,8 @@ public class PaintMEApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PaintME");
-		primaryStage.setScene(new Scene(this.root, 300, 275));
+		primaryStage.getIcons().add(new Image("/icons/TicTacToeCube.jpg"));
+		primaryStage.setScene(new Scene(this.root, 450, 350));
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}

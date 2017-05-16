@@ -1,0 +1,68 @@
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.Parent?>
+
+<?import java.lang.String?>
+<GridPane fx:controller="com.paintme.controllers.GameDetailsController"
+          xmlns="http://javafx.com/javafx/8"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="root"
+          gridLinesVisible="false"
+          vgap="20"
+          style="-fx-background-color: white"
+          alignment="CENTER">
+
+      <HBox fx:id="gameLoginHBox"
+            GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+            spacing="8">
+
+            <Label fx:id="gameLoginLabel" text="Name:" alignment="BASELINE_LEFT"/>
+            <TextField fx:id="gameLoginTextField"/>
+      </HBox>
+
+      <VBox fx:id="playerColorVBox"
+            GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+            spacing="5">
+
+            <Label text="Color:" alignment="BASELINE_LEFT"/>
+            <ColorPicker fx:id="colorPicker"/>
+      </VBox>
+
+      <VBox fx:id="gameDifficultyVBox"
+            GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+            spacing="5">
+
+            <Label text="Difficulty:" alignment="BASELINE_LEFT"/>
+            <ComboBox fx:id="difficultyComboBox">
+                  <items>
+                        <FXCollections fx:factory="observableArrayList">
+                              <String fx:id="easyMode" fx:value="Easy"/>
+                              <String fx:id="normalMode" fx:value="Normal"/>
+                              <String fx:id="hardMode" fx:value="Hard"/>
+                              <String fx:id="immrtalMode" fx:value="Immortal"/>
+                        </FXCollections>
+                  </items>
+                  <value>
+                        <String fx:value="Normal" />
+                  </value>
+            </ComboBox>
+      </VBox>
+
+      <HBox fx:id="buttonsHBox"
+            GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+            spacing="40">
+
+            <Button fx:id="cancelButton" text="Cancel"
+                    alignment="BASELINE_LEFT"
+                    onAction="#cancelGameDetails">
+            </Button>
+
+            <Button fx:id="applyButton" text="Apply"
+                    onAction="#applyGameDetailsButton">
+            </Button>
+      </HBox>
+</GridPane>

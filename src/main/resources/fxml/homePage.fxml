@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane fx:controller="com.paintme.controllers.HomePageController"
+          xmlns="http://javafx.com/javafx/8"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:id="grid"
+          alignment="center"
+          vgap="20">
+</GridPane>
