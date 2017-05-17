@@ -1,4 +1,4 @@
-package com.paintme.services;
+package com.paintme.infrastucture;
 
 import java.util.*;
 

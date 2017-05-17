@@ -1,4 +1,4 @@
-package com.paintme.services.strategies;
+package com.paintme.infrastucture.strategies;
 
 import java.util.concurrent.ThreadLocalRandom;
 

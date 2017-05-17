@@ -1,6 +1,6 @@
-package com.paintme.services.algorithms;
+package com.paintme.infrastucture.algorithms;
 
-import com.paintme.services.AlgorithmsDictionaries;
+import com.paintme.infrastucture.AlgorithmsDictionaries;
 import com.paintme.PaintMEException;
 
 public class Square3AnglesWinningAlgorithm extends Square3WinningAlgorithm {
