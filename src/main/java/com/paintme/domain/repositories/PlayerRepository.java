@@ -1,8 +1,10 @@
 package com.paintme.domain.repositories;
 
-import org.springframework.data.repository.*;
+import com.paintme.domain.models.Player;
+import org.springframework.data.repository.CrudRepository;
 
-import com.paintme.domain.models.*;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer>{
 }

@@ -2,21 +2,14 @@ package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 @Component
-public class MainMenuController implements Initializable{
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
+public class MainMenuController{
 
     public void playComputerModeButton(ActionEvent actionEvent) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()

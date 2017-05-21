@@ -1,8 +1,10 @@
 package com.paintme.domain.repositories;
 
-import org.springframework.data.repository.*;
+import com.paintme.domain.models.Team;
+import org.springframework.data.repository.CrudRepository;
 
-import com.paintme.domain.models.*;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TeamRepository extends CrudRepository<Team, Integer>{
 }

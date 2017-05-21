@@ -3,8 +3,9 @@ package com.paintme.security;
 import com.paintme.PaintMEException;
 import com.paintme.domain.models.User;
 
-import java.security.NoSuchAlgorithmException;
-
 public interface UserService {
-	boolean changePassword(User user, String oldPassword, String newPassword) throws NoSuchAlgorithmException, PaintMEException;
+	boolean changePassword(String oldPassword, String newPassword)
+			throws PaintMEException;
+
+	User loadUser() throws PaintMEException;
 }

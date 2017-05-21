@@ -4,8 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-public class SHA256 {
-    public static String getSHA256SecurePassword(
+public class Hashing {
+    public static String getSecurePassword(
             String password, byte[] salt, String algorithmName)
             throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance(algorithmName);
