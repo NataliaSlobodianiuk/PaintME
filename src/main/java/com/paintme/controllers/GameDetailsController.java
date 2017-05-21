@@ -1,6 +1,9 @@
 package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
+
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +19,10 @@ public class GameDetailsController{
     @FXML
     private GridPane root;
 
+    public void initialize(){
+
+    }
+
     public void cancelGameDetails(){
     }
 
@@ -25,11 +32,12 @@ public class GameDetailsController{
 
         Parent root = fxmlLoader.load();
 
-        Stage gameDetailsStage = new Stage();
-        gameDetailsStage.setTitle("Game");
-        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        gameDetailsStage.setScene(new Scene(root, 550, 350));
-        gameDetailsStage.setResizable(false);
-        gameDetailsStage.show();
+        Stage gameStage = new Stage();
+        gameStage.setTitle("Game");
+        gameStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
+        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
+        gameStage.setScene(new Scene(root, 600, 350));
+        gameStage.setResizable(false);
+        gameStage.show();
     }
 }

@@ -1,6 +1,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.shape.* ?>
 <?import javafx.scene.AmbientLight?>
 <?import javafx.scene.paint.Color?>
@@ -14,39 +15,44 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.SubScene?>
 
+<?import javafx.scene.image.ImageView?>
 <GridPane fx:controller="com.paintme.controllers.MainMenuController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           gridLinesVisible="false"
-          vgap="40"
+          vgap="10"
           style="-fx-background-color: white"
+          styleClass="panel-primary"
           alignment="CENTER">
 
     <children>
-            <SubScene fx:id="boxSubscene"
-                GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+            <Label fx:id="paintMeLabel" text="PaintME"
+                   GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+                   style="-fx-font: bold; -fx-font-size: 24px;"
+                   textFill="blue">
+            </Label>
+
+           <SubScene fx:id="boxSubscene"
+                GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
                 width="200" height="200"
-                  depthBuffer="true">
+                  depthBuffer="false">
             <root>
             <Group fx:id="boxGroup">
-                <Box fx:id="cube"
-                    width="200" height="200" depth="200">
-                    <material>
-                        <PhongMaterial diffuseColor="darkmagenta" specularColor="violet"/>
-                    </material>
-                </Box>
-
-                <PerspectiveCamera fx:id="boxCamera"
-                                    translateX="0" translateY="0" translateZ="0">
-                </PerspectiveCamera>
+                <children>
+                <ImageView fx:id="imageView">
+                    <image>
+                        <Image url="/icons/Cube.gif"/>
+                    </image>
+                </ImageView>
+                </children>
             </Group>
             </root>
         </SubScene>
 
         <HBox fx:id="buttonsHBox"
              alignment="center" spacing="20"
-             GridPane.columnIndex="0" GridPane.rowIndex = "1">
+             GridPane.columnIndex="0" GridPane.rowIndex = "2" GridPane.halignment="CENTER">
 
             <Button fx:id="computerButton" text="Computer"
                     alignment="BASELINE_LEFT" onAction="#playComputerModeButton">
@@ -57,7 +63,8 @@
             </Button>
 
             <Button fx:id="onlineButton" text="Online"
-                    alignment="BASELINE_RIGHT" onAction="#playOnlineModeButton">
+                    alignment="BASELINE_RIGHT" onAction="#playOnlineModeButton"
+                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
             </Button>
         </HBox>
     </children>

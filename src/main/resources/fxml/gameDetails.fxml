@@ -7,6 +7,7 @@
 <?import javafx.scene.Parent?>
 
 <?import java.lang.String?>
+
 <GridPane fx:controller="com.paintme.controllers.GameDetailsController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
@@ -14,8 +15,10 @@
           gridLinesVisible="false"
           vgap="20"
           style="-fx-background-color: white"
+          styleClass="panel-primary"
           alignment="CENTER">
 
+      <children>
       <HBox fx:id="gameLoginHBox"
             GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
             spacing="8">
@@ -43,7 +46,7 @@
                               <String fx:id="easyMode" fx:value="Easy"/>
                               <String fx:id="normalMode" fx:value="Normal"/>
                               <String fx:id="hardMode" fx:value="Hard"/>
-                              <String fx:id="immrtalMode" fx:value="Immortal"/>
+                              <!--<String fx:id="immortalMode" fx:value="Immortal"/>-->
                         </FXCollections>
                   </items>
                   <value>
@@ -62,7 +65,9 @@
             </Button>
 
             <Button fx:id="applyButton" text="Apply"
-                    onAction="#applyGameDetailsButton">
+                    onAction="#applyGameDetailsButton"
+                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
             </Button>
       </HBox>
+      </children>
 </GridPane>

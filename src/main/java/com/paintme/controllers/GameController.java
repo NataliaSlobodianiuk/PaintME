@@ -7,12 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GameController {
-
     @FXML
     private ListView<String> team1ListView;
 
     @FXML
     private ListView<String> team2ListView;
+
+    public void initialize() {
+
+    }
 
     public void button1 (ActionEvent actionEvent) throws Exception {
 

@@ -6,5 +6,45 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="20"
+
+    <children>
+    <VBox fx:id="loginVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+          spacing="5">
+
+        <Label fx:id="loginLabel" text="Login:" alignment="BASELINE_LEFT"/>
+        <TextField fx:id="loginTextField"/>
+    </VBox>
+
+    <VBox fx:id="emailVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER">
+
+        <Label fx:id="emailLabel" text="Email:" alignment="BASELINE_LEFT"/>
+        <TextField fx:id="emailTextField"/>
+    </VBox>
+
+    <VBox fx:id="passwordVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+          spacing="5">
+
+        <Label fx:id="passwordLabel" text="Password:" alignment="BASELINE_LEFT"/>
+        <PasswordField fx:id="passwordField"/>
+    </VBox>
+
+    <VBox fx:id="confirmPasswordVBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+          spacing="5">
+
+        <Label fx:id="confirmPasswordLabel" text="Password:" alignment="BASELINE_LEFT"/>
+        <PasswordField fx:id="confirmPasswordField"/>
+    </VBox>
+
+    <Button fx:id="signInButton"
+            GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+            text="Sign up"
+            onAction="#signUpButton"
+            style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+    </Button>
+    </children>
 </GridPane>

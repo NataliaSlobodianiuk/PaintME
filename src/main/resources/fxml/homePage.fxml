@@ -1,10 +1,51 @@
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+
+<?import java.lang.String?>
 
 <GridPane fx:controller="com.paintme.controllers.HomePageController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="10"
+
+    <children>
+        <HBox fx:id="playerDetailsHBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+        spacing="10">
+
+            <Label fx:id="loginLabel" text="Player login"
+                   style="-fx-background-color: greenyellow"/>
+        </HBox>
+
+        <ListView fx:id="tablesListView" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                  GridPane.halignment="CENTER">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="tablesRow" fx:value="Tables"/>
+                </FXCollections>
+            </items>
+        </ListView>
+
+        <HBox fx:id="buttonsHBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="RIGHT"
+              spacing="10">
+
+            <Button fx:id="joinTableButton" text="Join table"
+                    alignment="BASELINE_LEFT"
+                    onAction="#joinGameButton">
+            </Button>
+
+            <Button fx:id="createTableButton" text="Create table"
+                    onAction="#createTabelButton"
+                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            </Button>
+
+            <Button fx:id="leaderboardButton" text="Leaderboard"
+                    onAction="#leaderboardTabelButton">
+            </Button>
+        </HBox>
+    </children>
 </GridPane>
