@@ -1,11 +1,11 @@
 package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,15 +14,16 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameDetailsController {
-    public void initialize(){
-    }
+public class GameDetailsController{
 
     @FXML
     private GridPane root;
 
-    public void cancelGameDetails(){
+    public void initialize(){
 
+    }
+
+    public void cancelGameDetails(){
     }
 
     public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception{

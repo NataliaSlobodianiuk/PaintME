@@ -1,8 +1,8 @@
-package com.paintme.services.strategies;
+package com.paintme.infrastucture.strategies;
 
-import com.paintme.services.AlgorithmFactory;
+import com.paintme.infrastucture.AlgorithmFactory;
 import com.paintme.PaintMEException;
-import com.paintme.services.algorithms.FindAMoveAlgorithm;
+import com.paintme.infrastucture.algorithms.FindAMoveAlgorithm;
 
 public abstract class GameDifficultyStrategy {
     private FindAMoveAlgorithm algorithm = null;

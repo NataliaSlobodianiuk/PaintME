@@ -2,12 +2,11 @@ package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameController{
+public class GameController {
     @FXML
     private ListView<String> team1ListView;
 

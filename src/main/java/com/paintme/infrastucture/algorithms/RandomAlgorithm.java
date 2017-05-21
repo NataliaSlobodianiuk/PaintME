@@ -1,4 +1,4 @@
-package com.paintme.services.algorithms;
+package com.paintme.infrastucture.algorithms;
 
 import com.paintme.PaintMEException;
 

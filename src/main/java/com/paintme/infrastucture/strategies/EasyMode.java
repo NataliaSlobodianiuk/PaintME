@@ -1,4 +1,4 @@
-package com.paintme.services.strategies;
+package com.paintme.infrastucture.strategies;
 
 public class EasyMode extends GameDifficultyStrategy {
     @Override

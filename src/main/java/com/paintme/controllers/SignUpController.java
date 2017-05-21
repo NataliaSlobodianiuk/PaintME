@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import org.springframework.stereotype.Component;
 
+@Component
 public class SignUpController{
     public void initialize(){
     }

@@ -10,8 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-public class TableController{
-    public void initialize(){
+@Component
+public class TableController {
+    public void initialize() {
     }
 
     public void cancelTableButton(ActionEvent actionEvent) throws Exception {

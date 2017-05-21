@@ -1,8 +1,8 @@
 package com.paintme.domain.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -10,7 +10,8 @@ public class User implements Serializable
 {
     private Integer id;
     private String login;
-    private String password;
+    private String passwordHash;
+    private byte[] passwordSalt;
     private String email;
     private Short status;
     private Integer wins;
@@ -38,12 +39,21 @@ public class User implements Serializable
     }
 
     @Column(name = "password", nullable = false)
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    @Column(name = "password_salt", nullable = false)
+    public byte[] getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(byte[] passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
     @Column(name = "email", nullable = false, unique = true)

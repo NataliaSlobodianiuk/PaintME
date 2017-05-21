@@ -1,4 +1,4 @@
-package com.paintme.services.board_examiners;
+package com.paintme.infrastucture.board_examiners;
 
 import java.util.ArrayList;
 import java.util.List;
