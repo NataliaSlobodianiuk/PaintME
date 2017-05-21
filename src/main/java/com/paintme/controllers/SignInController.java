@@ -3,7 +3,7 @@ package com.paintme.controllers;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
-import com.paintme.security.UserService;
+import com.paintme.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 public class SignInController{
@@ -46,7 +48,7 @@ public class SignInController{
             String passwordHash = Hashing.getSecurePassword(
                     this.passwordField.getText(), salt, "SHA-256");
 
-            if (user.getPasswordHash() == passwordHash) {
+            if (Objects.equals(user.getPasswordHash(), passwordHash)) {
                 FXMLLoader fxmlLoader = new FXMLLoader((getClass()
                         .getResource("/fxml/homePage.fxml")));
 
