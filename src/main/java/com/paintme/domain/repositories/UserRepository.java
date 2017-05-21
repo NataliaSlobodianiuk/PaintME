@@ -1,10 +1,10 @@
 package com.paintme.domain.repositories;
 
 import com.paintme.domain.models.User;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-@Configurable
+@Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
     User findByLogin(String login);
     User findByLoginAndPasswordHash(String login, String passwordHash);

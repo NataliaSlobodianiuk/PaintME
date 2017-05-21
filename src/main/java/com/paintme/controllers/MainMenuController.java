@@ -1,17 +1,23 @@
 package com.paintme.controllers;
 
+import com.paintme.domain.repositories.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MainMenuController{
+    @Autowired
+    private UserRepository repository;
 
     public void playComputerModeButton(ActionEvent actionEvent) throws Exception {
+        this.repository.findAll();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                 .getResource("/fxml/gameDetails.fxml"));
 

@@ -14,8 +14,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class SignInController{
     @Autowired
-    private UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    private UserService userService;
+
     private UserRepository userRepository;
 
     @FXML

@@ -10,10 +10,15 @@ import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+		"com.paintme.security", "com.paintme.controllers",
+		"com.paintme.domain.models", "com.paintme.domain.repositories" })
+@ComponentScan(basePackages = { "com.paintme.security", "com.paintme.controllers",
+		"com.paintme.domain.models", "com.paintme.domain.repositories" })
 public class PaintMEApplication extends Application {
-	private ConfigurableApplicationContext springContext;
+	protected ConfigurableApplicationContext springContext;
 
 	@FXML
 	private GridPane root;
