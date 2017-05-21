@@ -35,7 +35,9 @@ public class PaintMEApplication extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("PaintME");
 		primaryStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-		primaryStage.setScene(new Scene(this.root, 450, 350));
+		root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
+		primaryStage.setScene(new Scene(this.root, 350, 300));
+
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}

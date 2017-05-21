@@ -6,8 +6,10 @@
       xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="20"
+          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap.css">
 
+    <children>
     <VBox fx:id="loginVBox"
           GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
           spacing="5">
@@ -27,7 +29,8 @@
     <Button fx:id="signInButton"
             GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
             text="Sign in"
-            onAction="#signInButton">
+            onAction="#signInButton"
+            style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
     </Button>
 
     <HBox fx:id="signUpHBox"
@@ -38,4 +41,6 @@
         <Hyperlink fx:id="signUpHyperlink" text="Sign up"
                    onAction="#signUpHyperlink"/>
     </HBox>
+    </children>
+
 </GridPane>

@@ -6,5 +6,21 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="20"
+          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap.css">
+
+    <children>
+        <TableView fx:id="leaderboard"
+                   GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <columns>
+                <TableColumn fx:id="numberColumn" text="№"/>
+                <TableColumn fx:id="loginColumn" text="Login"/>
+                <TableColumn fx:id="playsColumn" text="Plays"/>
+                <TableColumn fx:id="winsColumn" text="Wins"/>
+                <TableColumn fx:id="defeatsColumn" text="Defeats"/>
+                <TableColumn fx:id="drawsColumn" text="Draws"/>
+                <TableColumn fx:id="statusColumn" text="Status"/>
+            </columns>
+        </TableView>
+    </children>
 </GridPane>

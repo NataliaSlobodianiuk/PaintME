@@ -1,10 +1,104 @@
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+
+<?import java.lang.String?>
 
 <GridPane fx:controller="com.paintme.controllers.TableController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="20"
+          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap-theme.css">
+    <children>
+        <VBox fx:id="timeVBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+              spacing="5">
+
+            <Label fx:id="timeLabel" text="Time:" alignment="BASELINE_LEFT"/>
+            <ComboBox fx:id="timeComboBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="5secForMove" fx:value="5 sec"/>
+                        <String fx:id="10secForMove" fx:value="10 sec"/>
+                        <String fx:id="15secForMove" fx:value="15 sec"/>
+                        <String fx:id="20secForMove" fx:value="20 sec"/>
+                        <String fx:id="25secForMove" fx:value="25 sec"/>
+                        <String fx:id="30secForMove" fx:value="30 sec"/>
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="10 sec"/>
+                </value>
+            </ComboBox>
+        </VBox>
+
+        <VBox fx:id="dimensionVBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+              spacing="5">
+
+            <Label fx:id="cubeSizeLabel" text="Cube size:" alignment="BASELINE_LEFT"/>
+            <ComboBox fx:id="cubeSizeComboBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <!--<String fx:id="3x3Dim" fx:value="3x3"/>
+                        <String fx:id="5x5Dim" fx:value="5x5"/>-->
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="3x3"/>
+                </value>
+            </ComboBox>
+        </VBox>
+
+        <VBox fx:id="teamsVBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+              spacing="5">
+
+            <Label fx:id="teamsLabel" text="Teams per game:" alignment="BASELINE_LEFT"/>
+            <ComboBox fx:id="teamsComboBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="2teams" fx:value="2"/>
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="2"/>
+                </value>
+            </ComboBox>
+        </VBox>
+
+        <VBox fx:id="playersVBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+              spacing="5">
+
+            <Label fx:id="playersLabel" text="Players per team:" alignment="BASELINE_LEFT"/>
+            <ComboBox fx:id="playersComboBox">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="2players" fx:value="2"/>
+                    </FXCollections>
+                </items>
+                <value>
+                    <String fx:value="2"/>
+                </value>
+            </ComboBox>
+        </VBox>
+
+        <HBox fx:id="buttonsHBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
+              spacing="40">
+
+            <Button fx:id="cancelButton" text="Cancel"
+                    alignment="BASELINE_LEFT"
+                    onAction="#cancelTableButton">
+            </Button>
+
+            <Button fx:id="applyButton" text="Apply"
+                    onAction="#applyTableButton"
+                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            </Button>
+        </HBox>
+    </children>
 </GridPane>

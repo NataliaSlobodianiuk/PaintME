@@ -9,13 +9,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 @Component
-public class MainMenuController implements Initializable{
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+public class MainMenuController{
+    public void initialize() {
     }
 
     public void playComputerModeButton(ActionEvent actionEvent) throws Exception {
@@ -27,6 +23,7 @@ public class MainMenuController implements Initializable{
         Stage gameDetailsStage = new Stage();
         gameDetailsStage.setTitle("Game Details");
         gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
+        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
         gameDetailsStage.setScene(new Scene(root, 450, 350));
         gameDetailsStage.setResizable(false);
         gameDetailsStage.show();
@@ -41,6 +38,7 @@ public class MainMenuController implements Initializable{
         Stage gameDetailsStage = new Stage();
         gameDetailsStage.setTitle("Game Details");
         gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
+        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
         gameDetailsStage.setScene(new Scene(root, 450, 350));
         gameDetailsStage.setResizable(false);
         gameDetailsStage.show();
@@ -55,7 +53,8 @@ public class MainMenuController implements Initializable{
         Stage signInStage = new Stage();
         signInStage.setTitle("Sign In");
         signInStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        signInStage.setScene(new Scene(root, 450, 350));
+        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
+        signInStage.setScene(new Scene(root, 350, 300));
         signInStage.setResizable(false);
         signInStage.show();
     }

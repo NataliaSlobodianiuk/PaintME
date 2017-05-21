@@ -10,11 +10,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class LeaderboardController implements Initializable{
-    @Override
-    public void initialize(URL url, ResourceBundle rb){
+public class LeaderboardController{
+    public void initialize(){
     }
 }

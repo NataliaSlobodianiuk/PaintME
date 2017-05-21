@@ -2,8 +2,6 @@ package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +14,8 @@ import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameDetailsController implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle rb){
+public class GameDetailsController {
+    public void initialize(){
     }
 
     @FXML
@@ -34,11 +31,12 @@ public class GameDetailsController implements Initializable {
 
         Parent root = fxmlLoader.load();
 
-        Stage gameDetailsStage = new Stage();
-        gameDetailsStage.setTitle("Game");
-        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        gameDetailsStage.setScene(new Scene(root, 550, 350));
-        gameDetailsStage.setResizable(false);
-        gameDetailsStage.show();
+        Stage gameStage = new Stage();
+        gameStage.setTitle("Game");
+        gameStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
+        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
+        gameStage.setScene(new Scene(root, 600, 350));
+        gameStage.setResizable(false);
+        gameStage.show();
     }
 }
