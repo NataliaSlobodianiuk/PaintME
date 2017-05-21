@@ -23,7 +23,6 @@
           gridLinesVisible="false"
           vgap="10"
           style="-fx-background-color: white"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap.css"
           styleClass="panel-primary"
           alignment="CENTER">
 

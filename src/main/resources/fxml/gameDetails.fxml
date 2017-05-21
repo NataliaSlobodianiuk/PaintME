@@ -16,7 +16,6 @@
           vgap="20"
           style="-fx-background-color: white"
           styleClass="panel-primary"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap-theme.css"
           alignment="CENTER">
 
       <children>

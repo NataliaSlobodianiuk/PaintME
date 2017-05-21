@@ -9,8 +9,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap-theme.css">
+          vgap="20">
     <children>
         <VBox fx:id="timeVBox"
               GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"

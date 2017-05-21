@@ -10,7 +10,6 @@
           fx:id="grid"
           alignment="center"
           vgap="10"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap.css">
 
     <children>
         <HBox fx:id="playerDetailsHBox"

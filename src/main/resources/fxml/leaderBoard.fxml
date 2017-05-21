@@ -7,7 +7,6 @@
           fx:id="grid"
           alignment="center"
           vgap="20"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap.css">
 
     <children>
         <TableView fx:id="leaderboard"

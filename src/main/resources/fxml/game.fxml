@@ -26,7 +26,6 @@
           vgap="10"
           hgap="10"
           style="-fx-background-color: white"
-          stylesheets="@../style/bootstrap-3.3.2-dist/css/bootstrap-theme.css"
           alignment="CENTER">
 
     <children>
