@@ -1,7 +1,7 @@
 package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
-
+import javafx.scene.control.*;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -10,20 +10,55 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GameDetailsController{
+    @FXML
+    private Label player1LoginLabel;
 
     @FXML
-    private GridPane root;
+    private TextField player1LoginTextField;
+
+    @FXML
+    private Label player2LoginLabel;
+
+    @FXML
+    private TextField player2LoginTextField;
+
+    @FXML
+    private Label color1Label;
+
+    @FXML
+    private ColorPicker colorPicker1;
+
+    @FXML
+    private Label color2Label;
+
+    @FXML
+    private ColorPicker colorPicker2;
+
+    @FXML
+    private Label difficultyLabel;
+
+    @FXML
+    private ComboBox<String> difficultyComboBox;
+
+    @FXML
+    private Button applyButton;
+
+    @FXML
+    private Button cancelButton;
 
     public void initialize(){
 
     }
 
     public void cancelGameDetails(){
+        Stage stage = (Stage)cancelButton.getScene().getWindow();
+        stage.close();
     }
 
     public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception{

@@ -1,15 +1,32 @@
 package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MainMenuController{
+    @FXML
+    private Label paintMeLabel;
+
+    @FXML
+    private Image image;
+
+    @FXML
+    private Button computerButton;
+
+    @FXML
+    private Button twoPlayersButton;
+
+    @FXML
+    private Button onlineButton;
+
     public void initialize() {
     }
 

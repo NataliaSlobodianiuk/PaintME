@@ -30,7 +30,7 @@
             <Label fx:id="paintMeLabel" text="PaintME"
                    GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
                    style="-fx-font: bold; -fx-font-size: 24px;"
-                   textFill="blue">
+                   textFill="mediumvioletred">
             </Label>
 
            <SubScene fx:id="boxSubscene"
@@ -40,9 +40,9 @@
             <root>
             <Group fx:id="boxGroup">
                 <children>
-                <ImageView fx:id="imageView">
+                <ImageView>
                     <image>
-                        <Image url="/icons/Cube.gif"/>
+                        <Image fx:id="image" url="/icons/Cube.gif"/>
                     </image>
                 </ImageView>
                 </children>
@@ -58,7 +58,7 @@
                     alignment="BASELINE_LEFT" onAction="#playComputerModeButton">
             </Button>
 
-            <Button fx:id="2playersButton" text="2 Players"
+            <Button fx:id="twoPlayersButton" text="2 Players"
                    alignment="BASELINE_CENTER" onAction="#play2PlayersModeButton">
             </Button>
 

@@ -19,27 +19,43 @@
           alignment="CENTER">
 
       <children>
-      <HBox fx:id="gameLoginHBox"
+      <HBox fx:id="player1LoginHBox"
             GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
             spacing="8">
 
-            <Label fx:id="gameLoginLabel" text="Name:" alignment="BASELINE_LEFT"/>
-            <TextField fx:id="gameLoginTextField"/>
+            <Label fx:id="palyer1LoginLabel" text="Name 1:" alignment="BASELINE_LEFT"/>
+            <TextField fx:id="player1LoginTextField"/>
       </HBox>
 
-      <VBox fx:id="playerColorVBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
-            spacing="5">
+            <HBox fx:id="player2LoginHBox"
+                  GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+                  spacing="8">
 
-            <Label text="Color:" alignment="BASELINE_LEFT"/>
-            <ColorPicker fx:id="colorPicker"/>
-      </VBox>
+                  <Label fx:id="player2LoginLabel" text="Name 2:" alignment="BASELINE_LEFT"/>
+                  <TextField fx:id="player2LoginTextField"/>
+            </HBox>
 
-      <VBox fx:id="gameDifficultyVBox"
+      <VBox fx:id="player1ColorVBox"
             GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
             spacing="5">
 
-            <Label text="Difficulty:" alignment="BASELINE_LEFT"/>
+            <Label fx:id="color1Label" text="Color 1:" alignment="BASELINE_LEFT"/>
+            <ColorPicker fx:id="colorPicker1"/>
+      </VBox>
+
+            <VBox fx:id="player2ColorVBox"
+                  GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+                  spacing="5">
+
+                  <Label fx:id="color2Label" text="Color 2:" alignment="BASELINE_LEFT"/>
+                  <ColorPicker fx:id="colorPicker2"/>
+            </VBox>
+
+      <VBox fx:id="gameDifficultyVBox"
+            GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+            spacing="5">
+
+            <Label fx:id="difficultyLabel" text="Difficulty:" alignment="BASELINE_LEFT"/>
             <ComboBox fx:id="difficultyComboBox">
                   <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -56,7 +72,7 @@
       </VBox>
 
       <HBox fx:id="buttonsHBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+            GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
             spacing="40">
 
             <Button fx:id="cancelButton" text="Cancel"

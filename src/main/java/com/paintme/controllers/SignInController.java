@@ -13,8 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +25,25 @@ public class SignInController{
     private UserRepository userRepository;
 
     @FXML
+    private Label loginLabel;
+
+    @FXML
     private TextField loginTextField;
 
     @FXML
+    private Label passwordLabel;
+
+    @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private Button signInButton;
+
+    @FXML
+    private Label signUpLabel;
+
+    @FXML
+    private Hyperlink signUpHyperlink;
 
     public void signInButton(ActionEvent actionEvent) throws Exception {
         User user = this.userRepository.findByLogin(this.loginTextField.getText());

@@ -31,7 +31,7 @@
     <children>
     <HBox fx:id="sidesHBox" GridPane.rowIndex="0" GridPane.halignment="CENTER"
           spacing="50">
-          <StackPane fx:id="side1StackPane" alignment="BASELINE_LEFT">
+          <StackPane fx:id="side1StackPane">
               <children>
                   <ImageView>
                       <image>
@@ -111,7 +111,8 @@
         </ListView>
     </VBox>
 
-        <Label fx:id="timeLabel" text="Your turn! Time: 30 sec."
+        <Label fx:id="timeLabel"
+               text="Your turn! Time: 30 sec." textFill="white" style="-fx-font-weight: bold"
                GridPane.columnIndex="1" GridPane.rowIndex="0"
                GridPane.halignment="CENTER" GridPane.valignment="TOP">
         </Label>

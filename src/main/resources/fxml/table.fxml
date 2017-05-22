@@ -41,8 +41,8 @@
             <ComboBox fx:id="cubeSizeComboBox">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <!--<String fx:id="3x3Dim" fx:value="3x3"/>
-                        <String fx:id="5x5Dim" fx:value="5x5"/>-->
+                        <String fx:id="3x3Dim" fx:value="3x3"/>
+                        <!--<String fx:id="5x5Dim" fx:value="5x5"/>-->
                     </FXCollections>
                 </items>
                 <value>

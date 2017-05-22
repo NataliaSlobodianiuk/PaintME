@@ -6,7 +6,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20"
+          vgap="20">
 
     <children>
     <VBox fx:id="loginVBox"
@@ -36,11 +36,11 @@
           GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
           spacing="5">
 
-        <Label fx:id="confirmPasswordLabel" text="Password:" alignment="BASELINE_LEFT"/>
+        <Label fx:id="confirmPasswordLabel" text="Confirm password:" alignment="BASELINE_LEFT"/>
         <PasswordField fx:id="confirmPasswordField"/>
     </VBox>
 
-    <Button fx:id="signInButton"
+    <Button fx:id="signUpButton"
             GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
             text="Sign up"
             onAction="#signUpButton"

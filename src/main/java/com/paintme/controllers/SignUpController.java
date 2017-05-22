@@ -14,6 +14,33 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SignUpController{
+    @FXML
+    private Label loginLabel;
+
+    @FXML
+    private TextField loginTextField;
+
+    @FXML
+    private Label emailLabel;
+
+    @FXML
+    private TextField emailTextField;
+
+    @FXML
+    private Label passwordLabel;
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private Label confirmPasswordLabel;
+
+    @FXML
+    private PasswordField confirmPasswordField;
+
+    @FXML
+    private Button signUpButton;
+
     public void initialize(){
     }
 
