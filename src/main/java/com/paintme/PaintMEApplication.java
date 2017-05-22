@@ -11,7 +11,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+		"com.paintme.security", "com.paintme.controllers",
+		"com.paintme.domain.models", "com.paintme.domain.repositories",
+		"com.paintme.services"})
 public class PaintMEApplication extends Application {
 	private ConfigurableApplicationContext springContext;
 
@@ -20,7 +23,7 @@ public class PaintMEApplication extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(args);
-	};
+	}
 
 	@Override
 	public void init() throws Exception {

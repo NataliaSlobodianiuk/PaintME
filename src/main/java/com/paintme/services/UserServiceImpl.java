@@ -1,14 +1,16 @@
-package com.paintme.security;
+package com.paintme.services;
 
 import com.paintme.PaintMEException;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
+import com.paintme.security.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Properties;
 
 @Service
@@ -16,16 +18,20 @@ public class UserServiceImpl implements UserService {
 
 	private User sessionUser = null;
 
+	private final UserRepository userRepository;
+
 	@Autowired
-	private UserRepository userRepository;
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public boolean changePassword(String oldPassword, String newPassword)
 			throws PaintMEException {
 		try {
-			if (!(Hashing.getSecurePassword(
-					oldPassword, sessionUser.getPasswordSalt(), "SHA-256") ==
-					sessionUser.getPasswordHash())) {
+			if (!(Objects.equals(Hashing.getSecurePassword(
+					oldPassword, sessionUser.getPasswordSalt(), "SHA-256"),
+					sessionUser.getPasswordHash()))) {
 				return false;
 			}
 		} catch (NoSuchAlgorithmException exception) {
@@ -58,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User loadUser() throws PaintMEException {
+	public void loadUser() throws PaintMEException {
 		Properties prop = new Properties();
 		InputStream in = getClass().getResourceAsStream("application.properties");
 		try {
@@ -72,18 +78,14 @@ public class UserServiceImpl implements UserService {
 		String login = prop.getProperty("security.user.name");
 		String passwordHash = prop.getProperty("security.user.password");
 
-		User user = null;
-
 		if (login != null && passwordHash != null) {
-			user = this.userRepository.findByLoginAndPasswordHash(login, passwordHash);
-			if (user == null) {
+			sessionUser = this.userRepository.findByLoginAndPasswordHash(login, passwordHash);
+			if (sessionUser == null) {
 				throw new PaintMEException(
 						"User with login " + login +
 								" and password hash " + passwordHash +
 								" doesn't exist.");
 			}
 		}
-
-		return user;
 	}
 }

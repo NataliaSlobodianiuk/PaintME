@@ -31,6 +31,7 @@ public class MainMenuController{
     }
 
     public void playComputerModeButton(ActionEvent actionEvent) throws Exception {
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                 .getResource("/fxml/gameDetails.fxml"));
 
