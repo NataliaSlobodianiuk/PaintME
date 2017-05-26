@@ -20,18 +20,11 @@ import java.util.Objects;
 
 @Component
 public class SignInController{
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     private UserService userService;
 
+    @Autowired
     private UserRepository userRepository;
 
     @FXML
@@ -63,8 +56,6 @@ public class SignInController{
                 homePageStage.show();
             }
         }
-
-        this.userService.loadUser();
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {

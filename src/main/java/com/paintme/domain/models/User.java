@@ -1,5 +1,7 @@
 package com.paintme.domain.models;
 
+import com.paintme.domain.models.statuses.UserStatuses;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -13,10 +15,10 @@ public class User implements Serializable
     private String passwordHash;
     private byte[] passwordSalt;
     private String email;
-    private Short status;
-    private Integer wins;
-    private Integer draws;
-    private Integer defeats;
+    private UserStatuses status = UserStatuses.ONLINE;
+    private Integer wins = 0;
+    private Integer draws = 0;
+    private Integer defeats = 0;
     private Set<Player> playerSet;
 
     @Id
@@ -38,7 +40,7 @@ public class User implements Serializable
         this.login = login;
     }
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password_hash", nullable = false)
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -67,20 +69,19 @@ public class User implements Serializable
 
     @Column(
             name = "status",
-            nullable = false,
-            columnDefinition = "smallint default 0")
-    public Short getStatus() {
+            nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    public UserStatuses getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(UserStatuses status) {
         this.status = status;
     }
 
     @Column(
             name = "wins",
-            nullable = false,
-            columnDefinition = "int default 0")
+            nullable = false)
     public Integer getWins() {
         return wins;
     }
@@ -91,8 +92,7 @@ public class User implements Serializable
 
     @Column(
             name = "draws",
-            nullable = false,
-            columnDefinition = "int default 0")
+            nullable = false)
     public Integer getDraws() {
         return draws;
     }
@@ -102,8 +102,7 @@ public class User implements Serializable
     }
 
     @Column(name = "defeats",
-            nullable = false,
-            columnDefinition = "int default 0")
+            nullable = false)
     public Integer getDefeats() {
         return defeats;
     }

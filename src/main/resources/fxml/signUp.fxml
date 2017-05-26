@@ -6,7 +6,7 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20"
+          vgap="20">
 
     <children>
     <VBox fx:id="loginVBox"

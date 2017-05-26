@@ -12,11 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication(scanBasePackages = {
-		"com.paintme.security", "com.paintme.controllers",
-		"com.paintme.domain.models", "com.paintme.domain.repositories",
+		"com.paintme.security",
+		"com.paintme.controllers",
+		"com.paintme.domain.models",
+		"com.paintme.domain.repositories",
 		"com.paintme.services"})
 public class PaintMEApplication extends Application {
-	private ConfigurableApplicationContext springContext;
+	public static ConfigurableApplicationContext springContext;
 
 	@FXML
 	private GridPane root;
@@ -27,7 +29,7 @@ public class PaintMEApplication extends Application {
 
 	@Override
 	public void init() throws Exception {
-		this.springContext = SpringApplication.run(PaintMEApplication.class);
+		springContext = SpringApplication.run(PaintMEApplication.class);
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
 		fxmlLoader.setControllerFactory(springContext::getBean);
@@ -47,6 +49,6 @@ public class PaintMEApplication extends Application {
 
 	@Override
 	public void stop() throws Exception {
-		this.springContext.close();
+		springContext.close();
 	}
 }

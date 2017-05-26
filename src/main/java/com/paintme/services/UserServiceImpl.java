@@ -2,6 +2,7 @@ package com.paintme.services;
 
 import com.paintme.PaintMEException;
 import com.paintme.domain.models.User;
+import com.paintme.domain.models.statuses.UserStatuses;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Properties;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private User sessionUser = null;
+	public static User sessionUser = null;
 
 	private final UserRepository userRepository;
 
@@ -65,27 +66,42 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void loadUser() throws PaintMEException {
-		Properties prop = new Properties();
-		InputStream in = getClass().getResourceAsStream("application.properties");
-		try {
-			prop.load(in);
-		} catch (IOException exception) {
-			throw new PaintMEException(
-					"Project properties couldn`t be loaded. " +
-							exception.getMessage(), exception);
-		}
-
-		String login = prop.getProperty("security.user.name");
-		String passwordHash = prop.getProperty("security.user.password");
+		String login = this.getProperty("security.user.name");
+		String passwordHash = this.getProperty("security.user.password");
 
 		if (login != null && passwordHash != null) {
-			sessionUser = this.userRepository.findByLoginAndPasswordHash(login, passwordHash);
-			if (sessionUser == null) {
+			User user = this.userRepository.findByLoginAndPasswordHash(login, passwordHash);
+			if (user == null) {
 				throw new PaintMEException(
 						"User with login " + login +
 								" and password hash " + passwordHash +
 								" doesn't exist.");
 			}
+			else if (user.getStatus() != UserStatuses.OFFLINE){
+			}
 		}
+	}
+
+	public String getProperty(String propertyName) throws PaintMEException {
+		Properties prop;
+
+		try {
+			prop = this.getProperties();
+		}  catch (IOException exception) {
+			throw new PaintMEException(
+					"Project properties couldn`t be loaded. " +
+							exception.getMessage(), exception);
+		}
+
+		return prop.getProperty(propertyName);
+	}
+
+	private Properties getProperties() throws IOException {
+		Properties prop = new Properties();
+
+		InputStream in = getClass().getResourceAsStream("application.properties");
+		prop.load(in);
+
+		return prop;
 	}
 }

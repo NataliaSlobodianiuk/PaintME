@@ -1,23 +1,33 @@
 package com.paintme.controllers;
 
+import com.paintme.domain.models.User;
+import com.paintme.domain.repositories.UserRepository;
+import com.paintme.security.Hashing;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.scene.control.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SignUpController{
+    @Autowired
+    private UserRepository userRepository;
+
     public void initialize(){
     }
 
     public void signUpButton(ActionEvent actionEvent) throws Exception {
+        User usertoAdd = new User();
+        usertoAdd.setLogin("julia");
+        usertoAdd.setPasswordSalt(Hashing.getSalt("SHA1PRNG"));
+        usertoAdd.setPasswordHash(Hashing.getSecurePassword("mypassword", usertoAdd.getPasswordSalt(), "SHA-256"));
+        usertoAdd.setEmail("julia@example.com");
+        this.userRepository.save(usertoAdd);
+
         FXMLLoader fxmlLoader = new FXMLLoader((getClass()
                 .getResource("/fxml/homePage.fxml")));
 
