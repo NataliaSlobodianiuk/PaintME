@@ -17,8 +17,6 @@ import java.util.Properties;
 @Service
 public class UserServiceImpl implements UserService {
 
-	public static User sessionUser = null;
-
 	private final UserRepository userRepository;
 
 	@Autowired
@@ -27,12 +25,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean changePassword(String oldPassword, String newPassword)
+	public boolean changePassword(User user, String oldPassword, String newPassword)
 			throws PaintMEException {
 		try {
 			if (!(Objects.equals(Hashing.getSecurePassword(
-					oldPassword, sessionUser.getPasswordSalt(), "SHA-256"),
-					sessionUser.getPasswordHash()))) {
+					oldPassword, user.getPasswordSalt(), "SHA-256"),
+					user.getPasswordHash()))) {
 				return false;
 			}
 		} catch (NoSuchAlgorithmException exception) {
@@ -50,27 +48,32 @@ public class UserServiceImpl implements UserService {
 							exception.getMessage(), exception);
 		}
 
+		String newPasswordHash;
 		try {
-			sessionUser.setPasswordHash(Hashing.getSecurePassword(
-					newPassword, newSalt, "SHA-256"));
+			newPasswordHash = Hashing.getSecurePassword(
+					newPassword, newSalt, "SHA-256");
 		} catch (NoSuchAlgorithmException exception) {
 			throw new PaintMEException(
 					"Unknown algorithm for password encoding chosen. " +
 							exception.getMessage(), exception);
 		}
-		sessionUser.setPasswordSalt(newSalt);
 
-		this.userRepository.save(sessionUser);
+		user.setPasswordSalt(newSalt);
+		user.setPasswordHash(newPasswordHash);
+
+		this.userRepository.save(user);
 		return true;
 	}
 
 	@Override
-	public void loadUser() throws PaintMEException {
+	public User loadUser() throws PaintMEException {
 		String login = this.getProperty("security.user.name");
 		String passwordHash = this.getProperty("security.user.password");
 
+		User user = null;
 		if (login != null && passwordHash != null) {
-			User user = this.userRepository.findByLoginAndPasswordHash(login, passwordHash);
+			user = this.userRepository
+					.findByLoginAndPasswordHash(login, passwordHash);
 			if (user == null) {
 				throw new PaintMEException(
 						"User with login " + login +
@@ -78,8 +81,13 @@ public class UserServiceImpl implements UserService {
 								" doesn't exist.");
 			}
 			else if (user.getStatus() != UserStatuses.OFFLINE){
+				throw new PaintMEException(
+						"User with login " + login +
+								" and password hash " + passwordHash +
+								" is already signed in.");
 			}
 		}
+		return user;
 	}
 
 	public String getProperty(String propertyName) throws PaintMEException {
