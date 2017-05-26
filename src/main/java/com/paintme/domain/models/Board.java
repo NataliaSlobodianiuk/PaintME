@@ -1,16 +1,18 @@
 package com.paintme.domain.models;
 
-import java.io.Serializable;
+import com.paintme.domain.models.statuses.GameStatuses;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "boards")
 public class Board implements Serializable{
     private Integer id;
     private GameTable table;
-    private Short status;
+    private GameStatuses status = GameStatuses.CREATED;
     private String cells;
-    private Integer winnerColor;
+    private Integer winnerColor = -1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,13 +35,12 @@ public class Board implements Serializable{
 
     @Column(
             name = "status",
-            nullable = false,
-            columnDefinition = "smallint default 0")
-    public Short getStatus() {
+            nullable = false)
+    public GameStatuses getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(GameStatuses status) {
         this.status = status;
     }
 

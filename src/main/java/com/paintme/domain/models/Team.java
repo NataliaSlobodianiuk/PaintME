@@ -1,8 +1,8 @@
 package com.paintme.domain.models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "teams")

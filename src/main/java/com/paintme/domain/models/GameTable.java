@@ -1,15 +1,16 @@
 package com.paintme.domain.models;
 
-import java.io.Serializable;
-import java.util.Set;
+import com.paintme.domain.models.statuses.GameStatuses;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "tables")
 public class GameTable implements Serializable{
     private Integer id;
-    private Short status;
+    private GameStatuses status = GameStatuses.CREATED;
     private Set<Board> boardSet;
     private Set<Team> teamSet;
 
@@ -23,15 +24,12 @@ public class GameTable implements Serializable{
         this.id = id;
     }
 
-    @Column(
-            name = "status",
-            nullable = false,
-            columnDefinition = "smallint default 0")
-    public Short getStatus() {
+    @Column(name = "status", nullable = false)
+    public GameStatuses getStatus() {
         return status;
     }
 
-    public void setStatus(Short status) {
+    public void setStatus(GameStatuses status) {
         this.status = status;
     }
 
