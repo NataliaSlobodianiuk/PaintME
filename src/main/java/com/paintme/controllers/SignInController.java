@@ -1,5 +1,6 @@
 package com.paintme.controllers;
 
+import com.paintme.PaintMEApplication;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
@@ -9,8 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,25 @@ public class SignInController{
     private UserRepository userRepository;
 
     @FXML
+    private Label loginLabel;
+
+    @FXML
     private TextField loginTextField;
 
     @FXML
+    private Label passwordLabel;
+
+    @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private Button signInButton;
+
+    @FXML
+    private Label signUpLabel;
+
+    @FXML
+    private Hyperlink signUpHyperlink;
 
     public void signInButton(ActionEvent actionEvent) throws Exception {
         User user = this.userRepository.findByLogin(this.loginTextField.getText());
@@ -44,7 +59,7 @@ public class SignInController{
             if (Objects.equals(user.getPasswordHash(), passwordHash)) {
                 FXMLLoader fxmlLoader = new FXMLLoader((getClass()
                         .getResource("/fxml/homePage.fxml")));
-
+                fxmlLoader.setControllerFactory(PaintMEApplication.springContext::getBean);
                 Parent root = fxmlLoader.load();
 
                 Stage homePageStage = new Stage();
@@ -61,7 +76,7 @@ public class SignInController{
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass()
                 .getResource("/fxml/signUp.fxml"));
-
+        fxmlLoader.setControllerFactory(PaintMEApplication.springContext::getBean);
         Parent root = fxmlLoader.load();
 
         Stage signUpStage = new Stage();

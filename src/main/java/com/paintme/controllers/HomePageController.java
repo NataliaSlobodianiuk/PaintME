@@ -1,17 +1,34 @@
 package com.paintme.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HomePageController {
+    @FXML
+    private Label loginLabel;
+
+    @FXML
+    private ListView<String> tablesLListView;
+
+    @FXML
+    private Button joinTableButton;
+
+    @FXML
+    private Button createTableButton;
+
+    @FXML
+    private Button leaderboardButton;
+
     public void initialize() {
     }
 

@@ -34,7 +34,7 @@
 
     <HBox fx:id="signUpHBox"
           GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
-          spacing="8">
+          spacing="4">
 
         <Label fx:id="signUpLabel" text="Don't have an account - " alignment="BASELINE_LEFT"/>
         <Hyperlink fx:id="signUpHyperlink" text="Sign up"
