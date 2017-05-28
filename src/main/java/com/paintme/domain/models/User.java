@@ -15,7 +15,7 @@ public class User implements Serializable
     private String passwordHash;
     private byte[] passwordSalt;
     private String email;
-    private UserStatuses status = UserStatuses.ONLINE;
+    private UserStatuses status = UserStatuses.OFFLINE;
     private Integer wins = 0;
     private Integer draws = 0;
     private Integer defeats = 0;
