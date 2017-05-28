@@ -1,25 +1,18 @@
 package com.paintme;
 
+import com.paintme.view.FxmlView;
+import com.paintme.view.StageManager;
 import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication(scanBasePackages = {
-		"com.paintme.security", "com.paintme.controllers",
-		"com.paintme.domain.models", "com.paintme.domain.repositories",
-		"com.paintme.services"})
+@SpringBootApplication
 public class PaintMEApplication extends Application {
-	private ConfigurableApplicationContext springContext;
 
-	@FXML
-	private GridPane root;
+	protected ConfigurableApplicationContext springContext;
+	protected StageManager stageManager;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -27,26 +20,28 @@ public class PaintMEApplication extends Application {
 
 	@Override
 	public void init() throws Exception {
-		this.springContext = SpringApplication.run(PaintMEApplication.class);
-
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
-		fxmlLoader.setControllerFactory(springContext::getBean);
-		this.root = fxmlLoader.load();
+		this.springContext = bootstrapSpringApplicationContext();
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("PaintME");
-		primaryStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-		root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-		primaryStage.setScene(new Scene(this.root, 350, 300));
-
-		primaryStage.setResizable(false);
-		primaryStage.show();
+		stageManager = this.springContext.getBean(StageManager.class, primaryStage);
+		displayInitialScene();
 	}
 
 	@Override
 	public void stop() throws Exception {
 		this.springContext.close();
+	}
+
+	protected void displayInitialScene(){
+		this.stageManager.switchScene(FxmlView.MAIN);
+	}
+
+	private ConfigurableApplicationContext bootstrapSpringApplicationContext() {
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(PaintMEApplication.class);
+		String[] args = getParameters().getRaw().stream().toArray(String[]::new);
+		builder.headless(false);
+		return builder.run(args);
 	}
 }

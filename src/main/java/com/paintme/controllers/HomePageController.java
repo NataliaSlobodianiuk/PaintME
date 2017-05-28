@@ -1,5 +1,8 @@
 package com.paintme.controllers;
 
+import com.paintme.domain.repositories.UserRepository;
+import com.paintme.view.FxmlView;
+import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,17 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
 public class HomePageController {
+
+    @Autowired
+    @Lazy
+    protected StageManager stageManager;
+
     @FXML
     private Label loginLabel;
 
@@ -29,51 +39,22 @@ public class HomePageController {
     @FXML
     private Button leaderboardButton;
 
-    public void initialize() {
-    }
+    @FXML
+    private Button signOutButton;
 
     public void createTabelButton(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/fxml/table.fxml"));
-
-        Parent root = fxmlLoader.load();
-
-        Stage gameDetailsStage = new Stage();
-        gameDetailsStage.setTitle("Table");
-        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-        gameDetailsStage.setScene(new Scene(root, 450, 350));
-        gameDetailsStage.setResizable(false);
-        gameDetailsStage.show();
+        this.stageManager.switchScene(FxmlView.TABLE);
     }
 
     public void leaderboardTabelButton(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/fxml/leaderBoard.fxml"));
-
-        Parent root = fxmlLoader.load();
-
-        Stage gameDetailsStage = new Stage();
-        gameDetailsStage.setTitle("Leaderboard");
-        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-        gameDetailsStage.setScene(new Scene(root, 550, 350));
-        gameDetailsStage.setResizable(false);
-        gameDetailsStage.show();
+        this.stageManager.switchScene(FxmlView.LEADERBOARD);
     }
 
     public void joinGameButton(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/fxml/game.fxml"));
+        this.stageManager.switchScene(FxmlView.GAME);
+    }
 
-        Parent root = fxmlLoader.load();
-
-        Stage gameDetailsStage = new Stage();
-        gameDetailsStage.setTitle("Game");
-        gameDetailsStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-        gameDetailsStage.setScene(new Scene(root, 600, 350));
-        gameDetailsStage.setResizable(false);
-        gameDetailsStage.show();
+    public void signOutButton(ActionEvent actionEvent) throws Exception {
+        this.stageManager.switchScene(FxmlView.SIGNIN);
     }
 }

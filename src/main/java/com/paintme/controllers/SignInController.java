@@ -4,6 +4,8 @@ import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
 import com.paintme.services.UserService;
+import com.paintme.view.FxmlView;
+import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +19,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
 public class SignInController{
+
+    @Autowired
+    @Lazy
+    protected StageManager stageManager;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -35,6 +43,7 @@ public class SignInController{
 
     private UserService userService;
 
+    @Autowired
     private UserRepository userRepository;
 
     @FXML
@@ -58,7 +67,13 @@ public class SignInController{
     @FXML
     private Hyperlink signUpHyperlink;
 
+    public void initialize() {
+        this.loginTextField.setText("login");
+        this.passwordField.setText("password");
+    }
+
     public void signInButton(ActionEvent actionEvent) throws Exception {
+        this.userRepository.findAll();
         User user = this.userRepository.findByLogin(this.loginTextField.getText());
 
         if (user != null) {
@@ -67,18 +82,7 @@ public class SignInController{
                     this.passwordField.getText(), salt, "SHA-256");
 
             if (Objects.equals(user.getPasswordHash(), passwordHash)) {
-                FXMLLoader fxmlLoader = new FXMLLoader((getClass()
-                        .getResource("/fxml/homePage.fxml")));
-
-                Parent root = fxmlLoader.load();
-
-                Stage homePageStage = new Stage();
-                homePageStage.setTitle("Home Page");
-                homePageStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-                root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-                homePageStage.setScene(new Scene(root, 450, 350));
-                homePageStage.setResizable(false);
-                homePageStage.show();
+                this.stageManager.switchScene(FxmlView.HOMEPAGE);
             }
         }
 
@@ -86,22 +90,6 @@ public class SignInController{
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/fxml/signUp.fxml"));
-
-        Parent root = fxmlLoader.load();
-
-        Stage signUpStage = new Stage();
-        signUpStage.setTitle("Sign Up");
-        signUpStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-        signUpStage.setScene(new Scene(root, 350, 350));
-        signUpStage.setResizable(false);
-        signUpStage.show();
-    }
-
-    public void initialize() {
-        this.loginTextField.setText("login");
-        this.passwordField.setText("password");
+        this.stageManager.switchScene(FxmlView.SIGNUP);
     }
 }

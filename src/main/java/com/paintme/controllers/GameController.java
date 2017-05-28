@@ -1,5 +1,7 @@
 package com.paintme.controllers;
 
+import com.paintme.domain.repositories.UserRepository;
+import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.PerspectiveCamera;
@@ -7,10 +9,17 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Box;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GameController {
+
+    @Autowired
+    @Lazy
+    protected StageManager stageManager;
+
     @FXML
     private Image side1;
 
@@ -70,10 +79,6 @@ public class GameController {
 
     @FXML
     private PerspectiveCamera boxCamera;
-
-    public void initialize() {
-
-    }
 
     public void button1 (ActionEvent actionEvent) throws Exception {
 

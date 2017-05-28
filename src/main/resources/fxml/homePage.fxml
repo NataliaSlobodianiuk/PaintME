@@ -14,10 +14,13 @@
     <children>
         <HBox fx:id="playerDetailsHBox"
               GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-        spacing="10">
+        spacing="150">
 
             <Label fx:id="loginLabel" text="Player login"
                    style="-fx-background-color: greenyellow"/>
+            <Button fx:id="signOutButton" text="Sign out"
+                    onAction="#signOutButton">
+            </Button>
         </HBox>
 
         <ListView fx:id="tablesListView" GridPane.columnIndex="0" GridPane.rowIndex="1"
@@ -31,7 +34,7 @@
 
         <HBox fx:id="buttonsHBox"
               GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="RIGHT"
-              spacing="10">
+              spacing="20">
 
             <Button fx:id="joinTableButton" text="Join table"
                     alignment="BASELINE_LEFT"

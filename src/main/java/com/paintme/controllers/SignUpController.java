@@ -1,5 +1,8 @@
 package com.paintme.controllers;
 
+import com.paintme.domain.repositories.UserRepository;
+import com.paintme.view.FxmlView;
+import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.jws.soap.SOAPBinding;
 
 @Component
 public class SignUpController{
+
+    @Autowired
+    @Lazy
+    protected StageManager stageManager;
+
     @FXML
     private Label loginLabel;
 
@@ -41,21 +53,7 @@ public class SignUpController{
     @FXML
     private Button signUpButton;
 
-    public void initialize(){
-    }
-
     public void signUpButton(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader((getClass()
-                .getResource("/fxml/homePage.fxml")));
-
-        Parent root = fxmlLoader.load();
-
-        Stage homePageStage = new Stage();
-        homePageStage.setTitle("Home Page");
-        homePageStage.getIcons().add(new Image("/icons/5x5Cube.jpg"));
-        root.setStyle("-fx-background-image:url('/icons/BackgroundImage.jpg')");
-        homePageStage.setScene(new Scene(root, 450, 350));
-        homePageStage.setResizable(false);
-        homePageStage.show();
+        this.stageManager.switchScene(FxmlView.HOMEPAGE);
     }
 }
