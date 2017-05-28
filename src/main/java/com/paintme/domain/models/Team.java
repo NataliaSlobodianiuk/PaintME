@@ -11,6 +11,7 @@ public class Team implements Serializable{
     private Integer color;
     private GameTable table;
     private Set<Player> playerSet;
+    private String rgb;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -48,4 +49,13 @@ public class Team implements Serializable{
     public void setPlayerSet(Set<Player> playerSet) {
         this.playerSet = playerSet;
     }
+
+    public String getRgb() {
+        return rgb;
+    }
+
+    public void setRgb(String rgb) {
+        this.rgb = rgb;
+    }
+
 }

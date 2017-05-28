@@ -11,12 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication(scanBasePackages = {
-		"com.paintme.security",
-		"com.paintme.controllers",
-		"com.paintme.domain.models",
-		"com.paintme.domain.repositories",
-		"com.paintme.services"})
+@SpringBootApplication
 public class PaintMEApplication extends Application {
 	public static ConfigurableApplicationContext springContext;
 
