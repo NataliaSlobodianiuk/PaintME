@@ -57,8 +57,10 @@ public class SignInController{
                     this.passwordField.getText(), salt, "SHA-256");
 
             if (Objects.equals(user.getPasswordHash(), passwordHash)) {
-                FXMLLoader fxmlLoader = new FXMLLoader((getClass()
-                        .getResource("/fxml/homePage.fxml")));
+                this.userService.uploadUser(user);
+
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                        getClass().getResource("/fxml/homePage.fxml"));
                 fxmlLoader.setControllerFactory(PaintMEApplication.springContext::getBean);
                 Parent root = fxmlLoader.load();
 
@@ -70,12 +72,15 @@ public class SignInController{
                 homePageStage.setResizable(false);
                 homePageStage.show();
             }
+            else {
+                /// TODO: 5/26/2017  Allert Popup Wrong login or/and password
+            }
         }
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass()
-                .getResource("/fxml/signUp.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                getClass().getResource("/fxml/signUp.fxml"));
         fxmlLoader.setControllerFactory(PaintMEApplication.springContext::getBean);
         Parent root = fxmlLoader.load();
 

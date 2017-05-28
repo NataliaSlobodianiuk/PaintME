@@ -3,6 +3,7 @@ package com.paintme.controllers;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
+import com.paintme.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SignUpController{
+
+    @Autowired
+    private UserService userService;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -50,12 +55,19 @@ public class SignUpController{
     private Button signUpButton;
 
     public void signUpButton(ActionEvent actionEvent) throws Exception {
-        User usertoAdd = new User();
-        usertoAdd.setLogin("julia");
-        usertoAdd.setPasswordSalt(Hashing.getSalt("SHA1PRNG"));
-        usertoAdd.setPasswordHash(Hashing.getSecurePassword("mypassword", usertoAdd.getPasswordSalt(), "SHA-256"));
-        usertoAdd.setEmail("julia@example.com");
-        this.userRepository.save(usertoAdd);
+        if (this.passwordField.getText() !=  this.confirmPasswordField.getText()) {
+            // TODO: 5/26/2017  Allert Popup Password and Confirm password fields are different
+        }
+
+        User userToAdd = new User();
+        userToAdd.setLogin(this.loginTextField.getText());
+        userToAdd.setPasswordSalt(Hashing.getSalt("SHA1PRNG"));
+        userToAdd.setPasswordHash(Hashing.getSecurePassword(
+                this.passwordField.getText(), userToAdd.getPasswordSalt(), "SHA-256"));
+        userToAdd.setEmail(this.emailTextField.getText());
+
+        this.userRepository.save(userToAdd);
+        this.userService.uploadUser(userToAdd);
 
         FXMLLoader fxmlLoader = new FXMLLoader((getClass()
                 .getResource("/fxml/homePage.fxml")));

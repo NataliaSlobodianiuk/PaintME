@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GameDetailsController{
+
     @FXML
     private Label player1LoginLabel;
 

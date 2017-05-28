@@ -3,14 +3,16 @@ package com.paintme.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.PerspectiveCamera;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
 import javafx.scene.shape.Box;
 import org.springframework.stereotype.Component;
 
 @Component
 public class GameController {
+
     @FXML
     private Image side1;
 

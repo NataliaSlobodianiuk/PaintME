@@ -1,12 +1,9 @@
 package com.paintme.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.springframework.stereotype.Component;
-
-import javax.swing.table.*;
 
 @Component
 public class LeaderboardController {

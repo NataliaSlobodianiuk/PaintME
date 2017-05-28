@@ -7,5 +7,9 @@ public interface UserService {
 	boolean changePassword(User user, String oldPassword, String newPassword)
 			throws PaintMEException;
 
-	User loadUser() throws PaintMEException;
+	User getSessionUser() throws PaintMEException;
+
+	boolean uploadUser(User user) throws PaintMEException;
+
+	boolean unloadUser(User user) throws PaintMEException;
 }
