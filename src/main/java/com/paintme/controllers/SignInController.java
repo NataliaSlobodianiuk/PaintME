@@ -1,5 +1,6 @@
 package com.paintme.controllers;
 
+import com.paintme.PaintMEApplication;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
@@ -11,11 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +29,6 @@ public class SignInController{
     protected StageManager stageManager;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
     private UserService userService;
 
     @Autowired
@@ -82,11 +70,13 @@ public class SignInController{
                     this.passwordField.getText(), salt, "SHA-256");
 
             if (Objects.equals(user.getPasswordHash(), passwordHash)) {
+                this.userService.uploadUser(user);
                 this.stageManager.switchScene(FxmlView.HOMEPAGE);
             }
+            else {
+                /// TODO: 5/26/2017  Allert Popup Wrong login or/and password
+            }
         }
-
-        this.userService.loadUser();
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {

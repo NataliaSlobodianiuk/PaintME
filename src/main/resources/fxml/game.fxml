@@ -1,23 +1,9 @@
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-
-<?import javafx.scene.shape.* ?>
-<?import javafx.scene.AmbientLight?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.LightBase?>
-<?import javafx.scene.Parent?>
-<?import javafx.scene.PerspectiveCamera ?>
-<?import javafx.scene.paint.PhongMaterial?>
-<?import javafx.scene.PointLight?>
 <?import javafx.collections.FXCollections?>
-
-<?import javafx.scene.Group?>
-<?import javafx.scene.SubScene?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <GridPane fx:controller="com.paintme.controllers.GameController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
@@ -27,9 +13,15 @@
           hgap="10"
           style="-fx-background-color: white"
           alignment="CENTER">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
+    </columnConstraints>
 
     <children>
-    <HBox fx:id="sidesHBox" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+    <!--
+        <HBox fx:id="sidesHBox" GridPane.rowIndex="0" GridPane.halignment="CENTER"
           spacing="50">
           <StackPane fx:id="side1StackPane">
               <children>
@@ -86,66 +78,74 @@
             </children>
         </StackPane>
     </HBox>
-
-    <GridPane fx:id="subGridPane" GridPane.rowIndex="1" gridLinesVisible="false"
-                    hgap="10">
-    <children>
-    <VBox fx:id="team1VBox"
-          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="LEFT"
-          spacing="8">
-
-        <ListView fx:id="team1ListView">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:id="team1" fx:value="Team 1"/>
-                </FXCollections>
-            </items>
-        </ListView>
-
-        <ListView fx:id="team2ListView">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:id="team2" fx:value="Team 2"/>
-                </FXCollections>
-            </items>
-        </ListView>
-    </VBox>
+    -->
 
         <Label fx:id="timeLabel"
-               text="Your turn! Time: 30 sec." textFill="white" style="-fx-font-weight: bold"
+               text="Your turn! Time: 30 sec." textFill="white"
+               style="-fx-font-weight: bold"
                GridPane.columnIndex="1" GridPane.rowIndex="0"
                GridPane.halignment="CENTER" GridPane.valignment="TOP">
         </Label>
 
-        <VBox fx:id="cubeVBox"
-              GridPane.columnIndex="1" GridPane.rowIndex="0"
-              GridPane.halignment="CENTER" GridPane.valignment="CENTER" alignment="CENTER"
-              spacing="1.5">
+        <VBox fx:id="teams"
+              GridPane.columnIndex="0" GridPane.rowIndex="1"
+              GridPane.halignment="LEFT"
+              spacing="8" maxWidth="200">
 
-            <HBox fx:id="firstLineHBox" alignment="CENTER"
-                  spacing="1.5">
-                <Button fx:id="button1" prefWidth="30" prefHeight="30" onAction="#button1"/>
-                <Button fx:id="button2" prefWidth="30" prefHeight="30" onAction="#button2"/>
-                <Button fx:id="button3" prefWidth="30" prefHeight="30" onAction="#button3"/>
-            </HBox>
+            <ListView fx:id="team1ListView">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="team1" fx:value="Team 1"/>
+                    </FXCollections>
+                </items>
+            </ListView>
 
-            <HBox fx:id="secondLineHBox" alignment="CENTER"
-                  spacing="1.5">
-                <Button fx:id="button4" prefWidth="30" prefHeight="30" onAction="#button4"/>
-                <Button fx:id="button5" prefWidth="30" prefHeight="30" onAction="#button5"/>
-                <Button fx:id="button6" prefWidth="30" prefHeight="30" onAction="#button6"/>
-            </HBox>
-
-            <HBox fx:id="thirdLineHBox" alignment="CENTER"
-                  spacing="1.5">
-                <Button fx:id="button7" prefWidth="30" prefHeight="30" onAction="#button7"/>
-                <Button fx:id="button8" prefWidth="30" prefHeight="30" onAction="#button8"/>
-                <Button fx:id="button9" prefWidth="30" prefHeight="30" onAction="#button9"/>
-            </HBox>
+            <ListView fx:id="team2ListView">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="team2" fx:value="Team 2"/>
+                    </FXCollections>
+                </items>
+            </ListView>
         </VBox>
 
-        <!--<SubScene fx:id="boxSubscene"
-                  GridPane.columnIndex="2" GridPane.rowIndex="0"
+        <GridPane fx:id="subGridPane"
+                  GridPane.rowIndex="1"
+                  GridPane.columnIndex="1"
+                  gridLinesVisible="false"
+                  hgap="10">
+
+                <HBox fx:id="firstLineHBox"
+                      GridPane.rowIndex="0" GridPane.columnIndex="0"
+                      alignment="CENTER"
+                      spacing="1.5">
+                    <Button fx:id="0" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="1" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="2" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                </HBox>
+
+                <HBox fx:id="secondLineHBox"
+                      GridPane.rowIndex="1" GridPane.columnIndex="0"
+                      alignment="CENTER"
+                      spacing="1.5">
+                    <Button fx:id="3" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="4" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="5" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                </HBox>
+
+                <HBox fx:id="thirdLineHBox"
+                      GridPane.rowIndex="2" GridPane.columnIndex="0"
+                      alignment="CENTER"
+                      spacing="1.5">
+                    <Button fx:id="6" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="7" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                    <Button fx:id="8" prefWidth="75" prefHeight="75" onAction="#cell"/>
+                </HBox>
+        </GridPane>
+
+        <!--
+        <SubScene fx:id="boxSubscene"
+                  GridPane.columnIndex="2" GridPane.rowIndex="1"
                   GridPane.halignment="RIGHT" GridPane.valignment="CENTER"
                   width="200" height="100"
                   depthBuffer="true">
@@ -163,8 +163,7 @@
                     </PerspectiveCamera>
                 </Group>
             </root>
-        </SubScene>-->
-    </children>
-    </GridPane>
+        </SubScene>
+        -->
     </children>
 </GridPane>

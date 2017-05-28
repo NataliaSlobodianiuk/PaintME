@@ -31,7 +31,7 @@ public class PaintMEApplication extends Application {
 
 	@Override
 	public void stop() throws Exception {
-		this.springContext.close();
+		springContext.close();
 	}
 
 	protected void displayInitialScene(){
