@@ -1,6 +1,9 @@
 package com.paintme.controllers;
 
+import com.paintme.PaintMEException;
 import com.paintme.domain.models.User;
+import com.paintme.domain.models.statuses.UserStatuses;
+import com.paintme.domain.repositories.UserRepository;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
@@ -22,6 +25,9 @@ public class MainMenuController{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @FXML
     private Label paintMeLabel;
@@ -53,6 +59,16 @@ public class MainMenuController{
             this.stageManager.switchScene(FxmlView.SIGNIN);
         }
         else {
+            if (user.getStatus() != UserStatuses.OFFLINE){
+                throw new PaintMEException(
+                        "User with login " + user.getLogin() +
+                                " and password hash " + user.getPasswordHash() +
+                                " is already signed in.");
+            }
+            else {
+                user.setStatus(UserStatuses.ONLINE);
+                this.userRepository.save(user);
+            }
             this.stageManager.switchScene(FxmlView.HOMEPAGE);
         }
     }

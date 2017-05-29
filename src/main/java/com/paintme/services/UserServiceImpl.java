@@ -16,11 +16,11 @@ import java.util.Properties;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private final String propertiesFileName = "session.properties";
-	private final String loginPropertyName = "session.user.name";
-	private final String passwordPropertyName = "session.user.password";
+	private String propertiesFileName = "session.properties";
+	private String loginPropertyName = "session.user.name";
+	private String passwordPropertyName = "session.user.password";
 
-	private final UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository) {
@@ -84,16 +84,6 @@ public class UserServiceImpl implements UserService {
 								" and password hash " + passwordHash +
 								" doesn't exist.");
 			}
-			else if (user.getStatus() != UserStatuses.OFFLINE){
-				throw new PaintMEException(
-						"User with login " + login +
-								" and password hash " + passwordHash +
-								" is already signed in.");
-			}
-			else {
-				user.setStatus(UserStatuses.ONLINE);
-				userRepository.save(user);
-			}
 		}
 
 		return user;
@@ -150,8 +140,9 @@ public class UserServiceImpl implements UserService {
 		if (this.userRepository.findByLoginAndPasswordHash(
 				login, passwordHash) != null) {
 
-			this.removeProperty(this.loginPropertyName);
-			this.removeProperty(this.passwordPropertyName);
+			this.removeProperties(
+					this.loginPropertyName,
+					this.passwordPropertyName);
 
 			user.setStatus(UserStatuses.OFFLINE);
 			userRepository.save(user);
@@ -197,7 +188,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	public void removeProperty(String propertyName)
+	public void removeProperties(String ... propertyNames)
 			throws PaintMEException{
 
 		Properties props;
@@ -210,7 +201,10 @@ public class UserServiceImpl implements UserService {
 							exception.getMessage(), exception);
 		}
 
-		props.remove(propertyName);
+		for (int i = 0; i < propertyNames.length; i++)
+		{
+			props.remove(propertyNames[i]);
+		}
 
 		try {
 			this.saveProperties(props, false);
@@ -224,8 +218,15 @@ public class UserServiceImpl implements UserService {
 	private Properties getProperties() throws IOException {
 		Properties prop = new Properties();
 
-		InputStream in = getClass().getClassLoader()
-				.getResourceAsStream(this.propertiesFileName);
+		FileInputStream in;
+		try {
+			in = new FileInputStream(
+					"src/main/resources/" + this.propertiesFileName);
+		} catch (FileNotFoundException exception) {
+			throw new FileNotFoundException(
+					"Property file '" + this.propertiesFileName
+							+ "' not found in the classpath");
+		}
 
 		if (in != null) {
 			prop.load(in);
