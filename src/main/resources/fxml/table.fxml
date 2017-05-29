@@ -11,8 +11,16 @@
           alignment="center"
           vgap="20">
     <children>
-        <VBox fx:id="timeVBox"
+        <VBox fx:id="teamColorVBox"
               GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
+              spacing="5">
+
+            <Label fx:id="colorLabel" text="Color:" alignment="BASELINE_LEFT"/>
+            <ColorPicker fx:id="colorPicker"/>
+        </VBox>
+
+        <VBox fx:id="timeVBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
               spacing="5">
 
             <Label fx:id="timeLabel" text="Time:" alignment="BASELINE_LEFT"/>
@@ -34,7 +42,7 @@
         </VBox>
 
         <VBox fx:id="dimensionVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
+              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
               spacing="5">
 
             <Label fx:id="cubeSizeLabel" text="Cube size:" alignment="BASELINE_LEFT"/>
@@ -52,7 +60,7 @@
         </VBox>
 
         <VBox fx:id="teamsVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+              GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
               spacing="5">
 
             <Label fx:id="teamsLabel" text="Teams per game:" alignment="BASELINE_LEFT"/>
@@ -69,7 +77,7 @@
         </VBox>
 
         <VBox fx:id="playersVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
+              GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
               spacing="5">
 
             <Label fx:id="playersLabel" text="Players per team:" alignment="BASELINE_LEFT"/>
@@ -87,7 +95,7 @@
 
         <HBox fx:id="buttonsHBox"
               GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
-              spacing="40">
+              spacing="10">
 
             <Button fx:id="cancelButton" text="Cancel"
                     alignment="BASELINE_LEFT"

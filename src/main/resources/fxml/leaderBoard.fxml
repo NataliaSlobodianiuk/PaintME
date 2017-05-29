@@ -6,11 +6,17 @@
           xmlns:fx="http://javafx.com/fxml"
           fx:id="grid"
           alignment="center"
-          vgap="20">
+          vgap="10">
 
     <children>
+        <Button fx:id="homepageButton" text="Homepage"
+                GridPane.columnIndex="0" GridPane.rowIndex="0"
+                GridPane.halignment="RIGHT" GridPane.valignment="TOP"
+                alignment="BASELINE_RIGHT"
+                onAction="#homepageButton">
+        </Button>
         <TableView fx:id="leaderboard"
-                   GridPane.columnIndex="0" GridPane.rowIndex="0">
+                   GridPane.columnIndex="0" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="numberColumn" text="№"/>
                 <TableColumn fx:id="loginColumn" text="Login"/>

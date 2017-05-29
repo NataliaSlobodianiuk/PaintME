@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -23,6 +24,12 @@ public class TableController {
     @Autowired
     @Lazy
     protected StageManager stageManager;
+
+    @FXML
+    private Label colorLabel;
+
+    @FXML
+    private ColorPicker colorPicker;
 
     @FXML
     private Label timeLabel;
@@ -55,8 +62,7 @@ public class TableController {
     private Button cancelButton;
 
     public void cancelTableButton(ActionEvent actionEvent) throws Exception {
-        Stage stage = (Stage)cancelButton.getScene().getWindow();
-        stage.close();
+        this.stageManager.switchScene(FxmlView.HOMEPAGE);
     }
 
     public void applyTableButton(ActionEvent actionEvent) throws Exception {

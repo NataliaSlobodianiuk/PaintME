@@ -54,8 +54,7 @@ public class GameDetailsController{
     private Button cancelButton;
 
     public void cancelGameDetails(){
-        Stage stage = (Stage)cancelButton.getScene().getWindow();
-        stage.close();
+        this.stageManager.switchScene(FxmlView.MAIN);
     }
 
     public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception{

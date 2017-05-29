@@ -109,10 +109,12 @@
             </ListView>
         </VBox>
 
+        <VBox fx:id="fieldVBox"
+              GridPane.rowIndex="1" GridPane.columnIndex="1"
+              GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+              alignment="CENTER"
+              spacing="10">
         <GridPane fx:id="subGridPane"
-                  GridPane.rowIndex="1"
-                  GridPane.columnIndex="1"
-                  GridPane.halignment="CENTER" GridPane.valignment="CENTER"
                   alignment="CENTER"
                   gridLinesVisible="false"
                   hgap="10">
@@ -144,6 +146,12 @@
                     <Button fx:id="8" prefWidth="75" prefHeight="75" onAction="#cell"/>
                 </HBox>
         </GridPane>
+            <Button fx:id="exitButton" text="Exit" prefWidth="70" textAlignment="CENTER"
+                    alignment="CENTER"
+                    onAction="#exitButton"
+                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            </Button>
+        </VBox>
 
         <!--
         <SubScene fx:id="boxSubscene"

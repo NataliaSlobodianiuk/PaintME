@@ -44,6 +44,9 @@ public class SignInController{
     private Button signInButton;
 
     @FXML
+    private Button cancelButton;
+
+    @FXML
     private Label signUpLabel;
 
     @FXML
@@ -70,6 +73,10 @@ public class SignInController{
                 /// TODO: 5/26/2017  Allert Popup Wrong login or/and password
             }
         }
+    }
+
+    public void cancelButton(ActionEvent actionEvent) throws Exception {
+        this.stageManager.switchScene(FxmlView.MAIN);
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {
