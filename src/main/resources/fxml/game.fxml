@@ -112,6 +112,8 @@
         <GridPane fx:id="subGridPane"
                   GridPane.rowIndex="1"
                   GridPane.columnIndex="1"
+                  GridPane.halignment="CENTER" GridPane.valignment="CENTER"
+                  alignment="CENTER"
                   gridLinesVisible="false"
                   hgap="10">
 
