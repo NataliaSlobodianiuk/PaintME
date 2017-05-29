@@ -1,6 +1,5 @@
 package com.paintme.controllers;
 
-import com.paintme.PaintMEApplication;
 import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
 import com.paintme.security.Hashing;
@@ -9,12 +8,7 @@ import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -61,7 +55,6 @@ public class SignInController{
     }
 
     public void signInButton(ActionEvent actionEvent) throws Exception {
-        this.userRepository.findAll();
         User user = this.userRepository.findByLogin(this.loginTextField.getText());
 
         if (user != null) {

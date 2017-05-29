@@ -1,17 +1,19 @@
 package com.paintme.view;
 
 import com.paintme.spring.config.SpringFXMLLoader;
-
-import java.util.Objects;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import org.slf4j.Logger;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
+@Component
 public class StageManager {
     private static final Logger log = getLogger(StageManager.class);
     private final Stage primaryStage;

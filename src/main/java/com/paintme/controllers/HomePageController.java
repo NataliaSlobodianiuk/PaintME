@@ -1,5 +1,6 @@
 package com.paintme.controllers;
 
+import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
@@ -17,6 +18,9 @@ public class HomePageController {
     @Autowired
     @Lazy
     protected StageManager stageManager;
+
+    @Autowired
+    private UserService userService;
 
     @FXML
     private Label loginLabel;
@@ -49,6 +53,7 @@ public class HomePageController {
     }
 
     public void signOutButton(ActionEvent actionEvent) throws Exception {
+        this.userService.unloadUser(this.userService.getSessionUser());
         this.stageManager.switchScene(FxmlView.SIGNIN);
     }
 }
