@@ -53,7 +53,7 @@ public class GameDetailsController{
     @FXML
     private Button cancelButton;
 
-    public void cancelGameDetails(){
+    public void cancelGameDetailsButton(ActionEvent actionEvent)throws Exception{
         this.stageManager.switchScene(FxmlView.MAIN);
     }
 
