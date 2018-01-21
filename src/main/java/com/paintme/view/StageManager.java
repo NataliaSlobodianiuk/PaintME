@@ -46,6 +46,7 @@ public class StageManager {
         }
         catch(Exception exception){
             logAndExit("Unable to show scene for title " + fxmlView.setTitle(), exception);
+            exception.printStackTrace();
         }
     }
 

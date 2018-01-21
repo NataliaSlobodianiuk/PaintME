@@ -1,6 +1,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import com.paintme.domain.models.Player?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import com.paintme.domain.models.User?>
 <GridPane fx:controller="com.paintme.controllers.LeaderboardController"
           xmlns="http://javafx.com/javafx/8"
           xmlns:fx="http://javafx.com/fxml"
@@ -18,14 +22,47 @@
         <TableView fx:id="leaderboard"
                    GridPane.columnIndex="0" GridPane.rowIndex="1">
             <columns>
-                <TableColumn fx:id="numberColumn" text="№"/>
-                <TableColumn fx:id="loginColumn" text="Login"/>
-                <TableColumn fx:id="playsColumn" text="Plays"/>
-                <TableColumn fx:id="winsColumn" text="Wins"/>
-                <TableColumn fx:id="defeatsColumn" text="Defeats"/>
-                <TableColumn fx:id="drawsColumn" text="Draws"/>
-                <TableColumn fx:id="statusColumn" text="Status"/>
+                <TableColumn fx:id="numberColumn" text="№">
+                <cellValueFactory>
+                    <PropertyValueFactory property="number"/>
+                </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="loginColumn" text="Login">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="login"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="playsColumn" text="Plays">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="plays"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="winsColumn" text="Wins">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="wins"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="defeatsColumn" text="Defeats">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="defeats"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="drawsColumn" text="Draws">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="draws"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="statusColumn" text="Status">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="status"/>
+                    </cellValueFactory>
+                </TableColumn>
             </columns>
+            <items>
+            <FXCollections fx:factory="observableArrayList">
+                <User login="admin"/>
+            </FXCollections>
+            </items>
         </TableView>
     </children>
 </GridPane>
