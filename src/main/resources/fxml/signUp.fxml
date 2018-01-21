@@ -40,11 +40,19 @@
         <PasswordField fx:id="confirmPasswordField"/>
     </VBox>
 
-    <Button fx:id="signUpButton"
-            GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
-            text="Sign up"
-            onAction="#signUpButton"
-            style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
-    </Button>
+        <HBox fx:id="buttonsHBox"
+              GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+              spacing="10">
+            <Button fx:id="cancelButton"
+                    text="Cancel"
+                    onAction="#cancelButton">
+            </Button>
+            <Button fx:id="signUpButton"
+                GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
+                text="Sign up"
+                onAction="#signUpButton"
+                style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            </Button>
+        </HBox>
     </children>
 </GridPane>

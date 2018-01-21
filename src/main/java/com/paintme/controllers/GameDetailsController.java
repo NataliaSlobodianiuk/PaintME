@@ -61,12 +61,16 @@ public class GameDetailsController{
         this.color2Label.visibleProperty().setValue(false);
     }
 
-    public void cancelGameDetails(){
-        Stage stage = (Stage)cancelButton.getScene().getWindow();
+    public void cancelGameDetails() {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
-    public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception{
+    public void cancelGameDetailsButton(ActionEvent actionEvent) throws Exception {
+        this.stageManager.switchScene(FxmlView.MAIN);
+    }
+
+    public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.GAME);
     }
 }

@@ -73,7 +73,7 @@
 
       <HBox fx:id="buttonsHBox"
             GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
-            spacing="40">
+            spacing="10">
 
             <Button fx:id="cancelButton" text="Cancel"
                     alignment="BASELINE_LEFT"

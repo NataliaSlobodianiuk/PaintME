@@ -25,12 +25,19 @@
         <PasswordField fx:id="passwordField"/>
     </VBox>
 
+    <HBox fx:id="buttonsHBox"
+          GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
+          spacing="10">
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                onAction="#cancelButton">
+        </Button>
     <Button fx:id="signInButton"
-            GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
             text="Sign in"
             onAction="#signInButton"
             style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
     </Button>
+    </HBox>
 
     <HBox fx:id="signUpHBox"
           GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"

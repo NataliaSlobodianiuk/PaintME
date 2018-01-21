@@ -44,6 +44,9 @@ public class SignInController{
     private Button signInButton;
 
     @FXML
+    private Button cancelButton;
+
+    @FXML
     private Label signUpLabel;
 
     @FXML
@@ -67,9 +70,17 @@ public class SignInController{
                 this.stageManager.switchScene(FxmlView.HOMEPAGE);
             }
             else {
-                /// TODO: 5/26/2017  Allert Popup Wrong login or/and password
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Alert Message");
+                alert.setHeaderText("Authentication failed.");
+                alert.setContentText("Invalid login or/and password!");
+                alert.showAndWait();
             }
         }
+    }
+
+    public void cancelButton(ActionEvent actionEvent) throws Exception {
+        this.stageManager.switchScene(FxmlView.MAIN);
     }
 
     public void signUpHyperlink(ActionEvent actionEvent) throws Exception {

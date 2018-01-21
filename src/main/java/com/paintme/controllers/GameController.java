@@ -8,6 +8,8 @@ import com.paintme.infrastucture.board_examiners.BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 import com.paintme.infrastucture.strategies.EasyMode;
 import com.paintme.infrastucture.strategies.GameDifficultyStrategy;
+import com.paintme.services.UserService;
+import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,6 +72,9 @@ public class GameController {
     @Lazy
     protected StageManager stageManager;
 
+    @Autowired
+    private UserService userService;
+
     private GameTable table;
 
     @FXML
@@ -86,6 +91,9 @@ public class GameController {
 
     @FXML
     private PerspectiveCamera boxCamera;
+
+    @FXML
+    private Button exitButton;
 
     public void cell (ActionEvent actionEvent) throws Exception {
         if (this.isToMove) {
@@ -162,5 +170,16 @@ public class GameController {
             }
         }
         return -1;
+    }
+
+    public void exitButton(ActionEvent actionEvent) throws Exception{
+        User user = this.userService.getSessionUser();
+
+        if (user == null) {
+            this.stageManager.switchScene(FxmlView.MAIN);
+        }
+        else{
+            this.stageManager.switchScene(FxmlView.HOMEPAGE);
+        }
     }
 }
