@@ -53,11 +53,24 @@ public class GameDetailsController{
     @FXML
     private Button cancelButton;
 
-    public void cancelGameDetailsButton(ActionEvent actionEvent)throws Exception{
+    public void initialize() {
+        this.player2LoginLabel.visibleProperty().setValue(false);
+        this.player2LoginTextField.visibleProperty().setValue(false);
+
+        this.colorPicker2.visibleProperty().setValue(false);
+        this.color2Label.visibleProperty().setValue(false);
+    }
+
+    public void cancelGameDetails() {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    public void cancelGameDetailsButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.MAIN);
     }
 
-    public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception{
+    public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.GAME);
     }
 }
