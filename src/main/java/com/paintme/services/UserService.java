@@ -9,7 +9,7 @@ public interface UserService {
 
 	User getSessionUser() throws PaintMEException;
 
-	boolean uploadUser(User user) throws PaintMEException;
+	void setSessionUser(String login, String password) throws PaintMEException;
 
-	boolean unloadUser(User user) throws PaintMEException;
+	void removeSessionUser() throws PaintMEException;
 }

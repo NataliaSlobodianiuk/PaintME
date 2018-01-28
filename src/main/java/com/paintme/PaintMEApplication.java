@@ -1,5 +1,10 @@
 package com.paintme;
 
+import com.paintme.domain.models.User;
+import com.paintme.domain.models.statuses.UserStatuses;
+import com.paintme.domain.repositories.UserRepository;
+import com.paintme.services.UserService;
+import com.paintme.services.UserServiceImpl;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.application.Application;
@@ -14,6 +19,9 @@ public class PaintMEApplication extends Application {
 	protected ConfigurableApplicationContext springContext;
 	protected StageManager stageManager;
 
+    protected UserService userService;
+	protected UserRepository userRepository;
+
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -25,12 +33,21 @@ public class PaintMEApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		stageManager = this.springContext.getBean(StageManager.class, primaryStage);
+		this.stageManager = this.springContext.getBean(StageManager.class, primaryStage);
+        this.userService = this.springContext.getBean(UserServiceImpl.class);
+		this.userRepository = this.springContext.getBean(UserRepository.class);
 		displayInitialScene();
 	}
 
 	@Override
 	public void stop() throws Exception {
+        User user = this.userService.getSessionUser();
+
+        if (user != null) {
+            user.setStatus(UserStatuses.OFFLINE);
+            this.userRepository.save(user);
+        }
+
 		springContext.close();
 	}
 

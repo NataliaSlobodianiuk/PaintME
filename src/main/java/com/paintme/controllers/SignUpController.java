@@ -63,38 +63,9 @@ public class SignUpController{
     private Button cancelButton;
 
     public void signUpButton(ActionEvent actionEvent) throws Exception {
-
-        if (this.loginTextField.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alert Message");
-            alert.setHeaderText("Wrong login!");
-            alert.setContentText("Login field cannot be empty.");
-            alert.showAndWait();
-        }
-        else if (this.emailTextField.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alert Message");
-            alert.setHeaderText("Wrong email!");
-            alert.setContentText("Email field cannot be empty.");
-            alert.showAndWait();
-        }
-        else if (this.passwordField.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alert Message");
-            alert.setHeaderText("Wrong password!");
-            alert.setContentText("Password field cannot be empty.");
-            alert.showAndWait();
-        }
-        else if (!Objects.equals(this.passwordField.getText(), this.confirmPasswordField.getText())){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alert Message");
-            alert.setHeaderText("Wrong confirm password!");
-            alert.setContentText("Password and Confirm password fields are different.");
-            alert.showAndWait();
-        }
-        else {
-
+        if (this.isInputCorrect()) {
             User userToAdd = new User();
+
             userToAdd.setLogin(this.loginTextField.getText());
             userToAdd.setPasswordSalt(Hashing.getSalt("SHA1PRNG"));
             userToAdd.setPasswordHash(Hashing.getSecurePassword(
@@ -102,7 +73,8 @@ public class SignUpController{
             userToAdd.setEmail(this.emailTextField.getText());
 
             this.userRepository.save(userToAdd);
-            this.userService.uploadUser(userToAdd);
+
+            this.userService.setSessionUser(this.loginTextField.getText(), this.passwordField.getText());
 
             this.stageManager.switchScene(FxmlView.HOMEPAGE);
         }
@@ -110,5 +82,44 @@ public class SignUpController{
 
     public void cancelButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.SIGNIN);
+    }
+
+    private boolean isInputCorrect() {
+        boolean isCorrect = true;
+
+        if (this.loginTextField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alert Message");
+            alert.setHeaderText("Wrong login!");
+            alert.setContentText("Login field cannot be empty.");
+            alert.showAndWait();
+            isCorrect = false;
+        }
+        else if (this.emailTextField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alert Message");
+            alert.setHeaderText("Wrong email!");
+            alert.setContentText("Email field cannot be empty.");
+            alert.showAndWait();
+            isCorrect = false;
+        }
+        else if (this.passwordField.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alert Message");
+            alert.setHeaderText("Wrong password!");
+            alert.setContentText("Password field cannot be empty.");
+            alert.showAndWait();
+            isCorrect = false;
+        }
+        else if (!Objects.equals(this.passwordField.getText(), this.confirmPasswordField.getText())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alert Message");
+            alert.setHeaderText("Wrong confirm password!");
+            alert.setContentText("Password and Confirm password fields are different.");
+            alert.showAndWait();
+            isCorrect = false;
+        }
+
+        return isCorrect;
     }
 }

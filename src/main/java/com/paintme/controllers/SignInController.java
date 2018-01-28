@@ -1,8 +1,6 @@
 package com.paintme.controllers;
 
-import com.paintme.domain.models.User;
 import com.paintme.domain.repositories.UserRepository;
-import com.paintme.security.Hashing;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
@@ -12,8 +10,6 @@ import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 public class SignInController{
@@ -58,24 +54,23 @@ public class SignInController{
     }
 
     public void signInButton(ActionEvent actionEvent) throws Exception {
-        User user = this.userRepository.findByLogin(this.loginTextField.getText());
+        boolean success = true;
 
-        if (user != null) {
-            byte[] salt = user.getPasswordSalt();
-            String passwordHash = Hashing.getSecurePassword(
-                    this.passwordField.getText(), salt, "SHA-256");
+        try {
+            this.userService.setSessionUser(this.loginTextField.getText(), this.passwordField.getText());
+        }
+        catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alert Message");
+            alert.setHeaderText("Authentication failed.");
+            alert.setContentText(exception.getMessage());
+            alert.showAndWait();
 
-            if (Objects.equals(user.getPasswordHash(), passwordHash)) {
-                this.userService.uploadUser(user);
-                this.stageManager.switchScene(FxmlView.HOMEPAGE);
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Alert Message");
-                alert.setHeaderText("Authentication failed.");
-                alert.setContentText("Invalid login or/and password!");
-                alert.showAndWait();
-            }
+            success = false;
+        }
+
+        if (success) {
+            this.stageManager.switchScene(FxmlView.HOMEPAGE);
         }
     }
 

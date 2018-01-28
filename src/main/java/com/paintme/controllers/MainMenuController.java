@@ -68,8 +68,9 @@ public class MainMenuController{
             else {
                 user.setStatus(UserStatuses.ONLINE);
                 this.userRepository.save(user);
+
+                this.stageManager.switchScene(FxmlView.HOMEPAGE);
             }
-            this.stageManager.switchScene(FxmlView.HOMEPAGE);
         }
     }
 }
