@@ -1,89 +1,110 @@
-
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.Parent?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:controller="com.paintme.controllers.GameDetailsController"
-          xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:id="root"
-          gridLinesVisible="false"
-          vgap="20"
-          style="-fx-background-color: white"
-          styleClass="panel-primary"
-          alignment="CENTER">
-
+<HBox fx:id="controlButtonsHBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameDetailsController">
+   <children>
+         <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backMainMenuButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
+               <graphic>
+                     <ImageView fitHeight="25" fitWidth="25">
+                           <image>
+                                 <Image fx:id="backButtonImage" url="/icons/BackArrow.png" />
+                           </image>
+                     </ImageView>
+               </graphic>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         </Button>
+   
+   <GridPane fx:id="root" alignment="BASELINE_CENTER" gridLinesVisible="false" style="-fx-background-color: transparent" vgap="20" HBox.hgrow="ALWAYS">
+   
+         <children>
+   
+   
+         <HBox fx:id="player1LoginHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
       <children>
-      <HBox fx:id="player1LoginHBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-            spacing="8">
-
-            <Label fx:id="palyer1LoginLabel" text="Name 1:" alignment="BASELINE_LEFT"/>
-            <TextField fx:id="player1LoginTextField"/>
-      </HBox>
-
-            <HBox fx:id="player2LoginHBox"
-                  GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
-                  spacing="8">
-
-                  <Label fx:id="player2LoginLabel" text="Name 2:" alignment="BASELINE_LEFT"/>
-                  <TextField fx:id="player2LoginTextField"/>
-            </HBox>
-
-      <VBox fx:id="player1ColorVBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
-            spacing="5">
-
-            <Label fx:id="color1Label" text="Color 1:" alignment="BASELINE_LEFT"/>
-            <ColorPicker fx:id="colorPicker1"/>
-      </VBox>
-
-            <VBox fx:id="player2ColorVBox"
-                  GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
-                  spacing="5">
-
-                  <Label fx:id="color2Label" text="Color 2:" alignment="BASELINE_LEFT"/>
-                  <ColorPicker fx:id="colorPicker2"/>
-            </VBox>
-
-      <VBox fx:id="gameDifficultyVBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
-            spacing="5">
-
-            <Label fx:id="difficultyLabel" text="Difficulty:" alignment="BASELINE_LEFT"/>
-            <ComboBox fx:id="difficultyComboBox">
-                  <items>
-                        <FXCollections fx:factory="observableArrayList">
-                              <String fx:id="easyMode" fx:value="Easy"/>
-                              <String fx:id="normalMode" fx:value="Normal"/>
-                              <String fx:id="hardMode" fx:value="Hard"/>
-                              <!--<String fx:id="immortalMode" fx:value="Immortal"/>-->
-                        </FXCollections>
-                  </items>
-                  <value>
-                        <String fx:value="Normal" />
-                  </value>
-            </ComboBox>
-      </VBox>
-
-      <HBox fx:id="buttonsHBox"
-            GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
-            spacing="10">
-
-            <Button fx:id="cancelButton" text="Cancel"
-                    alignment="BASELINE_LEFT"
-                    onAction="#cancelGameDetails">
-            </Button>
-
-            <Button fx:id="applyButton" text="Apply"
-                    onAction="#applyGameDetailsButton"
-                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
-            </Button>
-      </HBox>
+      
+                  <Label fx:id="palyer1LoginLabel" alignment="BASELINE_LEFT" text="Name 1:" />
+                  <TextField fx:id="player1LoginTextField" />
       </children>
-</GridPane>
+         </HBox>
+   
+               <HBox fx:id="player2LoginHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <children>
+      
+                        <Label fx:id="player2LoginLabel" alignment="BASELINE_LEFT" text="Name 2:" />
+                        <TextField fx:id="player2LoginTextField" />
+      </children>
+               </HBox>
+   
+         <HBox fx:id="player1ColorHBox" spacing="13.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <children>
+      
+                              <Label fx:id="color1Label" alignment="BASELINE_LEFT" text="Color 1:" />
+                  <ColorPicker fx:id="colorPicker1" prefHeight="25.0" prefWidth="149.0" />
+      </children>
+         </HBox>
+   
+               <HBox fx:id="player2ColorHBox" spacing="13.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <children>
+      
+                        <Label fx:id="color2Label" alignment="BASELINE_LEFT" text="Color 2:" />
+                        <ColorPicker fx:id="colorPicker2" prefHeight="25.0" prefWidth="149.0" />
+      </children>
+               </HBox>
+   
+         <HBox fx:id="gameDifficultyHBox" spacing="5" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <children>
+      
+                  <Label fx:id="difficultyLabel" alignment="BASELINE_LEFT" text="Difficulty:" />
+                  <ComboBox fx:id="difficultyComboBox" prefHeight="25.0" prefWidth="149.0">
+                        <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                    <String fx:id="easyMode" fx:value="Easy" />
+                                    <String fx:id="normalMode" fx:value="Normal" />
+                                    <String fx:id="hardMode" fx:value="Hard" />
+                                    <!--<String fx:id="immortalMode" fx:value="Immortal"/>-->
+                              </FXCollections>
+                        </items>
+                        <value>
+                              <String fx:value="Normal" />
+                        </value>
+                  </ComboBox>
+      </children>
+         </HBox>
+   
+         <HBox fx:id="buttonsHBox" spacing="60.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+      <children>
+      
+                  <Button fx:id="resetButton" alignment="CENTER" onAction="#resetGameDetailsButton" prefHeight="25.0" prefWidth="70.0" text="Reset" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            </Button>
+      
+                  <Button fx:id="applyButton" alignment="CENTER" onAction="#applyGameDetailsButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Apply" textAlignment="CENTER" textFill="white">
+            </Button>
+      </children>
+         </HBox>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints fillWidth="false" hgrow="ALWAYS" />
+         </columnConstraints>
+         <HBox.margin>
+            <Insets bottom="5.0" right="5.0" top="5.0" />
+         </HBox.margin>
+   </GridPane>
+   </children>
+</HBox>

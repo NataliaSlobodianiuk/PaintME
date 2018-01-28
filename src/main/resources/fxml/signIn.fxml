@@ -1,52 +1,56 @@
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<GridPane fx:controller="com.paintme.controllers.SignInController"
-      xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml"
-          fx:id="grid"
-          alignment="center"
-          vgap="20">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:id="grid" alignment="CENTER" vgap="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.SignInController">
 
     <children>
-    <VBox fx:id="loginVBox"
-          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-          spacing="5">
+    <VBox fx:id="loginVBox" spacing="5" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
 
-        <Label fx:id="loginLabel" text="Login:" alignment="BASELINE_LEFT"/>
-        <TextField fx:id="loginTextField"/>
+        <Label fx:id="loginLabel" alignment="BASELINE_LEFT" text="Login:" />
+        <TextField fx:id="loginTextField" />
     </VBox>
 
-    <VBox fx:id="passwordVBox"
-          GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
-          spacing="5">
+    <VBox fx:id="passwordVBox" spacing="5" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 
-        <Label fx:id="passwordLabel" text="Password:" alignment="BASELINE_LEFT"/>
-        <PasswordField fx:id="passwordField"/>
+        <Label fx:id="passwordLabel" alignment="BASELINE_LEFT" text="Password:" />
+        <PasswordField fx:id="passwordField" />
     </VBox>
 
-    <HBox fx:id="buttonsHBox"
-          GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
-          spacing="10">
-        <Button fx:id="cancelButton"
-                text="Cancel"
-                onAction="#cancelButton">
+    <HBox fx:id="buttonsHBox" spacing="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <Button fx:id="cancelButton" alignment="CENTER" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="Cancel" textAlignment="CENTER">
         </Button>
-    <Button fx:id="signInButton"
-            text="Sign in"
-            onAction="#signInButton"
-            style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+    <Button fx:id="signInButton" alignment="CENTER" onAction="#signInButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Sign in" textAlignment="CENTER" textFill="white">
     </Button>
     </HBox>
 
-    <HBox fx:id="signUpHBox"
-          GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
-          spacing="4">
+    <HBox fx:id="signUpHBox" spacing="4" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 
-        <Label fx:id="signUpLabel" text="Don't have an account - " alignment="BASELINE_LEFT"/>
-        <Hyperlink fx:id="signUpHyperlink" text="Sign up"
-                   onAction="#signUpHyperlink"/>
+        <Label fx:id="signUpLabel" alignment="BASELINE_LEFT" text="Don't have an account - " />
+        <Hyperlink fx:id="signUpHyperlink" onAction="#signUpHyperlink" text="Sign up" />
     </HBox>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 
 </GridPane>

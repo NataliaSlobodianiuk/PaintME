@@ -1,48 +1,30 @@
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.* ?>
-<?import javafx.scene.AmbientLight?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.LightBase?>
-<?import javafx.scene.Parent?>
-<?import javafx.scene.PerspectiveCamera ?>
-<?import javafx.scene.paint.PhongMaterial?>
-<?import javafx.scene.PointLight?>
-<?import javafx.scene.transform.Rotate?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.SubScene?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<GridPane fx:controller="com.paintme.controllers.MainMenuController"
-          xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:id="grid"
-          gridLinesVisible="false"
-          vgap="10"
-          style="-fx-background-color: white"
-          styleClass="panel-primary"
-          alignment="CENTER">
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" style="-fx-background-color: transparent;" styleClass="panel-primary" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.MainMenuController">
 
     <children>
-            <Label fx:id="paintMeLabel" text="PaintME"
-                   GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-                   style="-fx-font: bold; -fx-font-size: 24px;"
-                   textFill="mediumvioletred">
+            <Label fx:id="paintMeLabel" style="-fx-font: bold; -fx-font-size: 24px;" text="PaintME" textFill="mediumvioletred" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
             </Label>
 
-           <SubScene fx:id="boxSubscene"
-                GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
-                width="200" height="200"
-                  depthBuffer="false">
+           <SubScene fx:id="boxSubscene" depthBuffer="false" height="200" width="200" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <root>
             <Group fx:id="boxGroup">
                 <children>
                 <ImageView>
                     <image>
-                        <Image fx:id="image" url="/icons/Cube.gif"/>
+                        <Image fx:id="image" url="/icons/Cube.gif" />
                     </image>
                 </ImageView>
                 </children>
@@ -50,22 +32,27 @@
             </root>
         </SubScene>
 
-        <HBox fx:id="buttonsHBox"
-             alignment="center" spacing="20"
-             GridPane.columnIndex="0" GridPane.rowIndex = "2" GridPane.halignment="CENTER">
+        <HBox fx:id="buttonsHBox" alignment="center" spacing="20" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 
-            <Button fx:id="computerButton" text="Computer"
-                    alignment="BASELINE_LEFT" onAction="#playComputerModeButton">
+            <Button fx:id="computerButton" alignment="CENTER" onAction="#playComputerModeButton" text="Computer" textAlignment="CENTER">
             </Button>
 
-            <Button fx:id="twoPlayersButton" text="2 Players"
-                   alignment="BASELINE_CENTER" onAction="#play2PlayersModeButton">
+            <Button fx:id="twoPlayersButton" alignment="CENTER" onAction="#play2PlayersModeButton" prefHeight="25.0" prefWidth="70.0" text="2 Players" textAlignment="CENTER">
             </Button>
 
-            <Button fx:id="onlineButton" text="Online"
-                    alignment="BASELINE_RIGHT" onAction="#playOnlineModeButton"
-                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            <Button fx:id="onlineButton" alignment="CENTER" onAction="#playOnlineModeButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Online" textAlignment="CENTER" textFill="white">
             </Button>
         </HBox>
     </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

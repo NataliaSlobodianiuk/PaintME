@@ -18,6 +18,9 @@ public class GameDetailsController{
     protected StageManager stageManager;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private Label player1LoginLabel;
 
     @FXML
@@ -51,7 +54,7 @@ public class GameDetailsController{
     private Button applyButton;
 
     @FXML
-    private Button cancelButton;
+    private Button resetButton;
 
     public void initialize() {
         this.player2LoginLabel.visibleProperty().setValue(false);
@@ -61,13 +64,12 @@ public class GameDetailsController{
         this.color2Label.visibleProperty().setValue(false);
     }
 
-    public void cancelGameDetails() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
+    public void backMainMenuButton(ActionEvent actionEvent) throws Exception {
+        this.stageManager.switchScene(FxmlView.MAIN);
     }
 
-    public void cancelGameDetailsButton(ActionEvent actionEvent) throws Exception {
-        this.stageManager.switchScene(FxmlView.MAIN);
+    public void resetGameDetailsButton(ActionEvent actionEvent) throws Exception {
+        //this.stageManager.switchScene(FxmlView.MAIN);
     }
 
     public void applyGameDetailsButton(ActionEvent actionEvent) throws Exception {
