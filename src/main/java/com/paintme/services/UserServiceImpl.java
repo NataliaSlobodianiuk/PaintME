@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	private String propertiesFileName = "session.properties";
 	private String loginPropertyName = "session.user.name";
-	private String passwordPropertyName = "session.user.password";
+	private String passwordHashPropertyName = "session.user.password";
 
 	private UserRepository userRepository;
 
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getSessionUser() throws PaintMEException {
 		String login = this.getProperty(this.loginPropertyName);
-		String passwordHash = this.getProperty(this.passwordPropertyName);
+		String passwordHash = this.getProperty(this.passwordHashPropertyName);
 
 		User user = null;
 		if (login != null && passwordHash != null) {
@@ -90,180 +90,155 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean uploadUser(User user) throws PaintMEException {
-		boolean isUploaded;
+	public void setSessionUser(String login, String password) throws PaintMEException {
+        User user = this.userRepository.findByLogin(login);
 
-		String login = user.getLogin();
-		String passwordHash = user.getPasswordHash();
+        if (user != null) {
+            if (!this.isPasswordCorrect(user, password)) {
+                throw new PaintMEException(
+                        "User with login " + login +
+                                " has different password (not " + password + ")");
+            } else {
+                if (user.getStatus() != UserStatuses.OFFLINE) {
+                    throw new PaintMEException(
+                            "User with login '" + login +
+                                    "' and password '" + password +
+                                    "' is already signed in.");
+                } else {
+                    user.setStatus(UserStatuses.ONLINE);
+                    this.userRepository.save(user);
 
-		if (user.getStatus() != UserStatuses.OFFLINE){
-			throw new PaintMEException(
-					"User with login " + login +
-							" and password hash " + passwordHash +
-							" is already signed in.");
-		}
-
-		if (this.userRepository.findByLoginAndPasswordHash(
-				login, passwordHash) != null) {
-			this.addProperty(this.loginPropertyName, login);
-			this.addProperty(this.passwordPropertyName, passwordHash);
-
-			user.setStatus(UserStatuses.ONLINE);
-			userRepository.save(user);
-
-			isUploaded = true;
-		}
-		else {
-			throw new PaintMEException(
-					"User with login " + login +
-							" and password hash " + passwordHash +
-							" doesn't exist.");
-		}
-
-		return isUploaded;
+                    this.addProperty(this.loginPropertyName, user.getLogin());
+                    this.addProperty(this.passwordHashPropertyName, user.getPasswordHash());
+                }
+            }
+        }
 	}
 
 	@Override
-	public boolean unloadUser(User user) throws PaintMEException {
-		boolean isUnloaded;
+	public void removeSessionUser() throws PaintMEException {
+	    User sessionUser = this.getSessionUser();
 
-		String login = user.getLogin();
-		String passwordHash = user.getPasswordHash();
+	    if (sessionUser != null)
+        {
+            if (sessionUser.getStatus() == UserStatuses.OFFLINE){
+                throw new PaintMEException(
+                        "User with login " + sessionUser.getLogin() +
+                                " is already signed out.");
+            }
+            else
+            {
+                sessionUser.setStatus(UserStatuses.OFFLINE);
+                this.userRepository.save(sessionUser);
 
-		if (user.getStatus() == UserStatuses.OFFLINE){
-			throw new PaintMEException(
-					"User with login " + login +
-							" and password hash " + passwordHash +
-							" is already signed out.");
-		}
-
-		if (this.userRepository.findByLoginAndPasswordHash(
-				login, passwordHash) != null) {
-
-			this.removeProperties(
-					this.loginPropertyName,
-					this.passwordPropertyName);
-
-			user.setStatus(UserStatuses.OFFLINE);
-			userRepository.save(user);
-
-			isUnloaded = true;
-		}
-		else {
-			throw new PaintMEException(
-					"User with login " + login +
-							" and password hash " + passwordHash +
-							" doesn't exist.");
-		}
-
-		return isUnloaded;
+                this.deleteProperty(this.loginPropertyName);
+                this.deleteProperty(this.passwordHashPropertyName);
+            }
+        }
+        else {
+	        throw new PaintMEException(
+                "No session user found.");
+        }
 	}
 
-	public String getProperty(String propertyName) throws PaintMEException {
-		Properties props;
+	private boolean isPasswordCorrect(User user, String password) throws PaintMEException {
+        String passwordHash;
+        try {
+            passwordHash = Hashing.getSecurePassword(password, user.getPasswordSalt(), "SHA-256");
+        }
+        catch (NoSuchAlgorithmException exception){
+            throw new PaintMEException("Unknown algorithm was used for getting user's password hash.");
+        }
 
-		try {
-			props = this.getProperties();
-		}  catch (IOException exception) {
-			throw new PaintMEException(
-					"Project properties couldn`t be loaded. " +
-							exception.getMessage(), exception);
-		}
+        return  Objects.equals(user.getPasswordHash(), passwordHash);
+    }
+
+	private String getProperty(String propertyName) throws PaintMEException {
+		Properties props = this.loadProperties();
 
 		return props.getProperty(propertyName);
 	}
 
-	public void addProperty(String propertyName, String propertyValue)
-			throws PaintMEException{
+	private void deleteProperty(String propertyName) throws  PaintMEException {
+        Properties props = this.loadProperties();
 
-		Properties props = new Properties();
-		props.setProperty(propertyName, propertyValue);
+        props.remove(propertyName);
 
-		try {
-			this.saveProperties(props, true);
-		} catch (IOException exception) {
-			throw new PaintMEException(
-					"Couldn`t save project properties. " +
-							exception.getMessage(), exception);
-		}
-	}
+        this.storeProperties(props);
+    }
 
-	public void removeProperties(String ... propertyNames)
-			throws PaintMEException{
+    private void updateProperty(String propertyName, String newValue) throws PaintMEException {
+	    Properties props = this.loadProperties();
 
-		Properties props;
+	    props.setProperty(propertyName, newValue);
 
-		try {
-			props = this.getProperties();
-		}  catch (IOException exception) {
-			throw new PaintMEException(
-					"Project properties couldn`t be loaded. " +
-							exception.getMessage(), exception);
-		}
+	    this.storeProperties(props);
+    }
 
-		for (int i = 0; i < propertyNames.length; i++)
-		{
-			props.remove(propertyNames[i]);
-		}
+    private void addProperty(String propertyName, String value) throws PaintMEException
+    {
+        Properties props = this.loadProperties();
 
-		try {
-			this.saveProperties(props, false);
-		} catch (IOException exception) {
-			throw new PaintMEException(
-					"Couldn`t save project properties. " +
-							exception.getMessage(), exception);
-		}
-	}
+        props.put(propertyName, value);
 
-	private Properties getProperties() throws IOException {
-		Properties prop = new Properties();
+        this.storeProperties(props);
+    }
 
-		FileInputStream in;
-		try {
-			in = new FileInputStream(
-					"src/main/resources/" + this.propertiesFileName);
-		} catch (FileNotFoundException exception) {
-			throw new FileNotFoundException(
-					"Property file '" + this.propertiesFileName
-							+ "' not found in the classpath");
-		}
+    private Properties loadProperties() throws PaintMEException {
+        Properties props = new Properties();
 
-		if (in != null) {
-			prop.load(in);
-		}
-		else {
-			throw new FileNotFoundException(
-					"Property file '" + this.propertiesFileName
-							+ "' not found in the classpath");
-		}
+        try {
+        FileInputStream in = this.getFileForReading();
+        props.load(in);
+        in.close();
+        }
+        catch (IOException exception) {
+            throw new PaintMEException(
+                    "Project properties couldn`t be loaded. " +
+                            exception.getMessage(), exception);
+        }
 
-		in.close();
+        return props;
+    }
 
-		return prop;
-	}
+    private void storeProperties(Properties props) throws PaintMEException {
+        try {
+            FileOutputStream out = this.getFileForWriting();
+            props.store(out, null);
+            out.close();
+        }
+        catch (IOException exception) {
+            throw new PaintMEException(
+                    "Project properties couldn`t be stored. " +
+                            exception.getMessage(), exception);
+        }
+    }
 
-	private void saveProperties(Properties props, boolean append)
-			throws IOException, PaintMEException {
+    private FileOutputStream getFileForWriting() throws  IOException {
+        FileOutputStream out;
+        try {
+            out = new FileOutputStream(
+                    "src/main/resources/" + this.propertiesFileName);
+        } catch (FileNotFoundException exception) {
+            throw new FileNotFoundException(
+                    "Property file '" + this.propertiesFileName
+                            + "' not found in the classpath");
+        }
 
-		FileOutputStream out;
-		try {
-			out = new FileOutputStream(
-					"src/main/resources/" + this.propertiesFileName,
-					append);
-		} catch (FileNotFoundException exception) {
-			throw new FileNotFoundException(
-					"Property file '" + this.propertiesFileName
-							+ "' not found in the classpath");
-		}
+        return out;
+    }
 
-		try {
-			props.store(out, null);
-		} catch (IOException exception) {
-			throw new PaintMEException(
-					"Couldn't write to project properties: " +
-							exception.getMessage(), exception);
-		}
+    private FileInputStream getFileForReading() throws  IOException {
+        FileInputStream in;
+        try {
+            in = new FileInputStream(
+                    "src/main/resources/" + this.propertiesFileName);
+        } catch (FileNotFoundException exception) {
+            throw new FileNotFoundException(
+                    "Property file '" + this.propertiesFileName
+                            + "' not found in the classpath");
+        }
 
-		out.close();
-	}
+        return in;
+    }
 }

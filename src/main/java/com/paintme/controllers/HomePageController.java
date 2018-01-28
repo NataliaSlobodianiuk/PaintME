@@ -53,7 +53,7 @@ public class HomePageController {
     }
 
     public void signOutButton(ActionEvent actionEvent) throws Exception {
-        this.userService.unloadUser(this.userService.getSessionUser());
+        this.userService.removeSessionUser();
         this.stageManager.switchScene(FxmlView.SIGNIN);
     }
 }

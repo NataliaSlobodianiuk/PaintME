@@ -25,8 +25,8 @@ public class StageManager {
     }
 
     public void switchScene(final FxmlView fxmlView){
-        Parent viewRootNodeHierarchy = loadViewNodeHierarchy(fxmlView.getFxmlFile());
-        show(viewRootNodeHierarchy, fxmlView);
+        Parent viewRootNodeHierarchy = this.loadViewNodeHierarchy(fxmlView.getFxmlFile());
+        this.show(viewRootNodeHierarchy, fxmlView);
     }
 
     private void show(final Parent rootNode, FxmlView fxmlView){
@@ -39,13 +39,13 @@ public class StageManager {
         this.primaryStage.setScene(scene);
         this.primaryStage.sizeToScene();
         this.primaryStage.centerOnScreen();
-        primaryStage.setResizable(false);
+        this.primaryStage.setResizable(false);
 
         try{
-            primaryStage.show();
+            this.primaryStage.show();
         }
         catch(Exception exception){
-            logAndExit("Unable to show scene for title " + fxmlView.setTitle(), exception);
+            this.logAndExit("Unable to show scene for title " + fxmlView.setTitle(), exception);
             exception.printStackTrace();
         }
     }
@@ -65,7 +65,7 @@ public class StageManager {
             Objects.requireNonNull(rootNode, "An FXML root node must not be null");
         }
         catch(Exception exception){
-            logAndExit("Unable to load an FXML view " + fxmlPath, exception);
+            this.logAndExit("Unable to load an FXML view " + fxmlPath, exception);
         }
 
         return rootNode;
