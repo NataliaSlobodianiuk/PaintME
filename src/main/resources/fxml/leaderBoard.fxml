@@ -11,10 +11,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <GridPane fx:id="grid" alignment="CENTER" vgap="20.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.LeaderboardController">
 
     <children>
-        <Button fx:id="homepageButton" alignment="BASELINE_RIGHT" contentDisplay="CENTER" onAction="#homepageButton" text="Homepage" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="TOP">
+        <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backToHomePageButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
+            <graphic>
+                <ImageView fitHeight="25" fitWidth="25">
+                    <image>
+                        <Image fx:id="backButtonImage" url="/icons/BackArrow.png" />
+                    </image>
+                </ImageView>
+            </graphic>
         </Button>
         <TableView fx:id="leaderboard" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <columns>
@@ -61,13 +70,6 @@
             </items>
         </TableView>
     </children>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>

@@ -164,7 +164,7 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  199;
+            return  240;
         }
 
         @Override

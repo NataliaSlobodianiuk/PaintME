@@ -64,7 +64,7 @@ public class GameDetailsController{
         this.color2Label.visibleProperty().setValue(false);
     }
 
-    public void backMainMenuButton(ActionEvent actionEvent) throws Exception {
+    public void backToMainMenuButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.MAIN);
     }
 

@@ -19,12 +19,12 @@ public class LeaderboardController {
     protected StageManager stageManager;
 
     @FXML
-    private Button homepageButton;
+    private Button backButton;
 
     @FXML
     private TableView<TableColumn> leaderboard;
 
-    public void homepageButton(ActionEvent actionEvent) throws Exception {
+    public void backToHomePageButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.HOMEPAGE);
     }
 }

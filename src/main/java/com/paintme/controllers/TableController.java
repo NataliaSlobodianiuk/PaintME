@@ -21,6 +21,9 @@ public class TableController {
     protected StageManager stageManager;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private Label colorLabel;
 
     @FXML
@@ -54,10 +57,14 @@ public class TableController {
     private Button applyButton;
 
     @FXML
-    private Button cancelButton;
+    private Button resetButton;
 
-    public void cancelTableButton(ActionEvent actionEvent) throws Exception {
+    public void backToHomePageButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.HOMEPAGE);
+    }
+
+    public void resetDefaultsButton(ActionEvent actionEvent) throws Exception {
+        //this.stageManager.switchScene(FxmlView.HOMEPAGE);
     }
 
     public void applyTableButton(ActionEvent actionEvent) throws Exception {

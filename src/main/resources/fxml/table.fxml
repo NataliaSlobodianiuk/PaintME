@@ -12,7 +12,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="grid" alignment="CENTER" vgap="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.TableController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<HBox fx:id="controlButtonsHBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.TableController">
+    <children>
+        <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backToHomePageButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
+            <graphic>
+                <ImageView fitHeight="25" fitWidth="25">
+                    <image>
+                        <Image fx:id="backButtonImage" url="/icons/BackArrow.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+<GridPane fx:id="grid" alignment="BASELINE_CENTER" gridLinesVisible="false" style="-fx-background-color: transparent" vgap="20" HBox.hgrow="ALWAYS">
     <children>
         <HBox fx:id="teamColorHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
 
@@ -88,25 +102,16 @@
 
         <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
 
-            <Button fx:id="cancelButton" alignment="BASELINE_LEFT" onAction="#cancelTableButton" text="Cancel">
+            <Button fx:id="resetButton" alignment="BASELINE_LEFT" onAction="#resetDefaultsButton" text="Reset">
             </Button>
 
             <Button fx:id="applyButton" onAction="#applyTableButton" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Apply" textFill="white">
             </Button>
         </HBox>
     </children>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
 </GridPane>
+    </children>
+</HBox>
