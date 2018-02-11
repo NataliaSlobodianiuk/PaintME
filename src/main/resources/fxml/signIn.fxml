@@ -15,28 +15,28 @@
 <GridPane fx:id="grid" alignment="CENTER" vgap="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.SignInController">
 
     <children>
-    <VBox fx:id="loginVBox" spacing="5" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+    <VBox fx:id="loginVBox" spacing="5" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
 
         <Label fx:id="loginLabel" alignment="BASELINE_LEFT" text="Login:" />
         <TextField fx:id="loginTextField" />
     </VBox>
 
-    <VBox fx:id="passwordVBox" spacing="5" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+    <VBox fx:id="passwordVBox" spacing="5.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
 
         <Label fx:id="passwordLabel" alignment="BASELINE_LEFT" text="Password:" />
         <PasswordField fx:id="passwordField" />
     </VBox>
 
-    <HBox fx:id="buttonsHBox" spacing="45.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-        <Button fx:id="cancelButton" alignment="CENTER" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="Cancel" textAlignment="CENTER">
+    <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+        <Button fx:id="cancelButton" alignment="CENTER" contentDisplay="CENTER" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="Cancel" textAlignment="CENTER">
         </Button>
-    <Button fx:id="signInButton" alignment="CENTER" onAction="#signInButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Sign in" textAlignment="CENTER" textFill="white">
+    <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" onAction="#signInButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Sign in" textAlignment="CENTER" textFill="white">
     </Button>
     </HBox>
 
     <HBox fx:id="signUpHBox" spacing="4" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 
-        <Label fx:id="signUpLabel" alignment="BASELINE_LEFT" text="Don't have an account - " />
+        <Label fx:id="signUpLabel" alignment="BASELINE_LEFT" prefHeight="23.0" prefWidth="130.0" text="Don't have an account - " />
         <Hyperlink fx:id="signUpHyperlink" onAction="#signUpHyperlink" text="Sign up" />
     </HBox>
     </children>

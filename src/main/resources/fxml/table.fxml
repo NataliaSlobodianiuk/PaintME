@@ -1,111 +1,112 @@
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:controller="com.paintme.controllers.TableController"
-          xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:id="grid"
-          alignment="center"
-          vgap="20">
+<GridPane fx:id="grid" alignment="CENTER" vgap="20" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.TableController">
     <children>
-        <VBox fx:id="teamColorVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-              spacing="5">
+        <HBox fx:id="teamColorHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
 
-            <Label fx:id="colorLabel" text="Color:" alignment="BASELINE_LEFT"/>
-            <ColorPicker fx:id="colorPicker"/>
-        </VBox>
+            <Label fx:id="colorLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="32.0" text="Color:" />
+            <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="149.0" />
+        </HBox>
 
-        <VBox fx:id="timeVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.halignment="CENTER"
-              spacing="5">
+        <HBox fx:id="timeHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 
-            <Label fx:id="timeLabel" text="Time:" alignment="BASELINE_LEFT"/>
-            <ComboBox fx:id="timeComboBox">
+            <Label fx:id="timeLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="29.0" text="Time:" />
+            <ComboBox fx:id="timeComboBox" prefHeight="25.0" prefWidth="151.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:id="5secForMove" fx:value="5 sec"/>
-                        <String fx:id="10secForMove" fx:value="10 sec"/>
-                        <String fx:id="15secForMove" fx:value="15 sec"/>
-                        <String fx:id="20secForMove" fx:value="20 sec"/>
-                        <String fx:id="25secForMove" fx:value="25 sec"/>
-                        <String fx:id="30secForMove" fx:value="30 sec"/>
+                        <String fx:id="5secForMove" fx:value="5 sec" />
+                        <String fx:id="10secForMove" fx:value="10 sec" />
+                        <String fx:id="15secForMove" fx:value="15 sec" />
+                        <String fx:id="20secForMove" fx:value="20 sec" />
+                        <String fx:id="25secForMove" fx:value="25 sec" />
+                        <String fx:id="30secForMove" fx:value="30 sec" />
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="10 sec"/>
+                    <String fx:value="10 sec" />
                 </value>
             </ComboBox>
-        </VBox>
+        </HBox>
 
-        <VBox fx:id="dimensionVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER"
-              spacing="5">
+        <HBox fx:id="dimensionHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
 
-            <Label fx:id="cubeSizeLabel" text="Cube size:" alignment="BASELINE_LEFT"/>
-            <ComboBox fx:id="cubeSizeComboBox">
+            <Label fx:id="cubeSizeLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="54.0" text="Cube size:" />
+            <ComboBox fx:id="cubeSizeComboBox" prefHeight="25.0" prefWidth="126.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:id="3x3Dim" fx:value="3x3"/>
+                        <String fx:id="3x3Dim" fx:value="3x3" />
                         <!--<String fx:id="5x5Dim" fx:value="5x5"/>-->
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="3x3"/>
+                    <String fx:value="3x3" />
                 </value>
             </ComboBox>
-        </VBox>
+        </HBox>
 
-        <VBox fx:id="teamsVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.halignment="CENTER"
-              spacing="5">
+        <HBox fx:id="teamsHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
 
-            <Label fx:id="teamsLabel" text="Teams per game:" alignment="BASELINE_LEFT"/>
-            <ComboBox fx:id="teamsComboBox">
+            <Label fx:id="teamsLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="91.0" text="Teams per game:" />
+            <ComboBox fx:id="teamsComboBox" prefHeight="25.0" prefWidth="89.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:id="2teams" fx:value="2"/>
+                        <String fx:id="2teams" fx:value="2" />
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="2"/>
+                    <String fx:value="2" />
                 </value>
             </ComboBox>
-        </VBox>
+        </HBox>
 
-        <VBox fx:id="playersVBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER"
-              spacing="5">
+        <HBox fx:id="playersHBox" spacing="8" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
 
-            <Label fx:id="playersLabel" text="Players per team:" alignment="BASELINE_LEFT"/>
-            <ComboBox fx:id="playersComboBox">
+            <Label fx:id="playersLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="91.0" text="Players per team:" />
+            <ComboBox fx:id="playersComboBox" prefHeight="25.0" prefWidth="90.0">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:id="2players" fx:value="2"/>
+                        <String fx:id="2players" fx:value="2" />
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="2"/>
+                    <String fx:value="2" />
                 </value>
             </ComboBox>
-        </VBox>
+        </HBox>
 
-        <HBox fx:id="buttonsHBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.halignment="CENTER"
-              spacing="10">
+        <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
 
-            <Button fx:id="cancelButton" text="Cancel"
-                    alignment="BASELINE_LEFT"
-                    onAction="#cancelTableButton">
+            <Button fx:id="cancelButton" alignment="BASELINE_LEFT" onAction="#cancelTableButton" text="Cancel">
             </Button>
 
-            <Button fx:id="applyButton" text="Apply"
-                    onAction="#applyTableButton"
-                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            <Button fx:id="applyButton" onAction="#applyTableButton" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Apply" textFill="white">
             </Button>
         </HBox>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </GridPane>

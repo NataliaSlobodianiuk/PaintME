@@ -1,54 +1,55 @@
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:controller="com.paintme.controllers.HomePageController"
-          xmlns="http://javafx.com/javafx/8"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:id="grid"
-          alignment="center"
-          vgap="10">
+<GridPane fx:id="grid" alignment="CENTER" vgap="20.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.HomePageController">
 
     <children>
-        <HBox fx:id="playerDetailsHBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-        spacing="150">
+        <HBox fx:id="playerDetailsHBox" alignment="CENTER" spacing="152.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
 
-            <Label fx:id="loginLabel" text="Player login"
-                   style="-fx-background-color: greenyellow"/>
-            <Button fx:id="signOutButton" text="Sign out"
-                    onAction="#signOutButton">
+            <Label fx:id="loginLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: greenyellow" text="Player login" textAlignment="CENTER" />
+            <Button fx:id="signOutButton" alignment="CENTER" contentDisplay="CENTER" onAction="#signOutButton" text="Sign out" textAlignment="CENTER">
             </Button>
         </HBox>
 
-        <ListView fx:id="tablesListView" GridPane.columnIndex="0" GridPane.rowIndex="1"
-                  GridPane.halignment="CENTER">
+        <ListView fx:id="tablesListView" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:id="tablesRow" fx:value="Tables"/>
+                    <String fx:id="tablesRow" fx:value="Tables" />
                 </FXCollections>
             </items>
         </ListView>
 
-        <HBox fx:id="buttonsHBox"
-              GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="RIGHT"
-              spacing="20">
+        <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
 
-            <Button fx:id="joinTableButton" text="Join table"
-                    alignment="BASELINE_LEFT"
-                    onAction="#joinGameButton">
+            <Button fx:id="joinTableButton" alignment="BASELINE_LEFT" onAction="#joinGameButton" text="Join table">
             </Button>
 
-            <Button fx:id="createTableButton" text="Create table"
-                    onAction="#createTabelButton"
-                    style="-fx-background-color: limegreen; -fx-font-weight: bold" textFill="white">
+            <Button fx:id="createTableButton" onAction="#createTabelButton" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Create table" textFill="white">
             </Button>
 
-            <Button fx:id="leaderboardButton" text="Leaderboard"
-                    onAction="#leaderboardTabelButton">
+            <Button fx:id="leaderboardButton" onAction="#leaderboardTabelButton" text="Leaderboard">
             </Button>
         </HBox>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </GridPane>

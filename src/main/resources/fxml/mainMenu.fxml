@@ -32,7 +32,7 @@
             </root>
         </SubScene>
 
-        <HBox fx:id="buttonsHBox" alignment="center" spacing="20" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
 
             <Button fx:id="computerButton" alignment="CENTER" onAction="#playComputerModeButton" text="Computer" textAlignment="CENTER">
             </Button>
@@ -55,4 +55,7 @@
       <RowConstraints />
       <RowConstraints />
    </rowConstraints>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </GridPane>

@@ -38,7 +38,7 @@
          <HBox fx:id="player1LoginHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
       <children>
       
-                  <Label fx:id="palyer1LoginLabel" alignment="BASELINE_LEFT" text="Name 1:" />
+                  <Label fx:id="palyer1LoginLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="45.0" text="Name 1:" />
                   <TextField fx:id="player1LoginTextField" />
       </children>
          </HBox>
@@ -46,7 +46,7 @@
                <HBox fx:id="player2LoginHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
       <children>
       
-                        <Label fx:id="player2LoginLabel" alignment="BASELINE_LEFT" text="Name 2:" />
+                        <Label fx:id="player2LoginLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="45.0" text="Name 2:" />
                         <TextField fx:id="player2LoginTextField" />
       </children>
                </HBox>
@@ -54,7 +54,7 @@
          <HBox fx:id="player1ColorHBox" spacing="13.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
       <children>
       
-                              <Label fx:id="color1Label" alignment="BASELINE_LEFT" text="Color 1:" />
+                              <Label fx:id="color1Label" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="41.0" text="Color 1:" />
                   <ColorPicker fx:id="colorPicker1" prefHeight="25.0" prefWidth="149.0" />
       </children>
          </HBox>
@@ -62,7 +62,7 @@
                <HBox fx:id="player2ColorHBox" spacing="13.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
       <children>
       
-                        <Label fx:id="color2Label" alignment="BASELINE_LEFT" text="Color 2:" />
+                        <Label fx:id="color2Label" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="41.0" text="Color 2:" />
                         <ColorPicker fx:id="colorPicker2" prefHeight="25.0" prefWidth="149.0" />
       </children>
                </HBox>
@@ -70,7 +70,7 @@
          <HBox fx:id="gameDifficultyHBox" spacing="5" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
       <children>
       
-                  <Label fx:id="difficultyLabel" alignment="BASELINE_LEFT" text="Difficulty:" />
+                  <Label fx:id="difficultyLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="50.0" text="Difficulty:" />
                   <ComboBox fx:id="difficultyComboBox" prefHeight="25.0" prefWidth="149.0">
                         <items>
                               <FXCollections fx:factory="observableArrayList">
@@ -87,7 +87,7 @@
       </children>
          </HBox>
    
-         <HBox fx:id="buttonsHBox" spacing="60.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+         <HBox fx:id="buttonsHBox" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
       <children>
       
                   <Button fx:id="resetButton" alignment="CENTER" onAction="#resetGameDetailsButton" prefHeight="25.0" prefWidth="70.0" text="Reset" textAlignment="CENTER" HBox.hgrow="ALWAYS">
@@ -105,6 +105,14 @@
          <HBox.margin>
             <Insets bottom="5.0" right="5.0" top="5.0" />
          </HBox.margin>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
    </GridPane>
    </children>
 </HBox>

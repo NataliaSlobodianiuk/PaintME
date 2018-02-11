@@ -17,12 +17,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  350;
+            return  240;
         }
 
         @Override
         int setHeight(){
-            return  300;
+            return  290;
         }
     },
     GAME{
@@ -80,12 +80,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  450;
+            return  285;
         }
 
         @Override
         int setHeight(){
-            return  350;
+            return  500;
         }
     },
     LEADERBOARD{
@@ -122,12 +122,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  350;
+            return  193;
         }
 
         @Override
         int setHeight(){
-            return  300;
+            return  212;
         }
     },
     SIGNUP{
@@ -143,12 +143,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  350;
+            return  201;
         }
 
         @Override
         int setHeight(){
-            return  350;
+            return  298;
         }
     },
     TABLE{
@@ -164,12 +164,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  350;
+            return  199;
         }
 
         @Override
         int setHeight(){
-            return  400;
+            return  260;
         }
     };
 
