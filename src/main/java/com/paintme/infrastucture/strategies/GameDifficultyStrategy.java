@@ -7,7 +7,7 @@ import com.paintme.infrastucture.algorithms.FindAMoveAlgorithm;
 public abstract class GameDifficultyStrategy {
     private FindAMoveAlgorithm algorithm = null;
 
-    public String makeAMove(char myColor, String boardType, String cells) throws PaintMEException {
+    public int getCellToMark(char myColor, String boardType, String cells) throws PaintMEException {
         if (this.algorithm == null) {
             try {
                 this.setAlgorithm(boardType, cells.length());
@@ -33,10 +33,7 @@ public abstract class GameDifficultyStrategy {
                     exception);
         }
 
-        StringBuilder newCells = new StringBuilder(cells);
-        newCells.setCharAt(cellToMarkNum, myColor);
-
-        return newCells.toString();
+        return cellToMarkNum;
     }
 
     private void setAlgorithm(String boardType, int cellsLength) throws PaintMEException {

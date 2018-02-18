@@ -2,6 +2,7 @@ package com.paintme.infrastucture.algorithms;
 
 import com.paintme.PaintMEException;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomAlgorithm extends FindAMoveAlgorithm{
@@ -25,9 +26,9 @@ public class RandomAlgorithm extends FindAMoveAlgorithm{
             }
         }
 
-        Integer[] freeCells = examiner.findFreeCells(cells);
+        List<Integer> freeCells = examiner.findFreeCells(cells);
 
-        int cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+        int cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
 
         return cellToMarkNum;
     }

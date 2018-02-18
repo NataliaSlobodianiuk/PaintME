@@ -7,7 +7,7 @@ import java.util.Map;
 public interface BoardExaminer {
     char findWinningSymbol(String cells);
 
-    default Integer[] findFreeCells(String cells) {
+    default List<Integer> findFreeCells(String cells) {
         List<Integer> freeCells = new ArrayList<>();
 
         for (int i = 0; i < cells.length(); i++)
@@ -18,10 +18,10 @@ public interface BoardExaminer {
             }
         }
 
-        return (Integer[]) freeCells.toArray();
+        return freeCells;
     }
 
-    default Integer[] findCellsByColor(String cells, char color) {
+    default List<Integer> findCellsByColor(String cells, char color) {
         List<Integer> cellsByColor = new ArrayList<>();
 
         for (int i = 0; i < cells.length(); i++)
@@ -32,13 +32,13 @@ public interface BoardExaminer {
             }
         }
 
-        return (Integer[]) cellsByColor.toArray();
+        return cellsByColor;
     }
 
     Map<Integer[], Character> findCombinationOfTwo(String cells);
     Map<Integer[], Character> findCombinationOfThree(String cells);
 
     default boolean isFinished(String cells){
-        return (this.findFreeCells(cells).length == 0);
+        return (this.findFreeCells(cells).size() == 0 || this.findWinningSymbol(cells) != '-');
     }
 }

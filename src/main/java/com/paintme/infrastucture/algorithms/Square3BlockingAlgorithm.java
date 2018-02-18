@@ -2,7 +2,7 @@ package com.paintme.infrastucture.algorithms;
 
 import com.paintme.PaintMEException;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Square3BlockingAlgorithm extends Square3FindAMoveAlgorithm{
@@ -27,22 +27,22 @@ public class Square3BlockingAlgorithm extends Square3FindAMoveAlgorithm{
             }
         }
 
-        Integer[] freeCells = examiner.findFreeCells(cells);
-        if (Arrays.asList(freeCells).contains(4)) {
+        List<Integer> freeCells = examiner.findFreeCells(cells);
+        if (freeCells.contains(4)) {
             cellToMarkNum = 4;
         }
-        else if (freeCells.length > 6){
-            cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+        else if (freeCells.size() > 6){
+            cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
         }
         else {
             if (ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE) % this.getRandomFrequencyNum() == 0){
-                cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+                cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
             }
             else {
                 cellToMarkNum = this.findAWinningMove(cells);
 
                 if (cellToMarkNum == -1) {
-                    cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+                    cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
                 }
             }
         }

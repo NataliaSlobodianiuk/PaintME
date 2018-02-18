@@ -39,8 +39,8 @@ public abstract class FindAMoveAlgorithm {
     protected int findAStrategicMove(char color, String cells, List<Integer[]> winningPositions){
         int cellToMarkNum = -1;
 
-        Integer[] freeCells = this.examiner.findFreeCells(cells);
-        Integer[] myCells = this.examiner.findCellsByColor(cells, color);
+        List<Integer> freeCells = this.examiner.findFreeCells(cells);
+        List<Integer> myCells = this.examiner.findCellsByColor(cells, color);
 
         boolean isAvailable = true;
         for (Integer[] winningPositionList: winningPositions) {
