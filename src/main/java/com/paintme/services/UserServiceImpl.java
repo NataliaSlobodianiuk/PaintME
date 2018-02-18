@@ -8,24 +8,28 @@ import com.paintme.security.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
-import java.util.Properties;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	private String propertiesFileName = "session.properties";
+	private String userProperties = "session.properties";
+
 	private String loginPropertyName = "session.user.name";
 	private String passwordHashPropertyName = "session.user.password";
 
 	private UserRepository userRepository;
 
+	private PropertiesService propertiesService;
+
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, PropertiesService propertiesService) {
 		this.userRepository = userRepository;
-	}
+
+        this.propertiesService = propertiesService;
+        this.propertiesService.setPropertiesFileName(this.userProperties);
+    }
 
 	@Override
 	public boolean changePassword(User user, String oldPassword, String newPassword)
@@ -71,8 +75,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getSessionUser() throws PaintMEException {
-		String login = this.getProperty(this.loginPropertyName);
-		String passwordHash = this.getProperty(this.passwordHashPropertyName);
+		String login = this.propertiesService.getProperty(this.loginPropertyName);
+		String passwordHash = this.propertiesService.getProperty(this.passwordHashPropertyName);
 
 		User user = null;
 		if (login != null && passwordHash != null) {
@@ -108,8 +112,8 @@ public class UserServiceImpl implements UserService {
                     user.setStatus(UserStatuses.ONLINE);
                     this.userRepository.save(user);
 
-                    this.addProperty(this.loginPropertyName, user.getLogin());
-                    this.addProperty(this.passwordHashPropertyName, user.getPasswordHash());
+                    this.propertiesService.addProperty(this.loginPropertyName, user.getLogin());
+                    this.propertiesService.addProperty(this.passwordHashPropertyName, user.getPasswordHash());
                 }
             }
         }
@@ -131,8 +135,8 @@ public class UserServiceImpl implements UserService {
                 sessionUser.setStatus(UserStatuses.OFFLINE);
                 this.userRepository.save(sessionUser);
 
-                this.deleteProperty(this.loginPropertyName);
-                this.deleteProperty(this.passwordHashPropertyName);
+                this.propertiesService.deleteProperty(this.loginPropertyName);
+                this.propertiesService.deleteProperty(this.passwordHashPropertyName);
             }
         }
         else {
@@ -151,94 +155,5 @@ public class UserServiceImpl implements UserService {
         }
 
         return  Objects.equals(user.getPasswordHash(), passwordHash);
-    }
-
-	private String getProperty(String propertyName) throws PaintMEException {
-		Properties props = this.loadProperties();
-
-		return props.getProperty(propertyName);
-	}
-
-	private void deleteProperty(String propertyName) throws  PaintMEException {
-        Properties props = this.loadProperties();
-
-        props.remove(propertyName);
-
-        this.storeProperties(props);
-    }
-
-    private void updateProperty(String propertyName, String newValue) throws PaintMEException {
-	    Properties props = this.loadProperties();
-
-	    props.setProperty(propertyName, newValue);
-
-	    this.storeProperties(props);
-    }
-
-    private void addProperty(String propertyName, String value) throws PaintMEException
-    {
-        Properties props = this.loadProperties();
-
-        props.put(propertyName, value);
-
-        this.storeProperties(props);
-    }
-
-    private Properties loadProperties() throws PaintMEException {
-        Properties props = new Properties();
-
-        try {
-        FileInputStream in = this.getFileForReading();
-        props.load(in);
-        in.close();
-        }
-        catch (IOException exception) {
-            throw new PaintMEException(
-                    "Project properties couldn`t be loaded. " +
-                            exception.getMessage(), exception);
-        }
-
-        return props;
-    }
-
-    private void storeProperties(Properties props) throws PaintMEException {
-        try {
-            FileOutputStream out = this.getFileForWriting();
-            props.store(out, null);
-            out.close();
-        }
-        catch (IOException exception) {
-            throw new PaintMEException(
-                    "Project properties couldn`t be stored. " +
-                            exception.getMessage(), exception);
-        }
-    }
-
-    private FileOutputStream getFileForWriting() throws  IOException {
-        FileOutputStream out;
-        try {
-            out = new FileOutputStream(
-                    "src/main/resources/" + this.propertiesFileName);
-        } catch (FileNotFoundException exception) {
-            throw new FileNotFoundException(
-                    "Property file '" + this.propertiesFileName
-                            + "' not found in the classpath");
-        }
-
-        return out;
-    }
-
-    private FileInputStream getFileForReading() throws  IOException {
-        FileInputStream in;
-        try {
-            in = new FileInputStream(
-                    "src/main/resources/" + this.propertiesFileName);
-        } catch (FileNotFoundException exception) {
-            throw new FileNotFoundException(
-                    "Property file '" + this.propertiesFileName
-                            + "' not found in the classpath");
-        }
-
-        return in;
     }
 }
