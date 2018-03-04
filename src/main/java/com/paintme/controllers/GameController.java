@@ -1,20 +1,20 @@
 package com.paintme.controllers;
 
+import com.paintme.PaintMEException;
+import com.paintme.controllers.Helpers.Alerts;
 import com.paintme.domain.models.Board;
-import com.paintme.domain.models.GameTable;
-import com.paintme.domain.models.Team;
-import com.paintme.domain.models.User;
+import com.paintme.infrastucture.Difficulty;
+import com.paintme.infrastucture.GameMode;
 import com.paintme.infrastucture.board_examiners.BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
-import com.paintme.infrastucture.strategies.EasyMode;
 import com.paintme.infrastucture.strategies.GameDifficultyStrategy;
+import com.paintme.services.GameService;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.PerspectiveCamera;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,23 +30,23 @@ public class GameController {
     private boolean isToMove;
     private int numToMove;
 
-    private Team team1;
-    private Team team2;
+    private String player1Login;
+    private String player2Login;
 
-    private User player1;
-    private User player2;
+    private String team1RGB;
+    private String team2RGB;
+    private char team1Color;
+    private char team2Color;
 
     private GameDifficultyStrategy strategy;
-    private BoardExaminer examiner;
 
     private Board board;
+    private BoardExaminer examiner;
 
-    private GameTable table;
-
+    private GameMode gameMode;
     //endregion
 
     //region FXML Fields
-
     @FXML
     private ListView<String> team1ListView;
 
@@ -64,11 +64,9 @@ public class GameController {
 
     @FXML
     private Button exitButton;
-
     //endregion
 
     //region Managers and Services
-
     @Autowired
     @Lazy
     protected StageManager stageManager;
@@ -76,34 +74,42 @@ public class GameController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GameService gameService;
     //endregion
 
     public void initialize() {
-        this.isToMove = true;
-        this.numToMove = 1;
+        try {
+            this.gameMode = this.gameService.getGameMode();
 
-        this.player1 = new User();
-        this.player1.setLogin("player1");
+            this.isToMove = true;
+            this.numToMove = 1;
 
-        this.team1 = new Team();
-        this.team1.setColor(1);
-        this.team1.setRgb("#b6e7c9");
+            this.board = new Board();
+            board.setCells("---------");
+            this.examiner = new Square3BoardExaminer();
 
-        this.player2 = new User();
-        this.player2.setLogin("computer");
+            this.team1Color = '1';
+            this.team2Color = '2';
 
-        this.team2 = new Team();
-        this.team2.setColor(2);
-        this.team2.setRgb("#cd41e3");
+            this.player1Login = this.gameService.getSide1Login();
+            this.team1RGB = this.gameService.getSide1Color();
 
-        this.strategy = new EasyMode();
-        this.examiner = new Square3BoardExaminer();
+            if (this.gameMode == GameMode.COMPUTER) {
+                Difficulty difficulty = this.gameService.getDifficulty();
+                this.player2Login = "computer (" + difficulty.name() + ")";
 
-        this.board = new Board();
-        board.setCells("---------");
+                this.strategy = difficulty.toStrategy();
+            } else if (this.gameMode == GameMode.TWOPLAYERS) {
+                this.player2Login = this.gameService.getSide2Login();
+                this.team2RGB = this.gameService.getSide2Color();
+            }
 
-        this.team1ListView.getItems().add(this.player1.getLogin());
-        this.team2ListView.getItems().add(this.player2.getLogin());
+            this.team1ListView.getItems().add(this.player1Login);
+            this.team2ListView.getItems().add(this.player2Login);
+        } catch (PaintMEException e) {
+            Alerts.showGamePropertiesAlert(e.getMessage());
+        }
     }
 
     public void cell (ActionEvent actionEvent) throws Exception {
@@ -111,32 +117,31 @@ public class GameController {
 
         if (this.isToMove) {
             Button ccell = (Button) actionEvent.getSource();
-
             int cellNumber = Integer.parseInt(ccell.getId());
 
             if (cells.charAt(cellNumber) != '-') {
-                this.showNotAFreeCell();
+                Alerts.showNotAFreeCellAlert();
                 return;
             }
 
             if (this.numToMove == 1) {
-                ccell.setStyle("-fx-base: " + this.team1.getRgb());
+                ccell.setStyle("-fx-base: " + this.team1RGB);
                 char[] cellsArr = cells.toCharArray();
-                cellsArr[cellNumber] = this.team1.getColor().toString().charAt(0);
+                cellsArr[cellNumber] = this.team1Color;
                 cells = String.valueOf(cellsArr);
                 this.board.setCells(cells);
                 this.numToMove = 2;
 
                 if (this.examiner.isFinished(cells)) {
-                    this.showEndGameMessage();
-                    this.exitButton(new ActionEvent());
+                    this.showEndGameAlert();
+                    this.exitButton(null);
                     return;
                 }
 
                 if (this.strategy != null) {
-                    cellNumber = this.strategy.getCellToMark(this.team2.getColor().toString().charAt(0), "SQUARE", cells);
+                    cellNumber = this.strategy.getCellToMark(this.team2Color, "SQUARE", cells);
                     cellsArr = cells.toCharArray();
-                    cellsArr[cellNumber] = this.team2.getColor().toString().charAt(0);
+                    cellsArr[cellNumber] = this.team2Color;
                     cells = String.valueOf(cellsArr);
                     this.board.setCells(cells);
 
@@ -151,59 +156,36 @@ public class GameController {
                 }
             }
             else if (this.numToMove == 2) {
-                ccell.setStyle("-fx-base: " + this.team2.getRgb());
+                ccell.setStyle("-fx-base: " + this.team2RGB);
                 char[] cellsArr = cells.toCharArray();
-                cellsArr[cellNumber] = this.team2.getColor().toString().charAt(0);
+                cellsArr[cellNumber] = this.team2Color;
                 cells = String.valueOf(cellsArr);
                 this.board.setCells(cells);
                 this.numToMove = 1;
             }
 
             if (this.examiner.isFinished(cells)) {
-                this.showEndGameMessage();
+                this.showEndGameAlert();
                 this.exitButton(new ActionEvent());
                 return;
             }
         }
         else {
-            this.showNotYourTurn();
+            Alerts.showNotYourTurnAlert();
             return;
         }
     }
 
-    private void showNotAFreeCell(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alert Message");
-        alert.setHeaderText("Not A Free Cell");
-        alert.setContentText("This cell is already painted, choose the other one!");
-        alert.showAndWait();
-    }
-
-    private void showEndGameMessage() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("End Game Message");
+    public void showEndGameAlert() {
         if (this.examiner.findWinningSymbol(this.board.getCells()) == '-') {
-            alert.setHeaderText("Draw");
-            alert.setContentText("It's a draw!");
+            Alerts.showEndGameDrawAlert();
         }
-        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team1.getColor().toString().charAt(0)) {
-            alert.setHeaderText("Win");
-            alert.setContentText(this.player1.getLogin() + " wins! Congrats!");
+        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team1Color) {
+            Alerts.showEndGameWinnerAlert(this.player1Login);
         }
-        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team2.getColor().toString().charAt(0)) {
-            alert.setHeaderText("Win");
-            alert.setContentText(this.player2.getLogin() + " wins! Congrats!");
+        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team2Color) {
+            Alerts.showEndGameLoserAlert(this.player1Login);
         }
-        alert.showAndWait();
-    }
-
-    private void showNotYourTurn(){
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alert Message");
-        alert.setHeaderText("Not Your Turn");
-        alert.setContentText("It is not your turn. Wait for the opponent!");
-        alert.showAndWait();
     }
 
     public void exitButton(ActionEvent actionEvent) throws Exception{

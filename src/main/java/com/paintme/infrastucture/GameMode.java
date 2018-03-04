@@ -1,6 +1,6 @@
 package com.paintme.infrastucture;
 
-public enum GameModes {
+public enum GameMode {
     COMPUTER,
     TWOPLAYERS,
     MULTIPLAYER

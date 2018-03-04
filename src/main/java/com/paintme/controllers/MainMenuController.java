@@ -4,6 +4,8 @@ import com.paintme.PaintMEException;
 import com.paintme.domain.models.User;
 import com.paintme.domain.models.statuses.UserStatuses;
 import com.paintme.domain.repositories.UserRepository;
+import com.paintme.infrastucture.GameMode;
+import com.paintme.services.GameService;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainMenuController{
 
+    //region Managers and Services
     @Autowired
     @Lazy
     protected StageManager stageManager;
@@ -27,8 +30,13 @@ public class MainMenuController{
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private GameService gameService;
 
+    @Autowired
+    private UserRepository userRepository;
+    //endregion
+
+    //region FXML Fields
     @FXML
     private Label paintMeLabel;
 
@@ -43,16 +51,20 @@ public class MainMenuController{
 
     @FXML
     private Button onlineButton;
+    //endregion
 
     public void playComputerModeButton(ActionEvent actionEvent) throws Exception {
+        this.gameService.setGameMode(GameMode.COMPUTER);
         this.stageManager.switchScene(FxmlView.GAMEDETAILS);
     }
 
     public void play2PlayersModeButton(ActionEvent actionEvent) throws Exception{
+        this.gameService.setGameMode(GameMode.TWOPLAYERS);
         this.stageManager.switchScene(FxmlView.GAMEDETAILS);
     }
 
     public void playOnlineModeButton(ActionEvent actionEvent) throws Exception{
+        this.gameService.setGameMode(GameMode.MULTIPLAYER);
         User user = this.userService.getSessionUser();
 
         if (user == null) {

@@ -38,7 +38,7 @@
          <HBox fx:id="player1LoginHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
       <children>
       
-                  <Label fx:id="palyer1LoginLabel" alignment="BASELINE_LEFT" text="Name 1:" />
+                  <Label fx:id="player1LoginLabel" alignment="BASELINE_LEFT" text="Name 1:" />
                   <TextField fx:id="player1LoginTextField" />
       </children>
          </HBox>
