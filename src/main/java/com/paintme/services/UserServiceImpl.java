@@ -14,10 +14,10 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private String userProperties = Properties.Files.SESSION.fileName();
+	private String userProperties = Properties.Files.SESSION.toString();
 
-	private String loginPropertyName = Properties.UserProperties.LOGIN.propertyName();
-	private String passwordHashPropertyName = Properties.UserProperties.PASSWORD.propertyName();
+	private String loginPropertyName = Properties.UserProperties.LOGIN.toString();
+	private String passwordHashPropertyName = Properties.UserProperties.PASSWORD.toString();
 
 	private UserRepository userRepository;
 
