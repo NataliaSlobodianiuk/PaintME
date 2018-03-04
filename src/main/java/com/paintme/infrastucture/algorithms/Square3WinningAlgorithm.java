@@ -2,7 +2,6 @@ package com.paintme.infrastucture.algorithms;
 
 import com.paintme.PaintMEException;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -27,19 +26,17 @@ public abstract class Square3WinningAlgorithm extends Square3FindAMoveAlgorithm 
             }
         }
 
-        Integer[] freeCells = this.examiner.findFreeCells(cells);
+        List<Integer> freeCells = this.examiner.findFreeCells(cells);
 
-        if (ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE) %
-                this.getRandomFrequencyNum() == 0){
-            cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(
-                    0, freeCells.length - 1)];
+        if (ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE) % this.getRandomFrequencyNum() == 0){
+            cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
         }
         else {
-            if (Arrays.asList(freeCells).contains(4)) {
+            if (freeCells.contains(4)) {
                 cellToMarkNum = 4;
-            } else if (freeCells.length > 6) {
+            } else if (freeCells.size() > 6) {
                 for (int i = 0; i < 9; i = i + 2) {
-                    if (!Arrays.asList(freeCells).contains(i)) {
+                    if (!freeCells.contains(i)) {
                         cellToMarkNum = i;
                         break;
                     }
@@ -47,11 +44,10 @@ public abstract class Square3WinningAlgorithm extends Square3FindAMoveAlgorithm 
             } else {
                 cellToMarkNum = this.findAWinningMove(cells);
                 if (cellToMarkNum == -1) {
-                    cellToMarkNum = this.findAStrategicMove(
-                            color, cells, winningPositions);
+                    cellToMarkNum = this.findAStrategicMove(color, cells, winningPositions);
                 }
                 if (cellToMarkNum == -1) {
-                    cellToMarkNum = freeCells[ThreadLocalRandom.current().nextInt(0, freeCells.length - 1)];
+                    cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
                 }
             }
         }

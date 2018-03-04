@@ -5,7 +5,7 @@ import java.util.*;
 public class Square3BoardExaminer extends SquareBoardExaminer {
     @Override
     public char findWinningSymbol(String cells) {
-        char winningSymbol = '\u0000';
+        char winningSymbol = '-';
 
         Map<Integer[], Character> combinationsOfTreeDictionary =
                 this.findCombinationOfThree(cells);

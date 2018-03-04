@@ -107,9 +107,9 @@ public class GameController {
     }
 
     public void cell (ActionEvent actionEvent) throws Exception {
-        if (this.isToMove) {
-            String cells = this.board.getCells();
+        String cells = this.board.getCells();
 
+        if (this.isToMove) {
             Button ccell = (Button) actionEvent.getSource();
 
             int cellNumber = Integer.parseInt(ccell.getId());
@@ -126,6 +126,29 @@ public class GameController {
                 cells = String.valueOf(cellsArr);
                 this.board.setCells(cells);
                 this.numToMove = 2;
+
+                if (this.examiner.isFinished(cells)) {
+                    this.showEndGameMessage();
+                    this.exitButton(new ActionEvent());
+                    return;
+                }
+
+                if (this.strategy != null) {
+                    cellNumber = this.strategy.getCellToMark(this.team2.getColor().toString().charAt(0), "SQUARE", cells);
+                    cellsArr = cells.toCharArray();
+                    cellsArr[cellNumber] = this.team2.getColor().toString().charAt(0);
+                    cells = String.valueOf(cellsArr);
+                    this.board.setCells(cells);
+
+                    /*
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
+                    Parent root = loader.load();
+                    ccell = (Button) loader.getNamespace().get(String.valueOf(cellNumber));
+                    ccell.setStyle("-fx-base: " + this.team2.getRgb());
+                    */
+
+                    this.numToMove = 1;
+                }
             }
             else if (this.numToMove == 2) {
                 ccell.setStyle("-fx-base: " + this.team2.getRgb());
@@ -136,8 +159,9 @@ public class GameController {
                 this.numToMove = 1;
             }
 
-            if (this.examiner.isFinished(this.board.getCells())) {
+            if (this.examiner.isFinished(cells)) {
                 this.showEndGameMessage();
+                this.exitButton(new ActionEvent());
                 return;
             }
         }
@@ -162,11 +186,11 @@ public class GameController {
             alert.setHeaderText("Draw");
             alert.setContentText("It's a draw!");
         }
-        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team1.getColor()) {
+        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team1.getColor().toString().charAt(0)) {
             alert.setHeaderText("Win");
             alert.setContentText(this.player1.getLogin() + " wins! Congrats!");
         }
-        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team2.getColor()) {
+        else if (this.examiner.findWinningSymbol(this.board.getCells()) == this.team2.getColor().toString().charAt(0)) {
             alert.setHeaderText("Win");
             alert.setContentText(this.player2.getLogin() + " wins! Congrats!");
         }
@@ -180,15 +204,6 @@ public class GameController {
         alert.setHeaderText("Not Your Turn");
         alert.setContentText("It is not your turn. Wait for the opponent!");
         alert.showAndWait();
-    }
-
-    private int findAFreeCell(String cells){
-        for (int i = 0; i < cells.length(); i++) {
-            if (cells.charAt(i) == '-') {
-                return i;
-            }
-        }
-        return -1;
     }
 
     public void exitButton(ActionEvent actionEvent) throws Exception{
