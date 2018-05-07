@@ -16,7 +16,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Component
 public class StageManager {
     private static final Logger log = getLogger(StageManager.class);
-    private final Stage primaryStage;
+    public final Stage primaryStage;
     private final SpringFXMLLoader springFXMLLoader;
 
     public StageManager(Stage primaryStage, SpringFXMLLoader springFXMLLoader){

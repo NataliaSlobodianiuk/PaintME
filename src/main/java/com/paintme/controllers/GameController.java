@@ -12,22 +12,34 @@ import com.paintme.services.GameService;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
+import com.paintme.view.graphics.Cube;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+import javafx.scene.AmbientLight;
+import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Box;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.MeshView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class GameController {
@@ -51,6 +63,10 @@ public class GameController {
 
     private GameMode gameMode;
     //endregion
+
+    private List<Button> buttonsList;
+
+    private Cube cube;
 
     //region FXML Fields
     @FXML
@@ -123,17 +139,65 @@ public class GameController {
         gridpane.setHgap(5);
         gridpane.setVgap(5);
 
+        buttonsList = new LinkedList<Button>();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 Button button = new Button();
                 button.setPrefHeight(225 / rows);
                 button.setPrefWidth(225 / cols);
                 button.setOnAction(this::cell);
+                buttonsList.add(button);
                 gridpane.add(button, c, r);
             }
         }
 
         this.fieldVBox.getChildren().add(gridpane);
+    }
+
+    public void setupCube(int buttonRows, int buttonCols) {
+        cube = new Cube();
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.setNearClip(0.1);
+        camera.setFarClip(10000.0);
+        camera.setTranslateZ(-10);
+        Group sceneRoot = new Group();
+        Scene gameScene = this.stageManager.primaryStage.getScene();
+        gameScene.setCamera(camera);
+
+        PhongMaterial mat = new PhongMaterial();
+        mat.setDiffuseMap(new Image(getClass().getResourceAsStream("/icons/DiffuseMapImage.png")));
+
+        Group meshGroup = new Group();
+
+        AtomicInteger cont = new AtomicInteger();
+        cube.patternFaceF.forEach(p -> {
+            MeshView meshP = new MeshView();
+            meshP.setMesh(cube.createCube(p));
+            meshP.setMaterial(mat);
+            Point3D pt = cube.pointsFaceF.get(cont.getAndIncrement());
+            meshP.getTransforms().addAll(new Translate(pt.getX(), pt.getY(), pt.getZ()));
+            meshGroup.getChildren().add(meshP);
+        });
+
+        Rotate rotateX = new Rotate(30, 0, 0, 0, Rotate.X_AXIS);
+        Rotate rotateY = new Rotate(20, 0, 0, 0, Rotate.Y_AXIS);
+        meshGroup.getTransforms().addAll(rotateX, rotateY);
+
+        sceneRoot.getChildren().addAll(meshGroup, new AmbientLight(Color.WHITE));
+        this.fieldVBox.getChildren().add(sceneRoot);
+
+        gameScene.setOnMousePressed(me -> {
+            cube.mouseOldX = me.getSceneX();
+            cube.mouseOldY = me.getSceneY();
+        });
+        gameScene.setOnMouseDragged(me -> {
+            cube.mousePosX = me.getSceneX();
+            cube.mousePosY = me.getSceneY();
+            rotateX.setAngle(rotateX.getAngle()-(cube.mousePosY - cube.mouseOldY));
+            rotateY.setAngle(rotateY.getAngle()+(cube.mousePosX - cube.mouseOldX));
+            cube.mouseOldX = cube.mousePosX;
+            cube.mouseOldY = cube.mousePosY;
+        });
     }
 
     public void cell (ActionEvent actionEvent) {
