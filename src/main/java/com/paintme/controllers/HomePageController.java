@@ -1,5 +1,8 @@
 package com.paintme.controllers;
 
+import com.paintme.PaintMEException;
+import com.paintme.controllers.Helpers.Alerts;
+import com.paintme.domain.models.User;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HomePageController {
 
+    //region FXML Fields
     @Autowired
     @Lazy
     protected StageManager stageManager;
@@ -39,6 +43,21 @@ public class HomePageController {
 
     @FXML
     private Button signOutButton;
+    //endregion
+
+    public void initialize(){
+        User sessionUser = null;
+
+        try {
+            sessionUser = this.userService.getSessionUser();
+        } catch (PaintMEException e) {
+            Alerts.showUnableToGetSessionUserAlert(e.getMessage());
+        }
+
+        if (sessionUser != null) {
+            this.loginLabel.setText(sessionUser.getLogin());
+        }
+    }
 
     public void createTabelButton(ActionEvent actionEvent) throws Exception {
         this.stageManager.switchScene(FxmlView.TABLE);

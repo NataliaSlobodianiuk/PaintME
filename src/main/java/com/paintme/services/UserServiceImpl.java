@@ -117,6 +117,10 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+        else {throw new PaintMEException(
+				"User with login " + login +
+						" doesn't exist.");
+		}
 	}
 
 	@Override

@@ -23,12 +23,16 @@ public class Alerts {
         Alerts.showInformationAlert("Game Finished", "Defeat", "Too bad, " + loser + ". You've lost. Try again!");
     }
 
+    public static void showWrongInputAlert(String content) {
+        Alerts.showInformationAlert("Alert", "Wrong Input", content);
+    }
+
     public static void showGamePropertiesAlert(String exception) {
         Alerts.showErrorAlert("Game Properties", "Work with game properties caused an error.", exception);
     }
 
-    public static void showWrongInputAlert(String content) {
-        Alerts.showInformationAlert("Alert", "Wrong Input", content);
+    public static void showUnableToGetSessionUserAlert(String exception) {
+        Alerts.showErrorAlert("Game Properties", "Unable to get session user.", exception);
     }
 
     private static void showErrorAlert(String title, String header, String content) {

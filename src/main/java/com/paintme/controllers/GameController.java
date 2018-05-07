@@ -2,6 +2,7 @@ package com.paintme.controllers;
 
 import com.paintme.PaintMEException;
 import com.paintme.controllers.Helpers.Alerts;
+import com.paintme.controllers.Helpers.Generators;
 import com.paintme.domain.models.Board;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.GameMode;
@@ -30,7 +31,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +62,11 @@ public class GameController {
     private BoardExaminer examiner;
 
     private GameMode gameMode;
-    //endregion
 
     private List<Button> buttonsList;
 
     private Cube cube;
+    //endregion
 
     //region FXML Fields
     @FXML
@@ -99,6 +99,7 @@ public class GameController {
 
     public void initialize() {
         setButtonsGridPane(3, 3);
+
         try {
             this.gameMode = this.gameService.getGameMode();
 
@@ -118,7 +119,7 @@ public class GameController {
             if (this.gameMode == GameMode.COMPUTER) {
                 Difficulty difficulty = this.gameService.getDifficulty();
                 this.player2Login = "computer (" + difficulty.name() + ")";
-
+                this.team2RGB = Generators.generateRandomHex();
                 this.strategy = difficulty.toStrategy();
             } else if (this.gameMode == GameMode.TWOPLAYERS) {
                 this.player2Login = this.gameService.getSide2Login();
@@ -143,6 +144,7 @@ public class GameController {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 Button button = new Button();
+                button.setId(Integer.toString(r * rows + c));
                 button.setPrefHeight(225 / rows);
                 button.setPrefWidth(225 / cols);
                 button.setOnAction(this::cell);
@@ -227,19 +229,15 @@ public class GameController {
                         return;
                     }
 
-                    if (this.strategy != null) {
+                    if (this.gameMode == GameMode.COMPUTER) {
                         cellNumber = this.strategy.getCellToMark(this.team2Color, "SQUARE", cells);
                         cellsArr = cells.toCharArray();
                         cellsArr[cellNumber] = this.team2Color;
                         cells = String.valueOf(cellsArr);
                         this.board.setCells(cells);
 
-
-                    /*FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
-                    Parent root = loader.load();
-                    ccell = (Button) loader.getNamespace().get(String.valueOf(cellNumber));
-                    ccell.setStyle("-fx-base: " + this.team2.getRgb());*/
-
+                        ccell = this.buttonsList.get(cellNumber);
+                        ccell.setStyle("-fx-base: " + this.team2RGB);
 
                         this.numToMove = 1;
                     }
