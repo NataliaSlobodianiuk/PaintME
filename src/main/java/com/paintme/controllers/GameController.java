@@ -14,10 +14,16 @@ import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Box;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -54,13 +60,10 @@ public class GameController {
     private ListView<String> team2ListView;
 
     @FXML
-    private Label timeLabel;
+    private VBox fieldVBox;
 
     @FXML
-    private Box cube;
-
-    @FXML
-    private PerspectiveCamera boxCamera;
+    private HBox buttonsHBox;
 
     @FXML
     private Button exitButton;
@@ -79,6 +82,7 @@ public class GameController {
     //endregion
 
     public void initialize() {
+        setButtonsGridPane(3, 3);
         try {
             this.gameMode = this.gameService.getGameMode();
 
@@ -112,67 +116,89 @@ public class GameController {
         }
     }
 
-    public void cell (ActionEvent actionEvent) throws Exception {
-        String cells = this.board.getCells();
+    public void setButtonsGridPane(int rows, int cols) {
+        GridPane gridpane = new GridPane();
+        gridpane.setAlignment(Pos.CENTER);
+        gridpane.setGridLinesVisible(false);
+        gridpane.setHgap(5);
+        gridpane.setVgap(5);
 
-        if (this.isToMove) {
-            Button ccell = (Button) actionEvent.getSource();
-            int cellNumber = Integer.parseInt(ccell.getId());
-
-            if (cells.charAt(cellNumber) != '-') {
-                Alerts.showNotAFreeCellAlert();
-                return;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                Button button = new Button();
+                button.setPrefHeight(225 / rows);
+                button.setPrefWidth(225 / cols);
+                button.setOnAction(this::cell);
+                gridpane.add(button, c, r);
             }
+        }
 
-            if (this.numToMove == 1) {
-                ccell.setStyle("-fx-base: " + this.team1RGB);
-                char[] cellsArr = cells.toCharArray();
-                cellsArr[cellNumber] = this.team1Color;
-                cells = String.valueOf(cellsArr);
-                this.board.setCells(cells);
-                this.numToMove = 2;
+        this.fieldVBox.getChildren().add(gridpane);
+    }
 
-                if (this.examiner.isFinished(cells)) {
-                    this.showEndGameAlert();
-                    this.exitButton(null);
+    public void cell (ActionEvent actionEvent) {
+        try {
+            String cells = this.board.getCells();
+
+            if (this.isToMove) {
+                Button ccell = (Button) actionEvent.getSource();
+                int cellNumber = Integer.parseInt(ccell.getId());
+
+                if (cells.charAt(cellNumber) != '-') {
+                    Alerts.showNotAFreeCellAlert();
                     return;
                 }
 
-                if (this.strategy != null) {
-                    cellNumber = this.strategy.getCellToMark(this.team2Color, "SQUARE", cells);
-                    cellsArr = cells.toCharArray();
+                if (this.numToMove == 1) {
+                    ccell.setStyle("-fx-base: " + this.team1RGB);
+                    char[] cellsArr = cells.toCharArray();
+                    cellsArr[cellNumber] = this.team1Color;
+                    cells = String.valueOf(cellsArr);
+                    this.board.setCells(cells);
+                    this.numToMove = 2;
+
+                    if (this.examiner.isFinished(cells)) {
+                        this.showEndGameAlert();
+                        this.exitButton(null);
+                        return;
+                    }
+
+                    if (this.strategy != null) {
+                        cellNumber = this.strategy.getCellToMark(this.team2Color, "SQUARE", cells);
+                        cellsArr = cells.toCharArray();
+                        cellsArr[cellNumber] = this.team2Color;
+                        cells = String.valueOf(cellsArr);
+                        this.board.setCells(cells);
+
+
+                    /*FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
+                    Parent root = loader.load();
+                    ccell = (Button) loader.getNamespace().get(String.valueOf(cellNumber));
+                    ccell.setStyle("-fx-base: " + this.team2.getRgb());*/
+
+
+                        this.numToMove = 1;
+                    }
+                } else if (this.numToMove == 2) {
+                    ccell.setStyle("-fx-base: " + this.team2RGB);
+                    char[] cellsArr = cells.toCharArray();
                     cellsArr[cellNumber] = this.team2Color;
                     cells = String.valueOf(cellsArr);
                     this.board.setCells(cells);
-
-                    /*
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("game.fxml"));
-                    Parent root = loader.load();
-                    ccell = (Button) loader.getNamespace().get(String.valueOf(cellNumber));
-                    ccell.setStyle("-fx-base: " + this.team2.getRgb());
-                    */
-
                     this.numToMove = 1;
                 }
-            }
-            else if (this.numToMove == 2) {
-                ccell.setStyle("-fx-base: " + this.team2RGB);
-                char[] cellsArr = cells.toCharArray();
-                cellsArr[cellNumber] = this.team2Color;
-                cells = String.valueOf(cellsArr);
-                this.board.setCells(cells);
-                this.numToMove = 1;
-            }
 
-            if (this.examiner.isFinished(cells)) {
-                this.showEndGameAlert();
-                this.exitButton(new ActionEvent());
+                if (this.examiner.isFinished(cells)) {
+                    this.showEndGameAlert();
+                    this.exitButton(new ActionEvent());
+                    return;
+                }
+            } else {
+                Alerts.showNotYourTurnAlert();
                 return;
             }
-        }
-        else {
-            Alerts.showNotYourTurnAlert();
-            return;
+        } catch (Exception e) {
+            Alerts.showGamePropertiesAlert(e.getMessage());
         }
     }
 

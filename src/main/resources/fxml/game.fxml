@@ -16,7 +16,6 @@
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
-        <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
     </columnConstraints>
 
     <children>
@@ -80,9 +79,6 @@
     </HBox>
     -->
 
-        <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="134.0" style="-fx-font-weight: bold" text="Your turn! Time: 30 sec." textAlignment="CENTER" textFill="white" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
-        </Label>
-
         <VBox fx:id="teams" maxWidth="200" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
 
             <ListView fx:id="team1ListView">
@@ -103,65 +99,12 @@
         </VBox>
 
         <VBox fx:id="fieldVBox" alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-        <GridPane fx:id="subGridPane" alignment="CENTER" gridLinesVisible="false" hgap="10">
-
-                <HBox fx:id="firstLineHBox" alignment="CENTER" spacing="1.5" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Button fx:id="0" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="1" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="2" onAction="#cell" prefHeight="75" prefWidth="75" />
-                </HBox>
-
-                <HBox fx:id="secondLineHBox" alignment="CENTER" spacing="1.5" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                    <Button fx:id="3" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="4" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="5" onAction="#cell" prefHeight="75" prefWidth="75" />
-                </HBox>
-
-                <HBox fx:id="thirdLineHBox" alignment="CENTER" spacing="1.5" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                    <Button fx:id="6" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="7" onAction="#cell" prefHeight="75" prefWidth="75" />
-                    <Button fx:id="8" onAction="#cell" prefHeight="75" prefWidth="75" />
-                </HBox>
-            <columnConstraints>
-               <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-               <RowConstraints />
-               <RowConstraints />
-               <RowConstraints />
-            </rowConstraints>
-        </GridPane>
+        </VBox>
+        <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" onAction="#exitButton" prefWidth="70" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Exit" textAlignment="CENTER" textFill="white">
             </Button>
-        </VBox>
-
-        <!--
-        <SubScene fx:id="boxSubscene"
-                  GridPane.columnIndex="2" GridPane.rowIndex="1"
-                  GridPane.halignment="RIGHT" GridPane.valignment="CENTER"
-                  width="200" height="100"
-                  depthBuffer="true">
-            <root>
-                <Group fx:id="boxGroup">
-                    <Box fx:id="cube"
-                         width="100" height="100" depth="100">
-                        <material>
-                            <PhongMaterial diffuseColor="darkmagenta" specularColor="violet"/>
-                        </material>
-                    </Box>
-
-                    <PerspectiveCamera fx:id="boxCamera"
-                                       translateX="100" translateY="-50" translateZ="150">
-                    </PerspectiveCamera>
-                </Group>
-            </root>
-        </SubScene>
-        -->
+        </HBox>
     </children>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
