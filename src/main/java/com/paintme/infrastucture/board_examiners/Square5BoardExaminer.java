@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Square5BoardExaminer extends SquareBoardExaminer {
+    public Square5BoardExaminer(){
+        this.size = 5;
+    }
+
     @Override
     public char findWinningSymbol(String cells) {
         char winningSymbol = '-';

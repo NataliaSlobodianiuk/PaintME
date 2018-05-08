@@ -3,6 +3,10 @@ package com.paintme.infrastucture.board_examiners;
 import java.util.*;
 
 public class Square3BoardExaminer extends SquareBoardExaminer {
+    public Square3BoardExaminer(){
+        this.size = 3;
+    }
+
     @Override
     public char findWinningSymbol(String cells) {
         char winningSymbol = '-';

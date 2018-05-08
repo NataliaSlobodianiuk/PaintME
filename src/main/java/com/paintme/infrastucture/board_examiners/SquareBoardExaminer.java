@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class SquareBoardExaminer implements IBoardExaminer {
+    protected int size;
+
     @Override
     public Map<Integer[], Character> findCombinationOfTwo(String cells) {
         Map<Integer[], Character> twos = new HashMap<>();
