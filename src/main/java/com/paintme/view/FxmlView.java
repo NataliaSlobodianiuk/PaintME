@@ -64,7 +64,7 @@ public enum FxmlView {
 
         @Override
         int setHeight(){
-            return  260;
+            return  310;
         }
     },
     HOMEPAGE{

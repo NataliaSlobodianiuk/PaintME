@@ -54,6 +54,12 @@ public class GameDetailsController{
     private ColorPicker colorPicker2;
 
     @FXML
+    private Label dimensionLabel;
+
+    @FXML
+    private ComboBox<String> dimensionComboBox;
+
+    @FXML
     private Label difficultyLabel;
 
     @FXML
