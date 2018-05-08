@@ -25,21 +25,12 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
     protected Map<Integer[], Character> findCombinationOfTwoColumns(String cells) {
         Map<Integer[], Character> twosColumns = new HashMap<>();
 
-        for (int i = 0; i < 3; i++) {
-            if (cells.charAt(i) != '-'
-                    && cells.charAt(i) == cells.charAt(i + 3)
-                    && cells.charAt(i + 6) == '-') {
-                twosColumns.put(new Integer[] {i, i + 3}, cells.charAt(i));
-            }
-            else if (cells.charAt(i + 3) != '-'
-                    && cells.charAt(i + 3) == cells.charAt(i + 6)
-                    && cells.charAt(i) == '-') {
-                twosColumns.put(new Integer[] {i + 3, i + 6}, cells.charAt(i + 3));
-            }
-            else if (cells.charAt(i) != '-'
-                    && cells.charAt(i) == cells.charAt(i + 6)
-                    && cells.charAt(i + 3) == '-') {
-                twosColumns.put(new Integer[]{i, i + 6}, cells.charAt(i));
+        for (int i = 0; i < this.size * (this.size - 1); i++) {
+            if (cells.charAt(i) != '-' && cells.charAt(i) == cells.charAt(i + this.size)) {
+                if ((i - this.size >= 0 && cells.charAt(i - this.size) == '-')
+                        || (i + this.size * 2 < cells.length() && cells.charAt(i + this.size * 2) == '-')) {
+                    twosColumns.put(new Integer[]{i, i + this.size}, cells.charAt(i));
+                }
             }
         }
 
@@ -52,12 +43,12 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
 
         Character symbolToCheck = cells.charAt(4);
         if (symbolToCheck != '-') {
-            for (int i = 0; i < 9; i = i + 2) {
+            for (int i = 0; i < this.size * this.size; i += this.size - 1) {
                 if (i == 4) {
                     continue;
                 }
                 if (symbolToCheck == cells.charAt(i)
-                        && cells.charAt(9 - 1 - i) == '-') {
+                        && cells.charAt(this.size * this.size - 1 - i) == '-') {
                     Integer[] two = new Integer[]{i, 4};
                     Arrays.sort(two);
                     twosDiagonals.put(two, symbolToCheck);
@@ -82,21 +73,14 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
     protected Map<Integer[], Character> findCombinationOfTwoRows(String cells) {
         Map<Integer[], Character> twosRows = new HashMap<>();
 
-        for (int i = 0; i < 9; i = i + 3) {
-            if (cells.charAt(i) != '-'
-                    && cells.charAt(i) == cells.charAt(i + 1)
-                    && cells.charAt(i + 2) == '-') {
-                twosRows.put(new Integer[] {i, i + 1}, cells.charAt(i));
-            }
-            else if (cells.charAt(i + 1) != '-'
-                    && cells.charAt(i + 1) == cells.charAt(i + 2)
-                    && cells.charAt(i) == '-') {
-                twosRows.put(new Integer[] {i + 1, i + 2}, cells.charAt(i + 1));
-            }
-            else if (cells.charAt(i) != '-'
-                    && cells.charAt(i) == cells.charAt(i + 2)
-                    && cells.charAt(i + 1) == '-') {
-                twosRows.put(new Integer[] {i, i + 2}, cells.charAt(i));
+        for (int i = 0; i <= this.size * (this.size - 1); i += this.size) {
+            for (int j = 0; j < this.size - 1; j++) {
+                if (cells.charAt(i + j) != '-' && cells.charAt(i + j) == cells.charAt(i + j + 1)) {
+                    if ((i + j - 1 >= i * this.size && cells.charAt(i + j - 1) == '-')
+                            || (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-')) {
+                        twosRows.put(new Integer[]{i + j, i + j + 1}, cells.charAt(i));
+                    }
+                }
             }
         }
 
@@ -107,12 +91,11 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
     protected Map<Integer[], Character> findCombinationOfThreeColumns(String cells) {
         Map<Integer[], Character> threesColumns = new HashMap<>();
 
-        for (int i = 0; i < 3; i++) {
-            Character symbolToCheck = cells.charAt(i);
-            if (symbolToCheck != '-'
-                    && symbolToCheck == cells.charAt(i + 3)
-                    && symbolToCheck == cells.charAt(i + 6)) {
-                threesColumns.put(new Integer[]{i, i + 3, i + 6}, symbolToCheck);
+        for (int i = 0; i < this.size * (this.size - 2); i++) {
+            if (cells.charAt(i) != '-'
+                    && cells.charAt(i) == cells.charAt(i + this.size)
+                    && cells.charAt(i) == cells.charAt(i + this.size * 2)) {
+                threesColumns.put(new Integer[]{i, i + this.size, i + this.size * 2}, cells.charAt(i));
             }
         }
 
@@ -142,12 +125,13 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
     protected Map<Integer[], Character> findCombinationOfThreeRows(String cells) {
         Map<Integer[], Character> threesRows = new HashMap<>();
 
-        for (int i = 0; i < 9; i = i + 3) {
-            Character symbolToCheck = cells.charAt(i);
-            if (symbolToCheck != '-'
-                    && symbolToCheck == cells.charAt(i + 1)
-                    && symbolToCheck == cells.charAt(i + 2)) {
-                threesRows.put(new Integer[]{i, i + 1, i + 2}, symbolToCheck);
+        for (int i = 0; i <= this.size * (this.size - 1); i += this.size) {
+            for (int j = 0; j < this.size - 2; j++) {
+                if (cells.charAt(i + j) != '-'
+                        && cells.charAt(i + j) == cells.charAt(i + j + 1)
+                        && cells.charAt(i + j) == cells.charAt(i + j + 2)) {
+                    threesRows.put(new Integer[]{i + j, i + j + 1, i + j + 2}, cells.charAt(i));
+                }
             }
         }
 
