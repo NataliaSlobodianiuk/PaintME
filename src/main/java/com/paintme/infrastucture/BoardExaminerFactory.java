@@ -1,17 +1,17 @@
 package com.paintme.infrastucture;
 
-import com.paintme.infrastucture.board_examiners.BoardExaminer;
+import com.paintme.infrastucture.board_examiners.IBoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 
 public class BoardExaminerFactory{
-    public BoardExaminer getBoardExaminer (String boardType, int cellsLength) {
-        BoardExaminer boardExaminer = null;
+    public IBoardExaminer getBoardExaminer (String boardType, int cellsLength) {
+        IBoardExaminer IBoardExaminer = null;
         
         switch (boardType.toUpperCase()) {
             case "SQUARE":
                 switch (cellsLength) {
                     case 9:
-                        boardExaminer = new Square3BoardExaminer();
+                        IBoardExaminer = new Square3BoardExaminer();
                         break;
                     default:
                         throw new IllegalArgumentException(
@@ -23,6 +23,6 @@ public class BoardExaminerFactory{
                         "Unknown type of board.");
         }
 
-        return boardExaminer;
+        return IBoardExaminer;
     }
 }

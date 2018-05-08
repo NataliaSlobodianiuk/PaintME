@@ -4,7 +4,7 @@ import com.paintme.domain.models.Board;
 import com.paintme.domain.models.GameTable;
 import com.paintme.domain.models.Team;
 import com.paintme.domain.models.User;
-import com.paintme.infrastucture.board_examiners.BoardExaminer;
+import com.paintme.infrastucture.board_examiners.IBoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 import com.paintme.infrastucture.strategies.EasyMode;
 import com.paintme.infrastucture.strategies.GameDifficultyStrategy;
@@ -37,7 +37,7 @@ public class GameController {
     private User player2;
 
     private GameDifficultyStrategy strategy;
-    private BoardExaminer examiner;
+    private IBoardExaminer examiner;
 
     private Board board;
 

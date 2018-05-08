@@ -149,4 +149,19 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
 
         return threesRows;
     }
+
+    @Override
+    protected Map<Integer[], Character> findCombinationOfFourColumns(String cells) {
+        return new HashMap<>();
+    }
+
+    @Override
+    protected Map<Integer[], Character> findCombinationOfFourDiagonals(String cells) {
+        return new HashMap<>();
+    }
+
+    @Override
+    protected Map<Integer[], Character> findCombinationOfFourRows(String cells) {
+        return new HashMap<>();
+    }
 }
