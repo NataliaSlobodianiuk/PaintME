@@ -60,6 +60,12 @@ public class GameDetailsController{
     private ComboBox<String> dimensionComboBox;
 
     @FXML
+    private Label fieldTypeLabel;
+
+    @FXML
+    private ComboBox<String> fieldTypeComboBox;
+
+    @FXML
     private Label difficultyLabel;
 
     @FXML
