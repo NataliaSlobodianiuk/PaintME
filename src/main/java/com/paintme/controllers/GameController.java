@@ -6,7 +6,7 @@ import com.paintme.controllers.Helpers.Generators;
 import com.paintme.domain.models.Board;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.GameMode;
-import com.paintme.infrastucture.board_examiners.BoardExaminer;
+import com.paintme.infrastucture.board_examiners.IBoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 import com.paintme.infrastucture.strategies.GameDifficultyStrategy;
 import com.paintme.services.GameService;
@@ -58,8 +58,9 @@ public class GameController {
 
     private GameDifficultyStrategy strategy;
 
+    private IBoardExaminer examiner;
+
     private Board board;
-    private BoardExaminer examiner;
 
     private GameMode gameMode;
 

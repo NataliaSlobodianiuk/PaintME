@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public interface BoardExaminer {
+public interface IBoardExaminer {
     char findWinningSymbol(String cells);
 
     default List<Integer> findFreeCells(String cells) {
@@ -37,6 +37,7 @@ public interface BoardExaminer {
 
     Map<Integer[], Character> findCombinationOfTwo(String cells);
     Map<Integer[], Character> findCombinationOfThree(String cells);
+    Map<Integer[], Character> findCombinationOfFour(String cells);
 
     default boolean isFinished(String cells){
         return (this.findFreeCells(cells).size() == 0 || this.findWinningSymbol(cells) != '-');
