@@ -1,6 +1,8 @@
 package com.paintme.services;
 
 import com.paintme.PaintMEException;
+import com.paintme.infrastucture.BoardSize;
+import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.GameMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class GameServiceImpl implements GameService {
     private String side2LoginPropertyName = Properties.GameProperties.SIDE2LOGIN.toString();
     private String side1ColorPropertyName = Properties.GameProperties.SIDE1COLOR.toString();
     private String side2ColorPropertyName = Properties.GameProperties.SIDE2COLOR.toString();
+    private String boardTypePropertyName = Properties.GameProperties.BOARDTYPE.toString();
+    private String boardSizePropertyName = Properties.GameProperties.BOARDSIZE.toString();
 
     private PropertiesService propertiesService;
 
@@ -49,6 +53,36 @@ public class GameServiceImpl implements GameService {
     @Override
     public void setDifficulty(Difficulty difficulty) throws PaintMEException {
         this.setDifficulty(difficulty.name());
+    }
+
+    @Override
+    public BoardType getBoardType() throws PaintMEException {
+        return BoardType.valueOf(this.getBoardTypeProperty());
+    }
+
+    @Override
+    public void setBoardType(String type) throws PaintMEException {
+        this.setProperty(this.boardTypePropertyName, this.getBoardTypeProperty(), type);
+    }
+
+    @Override
+    public void setBoardType(BoardType type) throws PaintMEException {
+        this.setBoardType(type.name());
+    }
+
+    @Override
+    public BoardSize getBoardSize() throws PaintMEException {
+        return BoardSize.valueOf(this.getBoardSizeProperty());
+    }
+
+    @Override
+    public void setBoardSize(String size) throws PaintMEException {
+        this.setProperty(this.boardSizePropertyName, this.getBoardSizeProperty(), size);
+    }
+
+    @Override
+    public void setBoardSize(BoardSize size) throws PaintMEException {
+        this.setBoardSize(size.name());
     }
 
     @Override
@@ -97,6 +131,14 @@ public class GameServiceImpl implements GameService {
 
     private String getDifficultyProperty() throws PaintMEException {
         return this.propertiesService.getProperty(this.difficultyPropertyName);
+    }
+
+    private String getBoardTypeProperty() throws PaintMEException {
+        return this.propertiesService.getProperty(this.boardTypePropertyName);
+    }
+
+    private String getBoardSizeProperty() throws PaintMEException {
+        return this.propertiesService.getProperty(this.boardSizePropertyName);
     }
 
     private void setProperty(String propertyName, String currValue, String newValue) throws PaintMEException{

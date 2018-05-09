@@ -11,7 +11,9 @@ public class Properties {
         SIDE1LOGIN("side1.login"),
         SIDE2LOGIN("side2.login"),
         SIDE1COLOR("side1.color"),
-        SIDE2COLOR("side2.color");
+        SIDE2COLOR("side2.color"),
+        BOARDTYPE("board.type"),
+        BOARDSIZE("board.size");
 
         private String name;
 
@@ -34,8 +36,7 @@ public class Properties {
         {
             if (this == Files.APPLICATION) {
                 return EnumValues.APPLICATION.toString();
-            }
-            else {
+            } else {
                 return EnumValues.SESSION.toString();
             }
         }
@@ -50,8 +51,7 @@ public class Properties {
         {
             if (this == UserProperties.LOGIN) {
                 return EnumValues.LOGIN.toString();
-            }
-            else {
+            } else {
                 return EnumValues.PASSWORD.toString();
             }
         }
@@ -63,28 +63,29 @@ public class Properties {
         SIDE1LOGIN,
         SIDE2LOGIN,
         SIDE1COLOR,
-        SIDE2COLOR;
+        SIDE2COLOR,
+        BOARDTYPE,
+        BOARDSIZE;
 
         @Override
         public String toString()
         {
             if (this == GameProperties.GAMEMODE) {
                 return EnumValues.GAMEMODE.toString();
-            }
-            else if (this == GameProperties.DIFFICULTY) {
+            } else if (this == GameProperties.DIFFICULTY) {
                 return EnumValues.DIFFICULTY.toString();
-            }
-            else if (this == GameProperties.SIDE1LOGIN) {
+            } else if (this == GameProperties.SIDE1LOGIN) {
                 return EnumValues.SIDE1LOGIN.toString();
-            }
-            else if (this == GameProperties.SIDE2LOGIN) {
+            } else if (this == GameProperties.SIDE2LOGIN) {
                 return EnumValues.SIDE2LOGIN.toString();
-            }
-            else if (this == GameProperties.SIDE1COLOR) {
+            } else if (this == GameProperties.SIDE1COLOR) {
                 return EnumValues.SIDE1COLOR.toString();
-            }
-            else {
+            } else if (this == GameProperties.SIDE2COLOR) {
                 return EnumValues.SIDE2COLOR.toString();
+            } else if (this == GameProperties.BOARDTYPE) {
+                return EnumValues.BOARDTYPE.toString();
+            } else {
+                return EnumValues.BOARDSIZE.toString();
             }
         }
     }
