@@ -5,6 +5,7 @@ import java.util.Map;
 
 public abstract class SquareBoardExaminer implements IBoardExaminer {
     protected int size;
+    protected int winAmount;
 
     @Override
     public Map<Integer[], Character> findCombinationOfTwo(String cells) {

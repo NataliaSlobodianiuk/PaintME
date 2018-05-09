@@ -5,6 +5,7 @@ import java.util.*;
 public class Square3BoardExaminer extends SquareBoardExaminer {
     public Square3BoardExaminer(){
         this.size = 3;
+        this.winAmount = 3;
     }
 
     @Override

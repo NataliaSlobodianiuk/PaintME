@@ -6,6 +6,7 @@ import java.util.Map;
 public class Square9BoardExaminer extends SquareBoardExaminer {
     public Square9BoardExaminer(){
         this.size = 9;
+        this.winAmount = 4;
     }
 
     @Override
