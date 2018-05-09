@@ -13,7 +13,7 @@ public class Properties {
         SIDE1COLOR("side1.color"),
         SIDE2COLOR("side2.color"),
         BOARDTYPE("board.type"),
-        BOARDSIZE("board.size");
+        BOARDFIELD("board.field");
 
         private String name;
 
@@ -65,7 +65,7 @@ public class Properties {
         SIDE1COLOR,
         SIDE2COLOR,
         BOARDTYPE,
-        BOARDSIZE;
+        BOARDFIELD;
 
         @Override
         public String toString()
@@ -85,7 +85,7 @@ public class Properties {
             } else if (this == GameProperties.BOARDTYPE) {
                 return EnumValues.BOARDTYPE.toString();
             } else {
-                return EnumValues.BOARDSIZE.toString();
+                return EnumValues.BOARDFIELD.toString();
             }
         }
     }

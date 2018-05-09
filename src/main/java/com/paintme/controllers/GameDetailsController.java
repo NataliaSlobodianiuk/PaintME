@@ -2,6 +2,9 @@ package com.paintme.controllers;
 
 import com.paintme.PaintMEException;
 import com.paintme.controllers.Helpers.Alerts;
+import com.paintme.controllers.Helpers.Generators;
+import com.paintme.infrastucture.BoardType;
+import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.GameMode;
 import com.paintme.services.GameService;
 import com.paintme.view.FxmlView;
@@ -54,16 +57,16 @@ public class GameDetailsController{
     private ColorPicker colorPicker2;
 
     @FXML
-    private Label dimensionLabel;
+    private Label boardTypeLabel;
 
     @FXML
-    private ComboBox<String> dimensionComboBox;
+    private ComboBox<String> boardTypeComboBox;
 
     @FXML
-    private Label fieldTypeLabel;
+    private Label fieldLabel;
 
     @FXML
-    private ComboBox<String> fieldTypeComboBox;
+    private ComboBox<String> fieldComboBox;
 
     @FXML
     private Label difficultyLabel;
@@ -122,10 +125,14 @@ public class GameDetailsController{
 
             if (this.gameMode == GameMode.COMPUTER) {
                 this.gameService.setDifficulty(this.difficultyComboBox.getValue().toUpperCase());
+                this.gameService.setSide2Color(Generators.generateRandomHex());
             } else {
                 this.gameService.setSide2Login(this.player2LoginTextField.getText());
                 this.gameService.setSide2Color("#" + this.colorPicker2.getValue().toString().substring(2));
             }
+
+            this.gameService.setBoardType(BoardType.fromString(this.boardTypeComboBox.getValue()));
+            this.gameService.setBoardField(Field.fromString(this.fieldComboBox.getValue()));
 
             this.stageManager.switchScene(FxmlView.GAME);
         }

@@ -1,7 +1,7 @@
 package com.paintme.services;
 
 import com.paintme.PaintMEException;
-import com.paintme.infrastucture.BoardSize;
+import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.GameMode;
@@ -18,9 +18,9 @@ public interface GameService {
     void setBoardType(String type) throws PaintMEException;
     void setBoardType(BoardType type) throws PaintMEException;
 
-    BoardSize getBoardSize() throws PaintMEException;
-    void setBoardSize(String size) throws PaintMEException;
-    void setBoardSize(BoardSize size) throws PaintMEException;
+    Field getBoardField() throws PaintMEException;
+    void setBoardField(String size) throws PaintMEException;
+    void setBoardField(Field size) throws PaintMEException;
 
     String getSide1Login() throws PaintMEException;
     void setSide1Login(String login) throws PaintMEException;
