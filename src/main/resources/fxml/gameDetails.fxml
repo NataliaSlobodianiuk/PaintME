@@ -62,8 +62,43 @@
                         <ColorPicker fx:id="colorPicker2" prefHeight="25.0" prefWidth="149.0" />
       </children>
                </HBox>
-   
-         <HBox fx:id="gameDifficultyHBox" spacing="5" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+
+             <HBox fx:id="dimensionHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+        <children>
+                 <Label fx:id="dimensionLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="46.0" text="Dim:" />
+                 <ComboBox fx:id="dimensionComboBox" prefHeight="25.0" prefWidth="149.0">
+                     <items>
+                         <FXCollections fx:factory="observableArrayList">
+                             <String fx:id="2Dim" fx:value="2D plane" />
+                             <String fx:id="3Dim" fx:value="3D cube" />
+                         </FXCollections>
+                     </items>
+                     <value>
+                         <String fx:value="2D plane" />
+                     </value>
+                 </ComboBox>
+        </children>
+             </HBox>
+
+             <HBox fx:id="fieldTypeHBox" spacing="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                 <children>
+                     <Label fx:id="fieldTypeLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="46.0" text="Field:" />
+                     <ComboBox fx:id="fieldTypeComboBox" prefHeight="25.0" prefWidth="149.0">
+                         <items>
+                             <FXCollections fx:factory="observableArrayList">
+                                 <String fx:id="3x3Field" fx:value="3x3" />
+                                 <String fx:id="5x5Field" fx:value="5x5" />
+                                 <String fx:id="9x9Field" fx:value="9x9" />
+                             </FXCollections>
+                         </items>
+                         <value>
+                             <String fx:value="3x3" />
+                         </value>
+                     </ComboBox>
+                 </children>
+             </HBox>
+
+         <HBox fx:id="gameDifficultyHBox" spacing="5" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
       <children>
       
                   <Label fx:id="difficultyLabel" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="50.0" text="Difficulty:" />
@@ -83,7 +118,7 @@
       </children>
          </HBox>
    
-         <HBox fx:id="buttonsHBox" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="2147483647">
+         <HBox fx:id="buttonsHBox" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="2147483647">
       <children>
       
                   <Button fx:id="resetButton" alignment="CENTER" onAction="#resetGameDetailsButton" prefHeight="25.0" prefWidth="70.0" text="Reset" textAlignment="CENTER" HBox.hgrow="ALWAYS">
@@ -96,10 +131,20 @@
          </children>
          <columnConstraints>
             <ColumnConstraints fillWidth="false" hgrow="ALWAYS" />
+            <ColumnConstraints />
          </columnConstraints>
          <HBox.margin>
             <Insets bottom="5.0" right="5.0" top="5.0" />
          </HBox.margin>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
    </GridPane>
    </children>
 </HBox>
