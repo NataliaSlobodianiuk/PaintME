@@ -2,14 +2,14 @@ package com.paintme.infrastucture.algorithms;
 
 import com.paintme.infrastucture.BoardExaminerFactory;
 import com.paintme.PaintMEException;
-import com.paintme.infrastucture.board_examiners.IBoardExaminer;
+import com.paintme.infrastucture.board_examiners.BoardExaminer;
 
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class FindAMoveAlgorithm {
     private int randomFrequencyNum = 0;
-    protected IBoardExaminer examiner = null;
+    protected BoardExaminer examiner = null;
 
     public int getRandomFrequencyNum() {
         return randomFrequencyNum;

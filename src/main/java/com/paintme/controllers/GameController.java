@@ -7,7 +7,7 @@ import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.GameMode;
-import com.paintme.infrastucture.board_examiners.IBoardExaminer;
+import com.paintme.infrastucture.board_examiners.BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square5BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square9BoardExaminer;
@@ -61,7 +61,7 @@ public class GameController {
 
     private GameDifficultyStrategy strategy;
 
-    private IBoardExaminer examiner;
+    private BoardExaminer examiner;
 
     private Board board;
 
