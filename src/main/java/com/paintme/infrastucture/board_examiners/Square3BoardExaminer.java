@@ -28,7 +28,8 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
             if (cells.charAt(i) != '-' && cells.charAt(i) == cells.charAt(i + this.size)) {
                 if (i - this.size >= 0 && cells.charAt(i - this.size) == '-') {
                     twosColumns.put(new Integer[]{ i, i + this.size, i - this.size }, cells.charAt(i));
-                } else if(i + this.size * 2 < cells.length() && cells.charAt(i + this.size * 2) == '-') {
+                }
+                if(i + this.size * 2 < cells.length() && cells.charAt(i + this.size * 2) == '-') {
                     twosColumns.put(new Integer[]{ i, i + this.size, i + this.size * 2 }, cells.charAt(i));
                 }
             }
@@ -54,7 +55,8 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
                                         i + (j + 1) * (this.size + 1),
                                         i + (j - 1) * (this.size + 1)},
                                 cells.charAt(i + j * (this.size + 1)));
-                    } else if (j < this.size - i - 2 && cells.charAt(i + (j + 2) * (this.size + 1)) == '-') {
+                    }
+                    if (j < this.size - i - 2 && cells.charAt(i + (j + 2) * (this.size + 1)) == '-') {
                         twosDiagonals.put(
                                 new Integer[] {
                                         i + j * (this.size + 1),
@@ -79,7 +81,8 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
                                         i + (j + 1) * (this.size - 1),
                                         i + (j - 1) * (this.size - 1)},
                                 cells.charAt(i + j * (this.size - 1)));
-                    } else if (j < i - 1 && cells.charAt(i + (j + 2) * (this.size - 1)) == '-') {
+                    }
+                    if (j < i - 1 && cells.charAt(i + (j + 2) * (this.size - 1)) == '-') {
                         twosDiagonals.put(
                                 new Integer[] {
                                         i + j * (this.size - 1),
@@ -103,7 +106,8 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
                 if (cells.charAt(i + j) != '-' && cells.charAt(i + j) == cells.charAt(i + j + 1)) {
                     if (i + j - 1 >= i * this.size && cells.charAt(i + j - 1) == '-') {
                         twosRows.put(new Integer[]{ i + j, i + j + 1, i + j - 1 }, cells.charAt(i));
-                    } else if (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-') {
+                    }
+                    if (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-') {
                         twosRows.put(new Integer[]{ i + j, i + j + 1, i + j + 2 }, cells.charAt(i));
                     }
                 }
