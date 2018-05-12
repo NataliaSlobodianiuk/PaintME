@@ -3,17 +3,16 @@ package com.paintme.infrastucture;
 import com.paintme.infrastucture.algorithms.*;
 
 public class AlgorithmFactory{
-    public FindAMoveAlgorithm getAlgorithm (String boardType, int cellsLength, int difficultyLevel) {
+    public FindAMoveAlgorithm getAlgorithm (BoardType boardType, Field field, int difficultyLevel) {
         FindAMoveAlgorithm algorithm = null;
 
         if (difficultyLevel == 0) {
             algorithm = new RandomAlgorithm();
-        }
-        else {
-            switch (boardType.toUpperCase()) {
-                case "SQUARE":
-                    switch (cellsLength) {
-                        case 9:
+        } else {
+            switch (boardType) {
+                case _2D:
+                    switch (field) {
+                        case THREE_BY_THREE:
                             switch (difficultyLevel) {
                                 case 1:
                                 case 2:
@@ -32,9 +31,11 @@ public class AlgorithmFactory{
                             break;
                         default:
                             throw new IllegalArgumentException(
-                                    "Unknown size of board.");
+                                    "Unknown field type.");
                     }
                     break;
+                case CUBE:
+                    //ToDo
                 default:
                     throw new IllegalArgumentException(
                             "Unknown type of board.");

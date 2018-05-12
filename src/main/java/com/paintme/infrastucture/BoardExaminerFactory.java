@@ -6,26 +6,28 @@ import com.paintme.infrastucture.board_examiners.Square5BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square9BoardExaminer;
 
 public class BoardExaminerFactory{
-    public BoardExaminer getBoardExaminer (String boardType, int cellsLength) {
+    public BoardExaminer getBoardExaminer (BoardType boardType, Field field) {
         BoardExaminer BoardExaminer = null;
         
-        switch (boardType.toUpperCase()) {
-            case "SQUARE":
-                switch (cellsLength) {
-                    case 9:
+        switch (boardType) {
+            case _2D:
+                switch (field) {
+                    case THREE_BY_THREE:
                         BoardExaminer = new Square3BoardExaminer();
                         break;
-                    case 25:
+                    case FIVE_BY_FIVE:
                         BoardExaminer = new Square5BoardExaminer();
                         break;
-                    case 81:
+                    case NINE_BY_NINE:
                         BoardExaminer = new Square9BoardExaminer();
                         break;
                     default:
                         throw new IllegalArgumentException(
-                                "Unknown size of board.");
+                                "Unknown field type.");
                 }
                 break;
+            case CUBE:
+                //ToDo
             default:
                 throw new IllegalArgumentException(
                         "Unknown type of board.");

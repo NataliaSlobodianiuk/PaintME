@@ -1,7 +1,9 @@
 package com.paintme.infrastucture.algorithms;
 
-import com.paintme.infrastucture.BoardExaminerFactory;
 import com.paintme.PaintMEException;
+import com.paintme.infrastucture.BoardExaminerFactory;
+import com.paintme.infrastucture.BoardType;
+import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.board_examiners.BoardExaminer;
 
 import java.util.Arrays;
@@ -19,14 +21,14 @@ public abstract class FindAMoveAlgorithm {
         this.randomFrequencyNum = randomFrequencyNum;
     }
 
-    public abstract int findAMove(char color, String boardType, String cells)
+    public abstract int findAMove(char color, BoardType boardType, Field field, String cells)
             throws PaintMEException;
 
-    protected void setExaminer(String boardType, int cellsLength)
+    protected void setExaminer(BoardType boardType, Field field)
             throws PaintMEException {
         BoardExaminerFactory examinerFactory = new BoardExaminerFactory();
         try {
-            this.examiner = examinerFactory.getBoardExaminer(boardType, cellsLength);
+            this.examiner = examinerFactory.getBoardExaminer(boardType, field);
         } catch (IllegalArgumentException exception) {
             throw new PaintMEException(
                     "BoardExaminerFactory couldn't create a board examiner." +
@@ -45,8 +47,8 @@ public abstract class FindAMoveAlgorithm {
         boolean isAvailable = true;
         for (Integer[] winningPositionList: winningPositions) {
             for (Integer winningPosition : winningPositionList) {
-                if (!Arrays.asList(freeCells).contains(winningPosition) &&
-                        !Arrays.asList(myCells).contains(winningPosition)) {
+                if (!Arrays.asList(freeCells).contains(winningPosition)
+                        && !Arrays.asList(myCells).contains(winningPosition)) {
                     isAvailable = false;
                     break;
                 }
