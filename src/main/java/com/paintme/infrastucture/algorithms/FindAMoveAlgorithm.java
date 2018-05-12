@@ -21,11 +21,7 @@ public abstract class FindAMoveAlgorithm {
         this.randomFrequencyNum = randomFrequencyNum;
     }
 
-    public abstract int findAMove(char color, BoardType boardType, Field field, String cells)
-            throws PaintMEException;
-
-    protected void setExaminer(BoardType boardType, Field field)
-            throws PaintMEException {
+    protected void setExaminer(BoardType boardType, Field field) throws PaintMEException {
         BoardExaminerFactory examinerFactory = new BoardExaminerFactory();
         try {
             this.examiner = examinerFactory.getBoardExaminer(boardType, field);
@@ -37,6 +33,8 @@ public abstract class FindAMoveAlgorithm {
                     exception);
         }
     }
+
+    public abstract int findAMove(char color, BoardType boardType, Field field, String cells) throws PaintMEException;
 
     protected int findAStrategicMove(char color, String cells, List<Integer[]> winningPositions){
         int cellToMarkNum = -1;

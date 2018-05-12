@@ -12,11 +12,9 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
     public char findWinningSymbol(String cells) {
         char winningSymbol = '-';
 
-        Map<Integer[], Character> combinationsOfTreeDictionary =
-                this.findCombinationOfThree(cells);
+        Map<Integer[], Character> combinationsOfTreeDictionary = this.findCombinationOfThree(cells);
         if (!combinationsOfTreeDictionary.isEmpty()) {
-            winningSymbol = (char) combinationsOfTreeDictionary
-                    .values().toArray()[0];
+            winningSymbol = (char) combinationsOfTreeDictionary.values().toArray()[0];
         }
 
         return winningSymbol;
@@ -28,9 +26,10 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
 
         for (int i = 0; i < this.size * (this.size - 1); i++) {
             if (cells.charAt(i) != '-' && cells.charAt(i) == cells.charAt(i + this.size)) {
-                if ((i - this.size >= 0 && cells.charAt(i - this.size) == '-')
-                        || (i + this.size * 2 < cells.length() && cells.charAt(i + this.size * 2) == '-')) {
-                    twosColumns.put(new Integer[]{i, i + this.size}, cells.charAt(i));
+                if (i - this.size >= 0 && cells.charAt(i - this.size) == '-') {
+                    twosColumns.put(new Integer[]{ i, i + this.size, i - this.size }, cells.charAt(i));
+                } else if(i + this.size * 2 < cells.length() && cells.charAt(i + this.size * 2) == '-') {
+                    twosColumns.put(new Integer[]{ i, i + this.size, i + this.size * 2 }, cells.charAt(i));
                 }
             }
         }
@@ -48,26 +47,19 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
             for (int j = 0; j < this.size - i - 1; j++) {
                 if (cells.charAt(i + j * (this.size + 1)) != '-'
                         && cells.charAt(i + j * (this.size + 1)) == cells.charAt(i + (j + 1) * (this.size + 1))) {
-                    if ((j > 0 && cells.charAt(i + (j - 1) * (this.size + 1)) == '-')
-                            || (j < this.size - i - 2 && cells.charAt(i + (j + 2) * (this.size + 1)) == '-')) {
+                    if (j > 0 && cells.charAt(i + (j - 1) * (this.size + 1)) == '-') {
                         twosDiagonals.put(
-                                new Integer[] {i + j * (this.size + 1), i + (j + 1) * (this.size + 1)},
+                                new Integer[] {
+                                        i + j * (this.size + 1),
+                                        i + (j + 1) * (this.size + 1),
+                                        i + (j - 1) * (this.size + 1)},
                                 cells.charAt(i + j * (this.size + 1)));
-                    }
-                }
-            }
-        }
-
-        //left-up corner (2nd line) (down)
-        for (int i = this.size; i < this.size * (this.size - this.winAmount + 1) ; i += this.size)
-        {
-            for (int j = 0; j < this.size - (i / this.size) - 1; j++) {
-                if (cells.charAt(i + j * (this.size + 1)) != '-'
-                        && cells.charAt(i + j * (this.size + 1)) == cells.charAt(i + (j + 1) * (this.size + 1))) {
-                    if ((j > 0 && cells.charAt(i + (j - 1) * (this.size + 1)) == '-')
-                            || (j < this.size - (i / this.size) - 2 && cells.charAt(i + (j + 2) * (this.size + 1)) == '-')) {
+                    } else if (j < this.size - i - 2 && cells.charAt(i + (j + 2) * (this.size + 1)) == '-') {
                         twosDiagonals.put(
-                                new Integer[] {i + j * (this.size + 1), i + (j + 1) * (this.size + 1)},
+                                new Integer[] {
+                                        i + j * (this.size + 1),
+                                        i + (j + 1) * (this.size + 1),
+                                        i + (j + 2) * (this.size + 1)},
                                 cells.charAt(i + j * (this.size + 1)));
                     }
                 }
@@ -80,26 +72,19 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
             for (int j = 0; j < i; j++) {
                 if (cells.charAt(i + j * (this.size - 1)) != '-'
                         && cells.charAt(i + j * (this.size - 1)) == cells.charAt(i + (j + 1) * (this.size - 1))) {
-                    if ((j > 0 && cells.charAt(i + (j - 1) * (this.size - 1)) == '-')
-                            || (j < i - 1 && cells.charAt(i + (j + 2) * (this.size - 1)) == '-')) {
+                    if (j > 0 && cells.charAt(i + (j - 1) * (this.size - 1)) == '-') {
                         twosDiagonals.put(
-                                new Integer[] {i + j * (this.size - 1), i + (j + 1) * (this.size - 1)},
+                                new Integer[] {
+                                        i + j * (this.size - 1),
+                                        i + (j + 1) * (this.size - 1),
+                                        i + (j - 1) * (this.size - 1)},
                                 cells.charAt(i + j * (this.size - 1)));
-                    }
-                }
-            }
-        }
-
-        //right-up corner (2nd line) (down)
-        for (int i = 2 * this.size - 1; i < this.size * (this.size - this.winAmount + 1) ; i += this.size)
-        {
-            for (int j = 0; j < this.size - Math.floorDiv(i, this.size) - 1; j++) {
-                if (cells.charAt(i + j * (this.size - 1)) != '-'
-                        && cells.charAt(i + j * (this.size - 1)) == cells.charAt(i + (j + 1) * (this.size - 1))) {
-                    if ((j > 0 && cells.charAt(i + (j - 1) * (this.size - 1)) == '-')
-                            || (j < this.size - Math.floorDiv(i, this.size) - 2 && cells.charAt(i + (j + 2) * (this.size - 1)) == '-')) {
+                    } else if (j < i - 1 && cells.charAt(i + (j + 2) * (this.size - 1)) == '-') {
                         twosDiagonals.put(
-                                new Integer[] {i + j * (this.size - 1), i + (j + 1) * (this.size - 1)},
+                                new Integer[] {
+                                        i + j * (this.size - 1),
+                                        i + (j + 1) * (this.size - 1),
+                                        i + (j + 2) * (this.size - 1)},
                                 cells.charAt(i + j * (this.size - 1)));
                     }
                 }
@@ -116,9 +101,10 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
         for (int i = 0; i <= this.size * (this.size - 1); i += this.size) {
             for (int j = 0; j < this.size - 1; j++) {
                 if (cells.charAt(i + j) != '-' && cells.charAt(i + j) == cells.charAt(i + j + 1)) {
-                    if ((i + j - 1 >= i * this.size && cells.charAt(i + j - 1) == '-')
-                            || (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-')) {
-                        twosRows.put(new Integer[]{i + j, i + j + 1}, cells.charAt(i));
+                    if (i + j - 1 >= i * this.size && cells.charAt(i + j - 1) == '-') {
+                        twosRows.put(new Integer[]{ i + j, i + j + 1, i + j - 1 }, cells.charAt(i));
+                    } else if (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-') {
+                        twosRows.put(new Integer[]{ i + j, i + j + 1, i + j + 2 }, cells.charAt(i));
                     }
                 }
             }
@@ -160,20 +146,6 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
             }
         }
 
-        //left-up corner (2nd line) (down)
-        for (int i = this.size; i < this.size * (this.size - this.winAmount + 1) ; i += this.size)
-        {
-            for (int j = 0; j < this.size - (i / this.size) - 2; j++) {
-                if (cells.charAt(i + j * (this.size + 1)) != '-'
-                        && cells.charAt(i + j * (this.size + 1)) == cells.charAt(i + (j + 1) * (this.size + 1))
-                        && cells.charAt(i + j * (this.size + 1)) == cells.charAt(i + (j + 2) * (this.size + 1))) {
-                    threesDiagonals.put(
-                            new Integer[]{i + j * (this.size + 1), i + (j + 1) * (this.size + 1), i + (j + 2) * (this.size + 1)},
-                            cells.charAt(i + j * (this.size + 1)));
-                }
-            }
-        }
-
         //right-up corner (left)
         for (int i = this.size - 1; i >= this.winAmount - 1; i--)
         {
@@ -185,20 +157,6 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
                             new Integer[]{i + j * (this.size - 1), i + (j + 1) * (this.size - 1), i + (j + 2) * (this.size - 1)},
                             cells.charAt(i + j * (this.size - 1)));
 
-                }
-            }
-        }
-
-        //right-up corner (2nd line) (down)
-        for (int i = 2 * this.size - 1; i < this.size * (this.size - this.winAmount + 1) ; i += this.size)
-        {
-            for (int j = 0; j < this.size - Math.floorDiv(i, this.size) - 2; j++) {
-                if (cells.charAt(i + j * (this.size - 1)) != '-'
-                        && cells.charAt(i + j * (this.size - 1)) == cells.charAt(i + (j + 1) * (this.size - 1))
-                        && cells.charAt(i + j * (this.size - 1)) == cells.charAt(i + (j + 2) * (this.size - 1))) {
-                    threesDiagonals.put(
-                            new Integer[]{i + j * (this.size - 1), i + (j + 1) * (this.size - 1), i + (j + 2) * (this.size - 1)},
-                            cells.charAt(i + j * (this.size - 1)));
                 }
             }
         }
