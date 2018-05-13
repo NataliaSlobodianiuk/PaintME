@@ -7,15 +7,9 @@ import com.paintme.infrastucture.Field;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomAlgorithm extends FindAMoveAlgorithm{
-    public RandomAlgorithm() {
-        this.setRandomFrequencyNum(1);
-    }
-
+public class RandomAlgorithm extends FindMoveAlgorithm {
     @Override
-    public int findAMove(char color, BoardType boardType, Field field, String cells)
-            throws PaintMEException {
-
+    public int findAMove(char color, BoardType boardType, Field field, String cells) throws PaintMEException {
         if (this.examiner == null) {
             try {
                 this.setExaminer(boardType, field);
@@ -29,9 +23,6 @@ public class RandomAlgorithm extends FindAMoveAlgorithm{
         }
 
         List<Integer> freeCells = examiner.findFreeCells(cells);
-
-        int cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
-
-        return cellToMarkNum;
+        return freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
     }
 }

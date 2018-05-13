@@ -4,10 +4,10 @@ import com.paintme.PaintMEException;
 import com.paintme.infrastucture.AlgorithmFactory;
 import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Field;
-import com.paintme.infrastucture.algorithms.FindAMoveAlgorithm;
+import com.paintme.infrastucture.algorithms.FindMoveAlgorithm;
 
 public abstract class GameDifficultyStrategy {
-    private FindAMoveAlgorithm algorithm = null;
+    private FindMoveAlgorithm algorithm = null;
 
     public int getCellToMark(char myColor, BoardType boardType, Field field, String cells) throws PaintMEException {
         if (this.algorithm == null) {

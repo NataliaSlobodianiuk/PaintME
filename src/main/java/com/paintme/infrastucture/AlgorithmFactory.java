@@ -3,8 +3,8 @@ package com.paintme.infrastucture;
 import com.paintme.infrastucture.algorithms.*;
 
 public class AlgorithmFactory{
-    public FindAMoveAlgorithm getAlgorithm (BoardType boardType, Field field, int difficultyLevel) {
-        FindAMoveAlgorithm algorithm = null;
+    public FindMoveAlgorithm getAlgorithm (BoardType boardType, Field field, int difficultyLevel) {
+        FindMoveAlgorithm algorithm = null;
 
         if (difficultyLevel == 0) {
             algorithm = new RandomAlgorithm();
@@ -16,13 +16,27 @@ public class AlgorithmFactory{
                             switch (difficultyLevel) {
                                 case 1:
                                 case 2:
-                                    algorithm = new Square3BlockingAlgorithm();
+                                    algorithm = new SquareBlockingAlgorithm(3);
                                     break;
                                 case 3:
-                                    algorithm = new Square3TriangleWinningAlgorithm();
-                                    break;
                                 case 4:
-                                    algorithm = new Square3AnglesWinningAlgorithm();
+                                    algorithm = new SquareWinningAlgorithm(3);
+                                    break;
+                                default:
+                                    throw new IllegalArgumentException(
+                                            "Unknown difficulty level.");
+                            }
+                            break;
+                        case FIVE_BY_FIVE:
+                        case NINE_BY_NINE:
+                            switch (difficultyLevel) {
+                                case 1:
+                                case 2:
+                                    algorithm = new SquareBlockingAlgorithm(4);
+                                    break;
+                                case 3:
+                                case 4:
+                                    algorithm = new SquareWinningAlgorithm(4);
                                     break;
                                 default:
                                     throw new IllegalArgumentException(
