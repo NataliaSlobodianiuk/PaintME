@@ -245,7 +245,7 @@ public class Square5BoardExaminer extends SquareBoardExaminer {
                 if (i - this.size >= 0 && cells.charAt(i - this.size) == '-') {
                     threesColumns.put(new Integer[]{ i, i + this.size, i + this.size * 2, i - this.size }, cells.charAt(i));
                 }
-                if (i + this.size * 3 >= 0 && cells.charAt(i + this.size * 3) == '-') {
+                if (i + this.size * 3 < cells.length() && cells.charAt(i + this.size * 3) == '-') {
                     threesColumns.put(new Integer[]{ i, i + this.size, i + this.size * 2, i + this.size * 3 }, cells.charAt(i));
                 }
             }
