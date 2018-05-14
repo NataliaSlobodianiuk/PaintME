@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.paint.Color?>
 <HBox fx:id="controlButtonsHBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameDetailsController">
    <children>
          <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backToMainMenuButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
@@ -51,7 +52,11 @@
       <children>
       
                               <Label fx:id="color1Label" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="41.0" text="Color 1:" />
-                  <ColorPicker fx:id="colorPicker1" prefHeight="25.0" prefWidth="149.0" />
+                  <ColorPicker fx:id="colorPicker1" prefHeight="25.0" prefWidth="149.0" >
+                      <value>
+                          <Color blue="1.0" green="0.0" red="0.0" />
+                      </value>
+                  </ColorPicker>
       </children>
          </HBox>
    
@@ -59,7 +64,11 @@
       <children>
       
                         <Label fx:id="color2Label" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="41.0" text="Color 2:" />
-                        <ColorPicker fx:id="colorPicker2" prefHeight="25.0" prefWidth="149.0" />
+                        <ColorPicker fx:id="colorPicker2" prefHeight="25.0" prefWidth="149.0">
+                            <value>
+                                <Color blue="0.0" green="0.0" red="1.0" />
+                            </value>
+                        </ColorPicker>
       </children>
                </HBox>
 
