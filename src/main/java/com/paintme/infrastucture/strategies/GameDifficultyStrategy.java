@@ -1,16 +1,18 @@
 package com.paintme.infrastucture.strategies;
 
-import com.paintme.infrastucture.AlgorithmFactory;
 import com.paintme.PaintMEException;
-import com.paintme.infrastucture.algorithms.FindAMoveAlgorithm;
+import com.paintme.infrastucture.AlgorithmFactory;
+import com.paintme.infrastucture.BoardType;
+import com.paintme.infrastucture.Field;
+import com.paintme.infrastucture.algorithms.FindMoveAlgorithm;
 
 public abstract class GameDifficultyStrategy {
-    private FindAMoveAlgorithm algorithm = null;
+    private FindMoveAlgorithm algorithm = null;
 
-    public int getCellToMark(char myColor, String boardType, String cells) throws PaintMEException {
+    public int getCellToMark(char myColor, BoardType boardType, Field field, String cells) throws PaintMEException {
         if (this.algorithm == null) {
             try {
-                this.setAlgorithm(boardType, cells.length());
+                this.setAlgorithm(boardType, field);
             } catch (PaintMEException exception) {
                 throw new PaintMEException(
                         "The algorithm couldn't be set." +
@@ -22,7 +24,7 @@ public abstract class GameDifficultyStrategy {
 
         int cellToMarkNum;
         try {
-            cellToMarkNum = this.algorithm.findAMove(myColor, boardType, cells);
+            cellToMarkNum = this.algorithm.findAMove(myColor, boardType, field, cells);
         } catch (PaintMEException exception) {
             throw new PaintMEException(
                     "A move based on " +
@@ -36,7 +38,7 @@ public abstract class GameDifficultyStrategy {
         return cellToMarkNum;
     }
 
-    private void setAlgorithm(String boardType, int cellsLength) throws PaintMEException {
+    private void setAlgorithm(BoardType boardType, Field cellsLength) throws PaintMEException {
         int difficultyLevel = this.getDifficultyLevel();
 
         AlgorithmFactory algorithmFactory = new AlgorithmFactory();

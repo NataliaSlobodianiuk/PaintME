@@ -3,7 +3,7 @@ package com.paintme.infrastucture.board_examiners;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class SquareBoardExaminer implements IBoardExaminer {
+public abstract class SquareBoardExaminer extends BoardExaminerBase {
     protected int size;
     protected int winAmount;
 

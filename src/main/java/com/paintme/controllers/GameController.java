@@ -7,7 +7,7 @@ import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.GameMode;
-import com.paintme.infrastucture.board_examiners.IBoardExaminer;
+import com.paintme.infrastucture.board_examiners.BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square5BoardExaminer;
 import com.paintme.infrastucture.board_examiners.Square9BoardExaminer;
@@ -64,11 +64,13 @@ public class GameController {
 
     private GameDifficultyStrategy strategy;
 
-    private IBoardExaminer examiner;
+    private BoardExaminer examiner;
 
     private Board board;
 
     private GameMode gameMode;
+    private BoardType boardType;
+    private Field boardField;
 
     private List<Button> buttonsList;
 
@@ -110,6 +112,8 @@ public class GameController {
     public void initialize() {
         try {
             this.gameMode = this.gameService.getGameMode();
+            this.boardType = this.gameService.getBoardType();
+            this.boardField = this.gameService.getBoardField();
 
             this.isToMove = true;
             this.numToMove = 1;
@@ -147,7 +151,7 @@ public class GameController {
                     }
 
                     if (this.gameMode == GameMode.COMPUTER) {
-                        cellNumber = this.strategy.getCellToMark(this.team2Color, "SQUARE", cells);
+                        cellNumber = this.strategy.getCellToMark(this.team2Color, this.boardType, this.boardField, cells);
                         cellsArr = cells.toCharArray();
                         cellsArr[cellNumber] = this.team2Color;
                         cells = String.valueOf(cellsArr);
@@ -191,15 +195,12 @@ public class GameController {
         }
     }
 
-    private void initializeBoard() throws PaintMEException {
-        BoardType boardType = this.gameService.getBoardType();
-        Field field = this.gameService.getBoardField();
-
+    private void initializeBoard(){
         this.board = new Board();
 
-        switch (boardType) {
+        switch (this.boardType) {
             case _2D:
-                switch (field) {
+                switch (this.boardField) {
                     case THREE_BY_THREE:
                         this.setButtonsGridPane(3, 3);
                         board.setCells(new String(new char[9]).replace("\0", "-"));
@@ -217,7 +218,7 @@ public class GameController {
                 }
                 break;
             case CUBE:
-                switch (field) {
+                switch (this.boardField) {
                     case THREE_BY_THREE:
                         this.setupCube(3, 3);
                         board.setCells(new String(new char[6 * 9]).replace("\0", "-"));
