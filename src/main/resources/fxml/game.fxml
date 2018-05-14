@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
+<GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="true" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
@@ -42,6 +42,8 @@
         <VBox fx:id="fieldVBox" alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
         </VBox>
         <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="playAgainButton" alignment="CENTER" contentDisplay="CENTER" onAction="#playAgainButton" prefWidth="80" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Play again" textAlignment="CENTER" textFill="white">
+            </Button>
             <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" onAction="#exitButton" prefWidth="70" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Exit" textAlignment="CENTER" textFill="white">
             </Button>
         </HBox>

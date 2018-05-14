@@ -146,8 +146,6 @@ public class GameController {
 
                     if (this.examiner.isFinished(cells)) {
                         this.showEndGameAlert();
-                        this.exitButton(null);
-                        return;
                     }
 
                     if (this.gameMode == GameMode.COMPUTER) {
@@ -173,21 +171,22 @@ public class GameController {
 
                 if (this.examiner.isFinished(cells)) {
                     this.showEndGameAlert();
-                    this.exitButton(new ActionEvent());
-                    return;
                 }
             } else {
                 Alerts.showNotYourTurnAlert();
-                return;
             }
         } catch (Exception e) {
             Alerts.showGamePropertiesAlert(e.getMessage());
         }
     }
 
+    public void playAgainButton(ActionEvent actionEvent) {
+
+    }
+
     public void exitButton(ActionEvent actionEvent) throws Exception{
         if (this.userService.getSessionUser() == null) {
-            this.stageManager.switchScene(FxmlView.MAIN);
+            this.stageManager.switchScene(FxmlView.GAMEDETAILS);
         }
         else{
             this.stageManager.switchScene(FxmlView.HOMEPAGE);
