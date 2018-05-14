@@ -16,36 +16,23 @@ import com.paintme.services.GameService;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
-import javafx.scene.*;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.PhongMaterial;
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Translate;
-import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 public class GameController {
@@ -148,6 +135,7 @@ public class GameController {
 
                     if (this.examiner.isFinished(cells)) {
                         this.showEndGameAlert();
+                        return;
                     }
 
                     if (this.gameMode == GameMode.COMPUTER) {
