@@ -171,7 +171,7 @@ public class GameController {
     }
 
     public void playAgainButton(ActionEvent actionEvent) {
-
+        this.stageManager.switchScene(FxmlView.GAME);
     }
 
     public void exitButton(ActionEvent actionEvent) throws Exception{
