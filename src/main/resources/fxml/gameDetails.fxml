@@ -18,11 +18,11 @@
 <?import javafx.scene.paint.Color?>
 <HBox fx:id="controlButtonsHBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameDetailsController">
    <children>
-         <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backToMainMenuButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
+         <Button fx:id="resetButton" alignment="TOP_LEFT" onAction="#resetGameDetailsButton" style="-fx-background-color: transparent; -fx-font-weight: bold; -fx-background-radius: 100;" text="" textAlignment="CENTER" textFill="black">
                <graphic>
                      <ImageView fitHeight="25" fitWidth="25">
                            <image>
-                                 <Image fx:id="backButtonImage" url="/icons/BackArrow.png" />
+                                 <Image fx:id="resetButtonImage" url="/icons/ResetArrow.png" />
                            </image>
                      </ImageView>
                </graphic>
@@ -130,7 +130,7 @@
          <HBox fx:id="buttonsHBox" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="2147483647">
       <children>
       
-                  <Button fx:id="resetButton" alignment="CENTER" onAction="#resetGameDetailsButton" prefHeight="25.0" prefWidth="70.0" text="Reset" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                  <Button fx:id="backButton" alignment="CENTER" onAction="#backToMainMenuButton" prefHeight="25.0" prefWidth="70.0" text="Back" textAlignment="CENTER" HBox.hgrow="ALWAYS">
             </Button>
       
                   <Button fx:id="applyButton" alignment="CENTER" onAction="#applyGameDetailsButton" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Apply" textAlignment="CENTER" textFill="white">
@@ -145,15 +145,6 @@
          <HBox.margin>
             <Insets bottom="5.0" right="5.0" top="5.0" />
          </HBox.margin>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
    </GridPane>
    </children>
 </HBox>
