@@ -19,65 +19,6 @@
     </columnConstraints>
 
     <children>
-    <!--
-        <HBox fx:id="sidesHBox" GridPane.rowIndex="0" GridPane.halignment="CENTER"
-          spacing="50">
-          <StackPane fx:id="side1StackPane">
-              <children>
-                  <ImageView>
-                      <image>
-                          <Image fx:id="side1" url="/icons/Grid_40x40.jpg"/>
-                      </image>
-                  </ImageView>
-              </children>
-          </StackPane>
-        <StackPane fx:id="side2StackPane" alignment="BASELINE_LEFT">
-            <children>
-                <ImageView>
-                    <image>
-                        <Image fx:id="side2" url="/icons/Grid_40x40.jpg"/>
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-        <StackPane fx:id="side3StackPane" alignment="BASELINE_LEFT">
-            <children>
-                <ImageView>
-                    <image>
-                        <Image fx:id="side3" url="/icons/Grid_40x40.jpg"/>
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-        <StackPane fx:id="side4StackPane" alignment="BASELINE_LEFT">
-            <children>
-                <ImageView>
-                    <image>
-                        <Image fx:id="side4" url="/icons/Grid_40x40.jpg"/>
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-        <StackPane fx:id="side5StackPane" alignment="BASELINE_LEFT">
-            <children>
-                <ImageView>
-                    <image>
-                        <Image fx:id="side5" url="/icons/Grid_40x40.jpg"/>
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-        <StackPane fx:id="side6StackPane" alignment="BASELINE_LEFT">
-            <children>
-                <ImageView>
-                    <image>
-                        <Image fx:id="side6" url="/icons/Grid_40x40.jpg"/>
-                    </image>
-                </ImageView>
-            </children>
-        </StackPane>
-    </HBox>
-    -->
 
         <VBox fx:id="teams" maxWidth="200" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
 
@@ -101,6 +42,8 @@
         <VBox fx:id="fieldVBox" alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
         </VBox>
         <HBox fx:id="buttonsHBox" alignment="CENTER" spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="playAgainButton" alignment="CENTER" contentDisplay="CENTER" onAction="#playAgainButton" prefWidth="80" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Play again" textAlignment="CENTER" textFill="white">
+            </Button>
             <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" onAction="#exitButton" prefWidth="70" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Exit" textAlignment="CENTER" textFill="white">
             </Button>
         </HBox>

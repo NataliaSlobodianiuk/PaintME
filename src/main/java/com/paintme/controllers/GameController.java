@@ -16,26 +16,29 @@ import com.paintme.services.GameService;
 import com.paintme.services.UserService;
 import com.paintme.view.FxmlView;
 import com.paintme.view.StageManager;
-import com.paintme.view.graphics.Cube;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
-import javafx.scene.AmbientLight;
-import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -70,10 +73,14 @@ public class GameController {
     private Field boardField;
 
     private List<Button> buttonsList;
-    private Cube cube;
+
+    private Group cube;
     //endregion
 
     //region FXML Fields
+    @FXML
+    private GridPane grid;
+
     @FXML
     private ListView<String> team1ListView;
 
@@ -141,8 +148,6 @@ public class GameController {
 
                     if (this.examiner.isFinished(cells)) {
                         this.showEndGameAlert();
-                        this.exitButton(null);
-                        return;
                     }
 
                     if (this.gameMode == GameMode.COMPUTER) {
@@ -168,21 +173,22 @@ public class GameController {
 
                 if (this.examiner.isFinished(cells)) {
                     this.showEndGameAlert();
-                    this.exitButton(new ActionEvent());
-                    return;
                 }
             } else {
                 Alerts.showNotYourTurnAlert();
-                return;
             }
         } catch (Exception e) {
             Alerts.showGamePropertiesAlert(e.getMessage());
         }
     }
 
+    public void playAgainButton(ActionEvent actionEvent) {
+
+    }
+
     public void exitButton(ActionEvent actionEvent) throws Exception{
         if (this.userService.getSessionUser() == null) {
-            this.stageManager.switchScene(FxmlView.MAIN);
+            this.stageManager.switchScene(FxmlView.GAMEDETAILS);
         }
         else{
             this.stageManager.switchScene(FxmlView.HOMEPAGE);
@@ -266,7 +272,7 @@ public class GameController {
                 button.setPrefHeight(225 / rows);
                 button.setPrefWidth(225 / cols);
                 button.setOnAction(this::cell);
-                buttonsList.add(button);
+                this.buttonsList.add(button);
                 gridpane.add(button, c, r);
             }
         }
@@ -275,49 +281,79 @@ public class GameController {
     }
 
     private void setupCube(int buttonRows, int buttonCols) {
-        cube = new Cube();
-        PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.setNearClip(0.1);
-        camera.setFarClip(10000.0);
-        camera.setTranslateZ(-10);
-        Group sceneRoot = new Group();
-        Scene gameScene = this.stageManager.primaryStage.getScene();
-        gameScene.setCamera(camera);
+        this.cube = new Group();
+        double cubeSize = 200;
+        Color color = Color.AQUA;
 
-        PhongMaterial mat = new PhongMaterial();
-        mat.setDiffuseMap(new Image(getClass().getResourceAsStream("/icons/DiffuseMapImage.png")));
+        List<GridPane> cubeSides = new LinkedList<GridPane>();
+        for (int i = 0; i < 6; i++) {
+            GridPane side = new GridPane();
+            side.setVgap(0);
+            side.setHgap(0);
+            side.setPrefWidth(cubeSize);
+            side.setPrefHeight(cubeSize);
+            cubeSides.add(side);
+        }
 
-        Group meshGroup = new Group();
+        //back
+        cubeSides.get(0).setTranslateX(-0.5 * cubeSize);
+        cubeSides.get(0).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(0).setTranslateZ(0.5 * cubeSize);
 
-        AtomicInteger cont = new AtomicInteger();
-        cube.patternFaceF.forEach(p -> {
-            MeshView meshP = new MeshView();
-            meshP.setMesh(cube.createCube(p));
-            meshP.setMaterial(mat);
-            Point3D pt = cube.pointsFaceF.get(cont.getAndIncrement());
-            meshP.getTransforms().addAll(new Translate(pt.getX(), pt.getY(), pt.getZ()));
-            meshGroup.getChildren().add(meshP);
-        });
+        //bottom
+        cubeSides.get(1).setTranslateX(-0.5 * cubeSize);
+        cubeSides.get(1).setTranslateY(0);
+        cubeSides.get(1).setRotationAxis(Rotate.X_AXIS);
+        cubeSides.get(1).setRotate(90);
 
-        Rotate rotateX = new Rotate(30, 0, 0, 0, Rotate.X_AXIS);
-        Rotate rotateY = new Rotate(20, 0, 0, 0, Rotate.Y_AXIS);
-        meshGroup.getTransforms().addAll(rotateX, rotateY);
+        //right
+        cubeSides.get(2).setTranslateX(-1 * cubeSize);
+        cubeSides.get(2).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(2).setRotationAxis(Rotate.Y_AXIS);
+        cubeSides.get(2).setRotate(90);
 
-        sceneRoot.getChildren().addAll(meshGroup, new AmbientLight(Color.WHITE));
-        this.fieldVBox.getChildren().add(sceneRoot);
+        //left
+        cubeSides.get(3).setTranslateX(0);
+        cubeSides.get(3).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(3).setRotationAxis(Rotate.Y_AXIS);
+        cubeSides.get(3).setRotate(90);
 
-        gameScene.setOnMousePressed(me -> {
-            cube.mouseOldX = me.getSceneX();
-            cube.mouseOldY = me.getSceneY();
-        });
-        gameScene.setOnMouseDragged(me -> {
-            cube.mousePosX = me.getSceneX();
-            cube.mousePosY = me.getSceneY();
-            rotateX.setAngle(rotateX.getAngle()-(cube.mousePosY - cube.mouseOldY));
-            rotateY.setAngle(rotateY.getAngle()+(cube.mousePosX - cube.mouseOldX));
-            cube.mouseOldX = cube.mousePosX;
-            cube.mouseOldY = cube.mousePosY;
-        });
+        //top
+        cubeSides.get(4).setTranslateX(-0.5 * cubeSize);
+        cubeSides.get(4).setTranslateY(-1 * cubeSize);
+        cubeSides.get(4).setRotationAxis(Rotate.X_AXIS);
+        cubeSides.get(4).setRotate(90);
+
+        //front
+        cubeSides.get(5).setTranslateX(-0.5 * cubeSize);
+        cubeSides.get(5).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(5).setTranslateZ(0.5 * cubeSize);
+
+        this.buttonsList = new LinkedList<Button>();
+
+        for (int i = 0; i < cubeSides.size(); i++) {
+            for (int r = 0; r < buttonRows; r++) {
+                for (int c = 0; c < buttonCols; c++) {
+                    Button button = new Button();
+                    button.setId(Integer.toString(i * buttonRows * buttonCols + r * buttonRows + c));
+                    button.setPrefHeight(cubeSize / buttonRows);
+                    button.setPrefWidth(cubeSize / buttonCols);
+                    button.setOnAction(this::cell);
+                    this.buttonsList.add(button);
+                    cubeSides.get(i).add(button, c, r);
+                }
+            }
+        }
+
+        for (GridPane side : cubeSides) {
+            this.cube.getChildren().add(side);
+        }
+
+        this.cube.getTransforms().addAll(new Rotate(-30, Rotate.X_AXIS), new Rotate(30, Rotate.Y_AXIS));
+
+        this.fieldVBox.getChildren().add(this.cube);
+        cubeSides.get(1).setVisible(false);
+        cubeSides.get(3).setVisible(false);
     }
 
     private void showEndGameAlert() {
