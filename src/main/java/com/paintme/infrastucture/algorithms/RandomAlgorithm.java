@@ -23,6 +23,6 @@ public class RandomAlgorithm extends FindMoveAlgorithm {
         }
 
         List<Integer> freeCells = examiner.findFreeCells(cells);
-        return freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
+        return freeCells.isEmpty() ? -1 : freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
     }
 }

@@ -18,7 +18,9 @@ public class SquareBlockingAlgorithm extends SquareFindMoveAlgorithm {
         int cellToMarkNum = this.findBlockMove(color, boardType, field, cells);
         if (cellToMarkNum == -1) {
             List<Integer> freeCells = this.examiner.findFreeCells(cells);
-            cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
+            if (!freeCells.isEmpty()) {
+                cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
+            }
         }
 
         return cellToMarkNum;
