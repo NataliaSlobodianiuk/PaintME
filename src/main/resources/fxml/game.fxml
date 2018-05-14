@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="true" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
+<GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
