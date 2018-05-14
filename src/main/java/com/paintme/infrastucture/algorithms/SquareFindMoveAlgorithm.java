@@ -32,15 +32,15 @@ public abstract class SquareFindMoveAlgorithm extends FindMoveAlgorithm {
         return -1;
     }
 
-    private int findBlockMove3(char color, String cells) throws PaintMEException {
+    private int findBlockMove3(char color, String cells) {
         return this.findBlockMove(color, examiner.findCombinationOfTwo(cells));
     }
 
-    private int findBlockMove4(char color, String cells) throws PaintMEException {
+    private int findBlockMove4(char color, String cells) {
         return this.findBlockMove(color, examiner.findCombinationOfThree(cells));
     }
 
-    private int findBlockMove(char color, Map<Integer[], Character> combinations) throws PaintMEException {
+    private int findBlockMove(char color, Map<Integer[], Character> combinations) {
         if (!combinations.isEmpty()) {
             for (Map.Entry<Integer[], Character> combination : combinations.entrySet()) {
                 if (combination.getValue() != color) {
@@ -76,15 +76,15 @@ public abstract class SquareFindMoveAlgorithm extends FindMoveAlgorithm {
         return -1;
     }
 
-    private int findWinningMove3(char color, String cells) throws PaintMEException {
+    private int findWinningMove3(char color, String cells) {
         return this.findWinningMove(color, examiner.findCombinationOfTwo(cells));
     }
 
-    private int findWinningMove4(char color, String cells) throws PaintMEException {
+    private int findWinningMove4(char color, String cells) {
         return this.findWinningMove(color, examiner.findCombinationOfThree(cells));
     }
 
-    private int findWinningMove(char color, Map<Integer[], Character> combinations) throws PaintMEException {
+    private int findWinningMove(char color, Map<Integer[], Character> combinations){
         if (!combinations.isEmpty()) {
             for (Map.Entry<Integer[], Character> combination : combinations.entrySet()) {
                 if (combination.getValue() == color) {

@@ -13,12 +13,14 @@ public class SquareWinningAlgorithm extends SquareFindMoveAlgorithm {
     }
 
     @Override
-    public int findAMove(char color, BoardType boardType, Field field, String cells)
-            throws PaintMEException {
+    public int findAMove(char color, BoardType boardType, Field field, String cells) throws PaintMEException {
         int cellToMarkNum = this.findWinningMove(color, boardType, field, cells);
         if (cellToMarkNum == -1) {
-            List<Integer> freeCells = this.examiner.findFreeCells(cells);
-            cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
+            cellToMarkNum = this.findBlockMove(color, boardType, field, cells);
+            if (cellToMarkNum == -1) {
+                List<Integer> freeCells = this.examiner.findFreeCells(cells);
+                cellToMarkNum = freeCells.get(ThreadLocalRandom.current().nextInt(0, freeCells.size() - 1));
+            }
         }
 
         return cellToMarkNum;
