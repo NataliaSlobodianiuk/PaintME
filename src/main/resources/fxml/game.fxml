@@ -12,15 +12,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>
 <GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
-        <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="35" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="15" />
     </columnConstraints>
 
     <children>
 
-        <VBox fx:id="teams" maxWidth="200" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+        <VBox fx:id="teams" fillWidth="true" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
 
             <ListView fx:id="team1ListView">
                 <items>
