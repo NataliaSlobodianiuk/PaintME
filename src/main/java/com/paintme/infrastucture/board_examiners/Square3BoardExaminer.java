@@ -104,10 +104,10 @@ public class Square3BoardExaminer extends SquareBoardExaminer {
         for (int i = 0; i <= this.size * (this.size - 1); i += this.size) {
             for (int j = 0; j < this.size - 1; j++) {
                 if (cells.charAt(i + j) != '-' && cells.charAt(i + j) == cells.charAt(i + j + 1)) {
-                    if (i + j - 1 >= i * this.size && cells.charAt(i + j - 1) == '-') {
+                    if (i + j - 1 >= 0 && cells.charAt(i + j - 1) == '-') {
                         twosRows.put(new Integer[]{ i + j, i + j + 1, i + j - 1 }, cells.charAt(i));
                     }
-                    if (i + j + 2 < i * this.size + this.size && cells.charAt(i + j + 2) == '-') {
+                    if (i + j + 2 < cells.length() && cells.charAt(i + j + 2) == '-') {
                         twosRows.put(new Integer[]{ i + j, i + j + 1, i + j + 2 }, cells.charAt(i));
                     }
                 }
