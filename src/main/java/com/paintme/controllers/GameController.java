@@ -37,6 +37,9 @@ import java.util.List;
 @Component
 public class GameController {
 
+    //constraints
+    private static final int BOARD_SIZE = 270;
+
     //region Fields
     private boolean isToMove;
     private int numToMove;
@@ -257,8 +260,8 @@ public class GameController {
             for (int c = 0; c < cols; c++) {
                 Button button = new Button();
                 button.setId(Integer.toString(r * rows + c));
-                button.setPrefHeight(225 / rows);
-                button.setPrefWidth(225 / cols);
+                button.setPrefHeight(BOARD_SIZE / rows);
+                button.setPrefWidth(BOARD_SIZE / cols);
                 button.setOnAction(this::cell);
                 this.buttonsList.add(button);
                 gridpane.add(button, c, r);
@@ -270,7 +273,6 @@ public class GameController {
 
     private void setupCube(int buttonRows, int buttonCols) {
         this.cube = new Group();
-        double cubeSize = 200;
         Color color = Color.AQUA;
 
         List<GridPane> cubeSides = new LinkedList<GridPane>();
@@ -278,44 +280,44 @@ public class GameController {
             GridPane side = new GridPane();
             side.setVgap(0);
             side.setHgap(0);
-            side.setPrefWidth(cubeSize);
-            side.setPrefHeight(cubeSize);
+            side.setPrefWidth(BOARD_SIZE);
+            side.setPrefHeight(BOARD_SIZE);
             cubeSides.add(side);
         }
 
         //back
-        cubeSides.get(0).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(0).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(0).setTranslateZ(0.5 * cubeSize);
+        cubeSides.get(0).setTranslateX(-0.5 * BOARD_SIZE);
+        cubeSides.get(0).setTranslateY(-0.5 * BOARD_SIZE);
+        cubeSides.get(0).setTranslateZ(0.5 * BOARD_SIZE);
 
         //bottom
-        cubeSides.get(1).setTranslateX(-0.5 * cubeSize);
+        cubeSides.get(1).setTranslateX(-0.5 * BOARD_SIZE);
         cubeSides.get(1).setTranslateY(0);
         cubeSides.get(1).setRotationAxis(Rotate.X_AXIS);
         cubeSides.get(1).setRotate(90);
 
         //right
-        cubeSides.get(2).setTranslateX(-1 * cubeSize);
-        cubeSides.get(2).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(2).setTranslateX(-1 * BOARD_SIZE);
+        cubeSides.get(2).setTranslateY(-0.5 * BOARD_SIZE);
         cubeSides.get(2).setRotationAxis(Rotate.Y_AXIS);
         cubeSides.get(2).setRotate(90);
 
         //left
         cubeSides.get(3).setTranslateX(0);
-        cubeSides.get(3).setTranslateY(-0.5 * cubeSize);
+        cubeSides.get(3).setTranslateY(-0.5 * BOARD_SIZE);
         cubeSides.get(3).setRotationAxis(Rotate.Y_AXIS);
         cubeSides.get(3).setRotate(90);
 
         //top
-        cubeSides.get(4).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(4).setTranslateY(-1 * cubeSize);
+        cubeSides.get(4).setTranslateX(-0.5 * BOARD_SIZE);
+        cubeSides.get(4).setTranslateY(-1 * BOARD_SIZE);
         cubeSides.get(4).setRotationAxis(Rotate.X_AXIS);
         cubeSides.get(4).setRotate(90);
 
         //front
-        cubeSides.get(5).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(5).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(5).setTranslateZ(0.5 * cubeSize);
+        cubeSides.get(5).setTranslateX(-0.5 * BOARD_SIZE);
+        cubeSides.get(5).setTranslateY(-0.5 * BOARD_SIZE);
+        cubeSides.get(5).setTranslateZ(0.5 * BOARD_SIZE);
 
         this.buttonsList = new LinkedList<Button>();
 
@@ -324,8 +326,8 @@ public class GameController {
                 for (int c = 0; c < buttonCols; c++) {
                     Button button = new Button();
                     button.setId(Integer.toString(i * buttonRows * buttonCols + r * buttonRows + c));
-                    button.setPrefHeight(cubeSize / buttonRows);
-                    button.setPrefWidth(cubeSize / buttonCols);
+                    button.setPrefHeight(BOARD_SIZE / buttonRows);
+                    button.setPrefWidth(BOARD_SIZE / buttonCols);
                     button.setOnAction(this::cell);
                     this.buttonsList.add(button);
                     cubeSides.get(i).add(button, c, r);

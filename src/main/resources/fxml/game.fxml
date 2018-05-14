@@ -15,8 +15,8 @@
 <?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>
 <GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="35" />
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="50" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="25" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="60" />
         <ColumnConstraints hgrow="ALWAYS" percentWidth="15" />
     </columnConstraints>
 

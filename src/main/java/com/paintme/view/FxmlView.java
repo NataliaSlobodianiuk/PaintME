@@ -38,12 +38,12 @@ public enum FxmlView {
 
         @Override
         int setWidth(){
-            return  600;
+            return  750;
         }
 
         @Override
         int setHeight(){
-            return  400;
+            return  500;
         }
     },
     GAMEDETAILS{
