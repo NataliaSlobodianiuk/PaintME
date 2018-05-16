@@ -68,8 +68,6 @@ public class GameController {
     //endregion
 
     //region FXML Fields
-    @FXML
-    private GridPane grid;
 
     @FXML
     private ListView<String> team1ListView;
@@ -81,10 +79,16 @@ public class GameController {
     private VBox fieldVBox;
 
     @FXML
-    private HBox buttonsHBox;
+    private Button upButton;
 
     @FXML
-    private Button exitButton;
+    private Button rightButton;
+
+    @FXML
+    private Button downButton;
+
+    @FXML
+    private Button leftButton;
     //endregion
 
     //region Managers and Services
@@ -191,6 +195,10 @@ public class GameController {
 
         switch (this.boardType) {
             case _2D:
+                this.upButton.setVisible(false);
+                this.downButton.setVisible(false);
+                this.leftButton.setVisible(false);
+                this.rightButton.setVisible(false);
                 switch (this.boardField) {
                     case THREE_BY_THREE:
                         this.setButtonsGridPane(3, 3);
@@ -344,6 +352,22 @@ public class GameController {
         this.fieldVBox.getChildren().add(this.cube);
         cubeSides.get(1).setVisible(false);
         cubeSides.get(3).setVisible(false);
+    }
+
+    public void upButton(ActionEvent actionEvent) {
+
+    }
+
+    public void rightButton(ActionEvent actionEvent) {
+
+    }
+
+    public void downButton(ActionEvent actionEvent) {
+
+    }
+
+    public void leftButton(ActionEvent actionEvent) {
+
     }
 
     private void showEndGameAlert() {
