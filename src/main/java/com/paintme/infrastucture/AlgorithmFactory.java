@@ -4,13 +4,14 @@ import com.paintme.infrastucture.algorithms.*;
 
 public class AlgorithmFactory{
     public FindMoveAlgorithm getAlgorithm (BoardType boardType, Field field, int difficultyLevel) {
-        FindMoveAlgorithm algorithm = null;
+        FindMoveAlgorithm algorithm;
 
         if (difficultyLevel == 0) {
             algorithm = new RandomAlgorithm();
         } else {
             switch (boardType) {
                 case _2D:
+                case CUBE:
                     switch (field) {
                         case THREE_BY_THREE:
                             switch (difficultyLevel) {
@@ -48,8 +49,6 @@ public class AlgorithmFactory{
                                     "Unknown field type.");
                     }
                     break;
-                case CUBE:
-                    //ToDo
                 default:
                     throw new IllegalArgumentException(
                             "Unknown type of board.");

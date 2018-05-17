@@ -7,7 +7,7 @@ import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.board_examiners.BoardExaminer;
 
 public abstract class FindMoveAlgorithm {
-    protected int winAmount = -1;
+    protected int winAmount = 3;
 
     protected BoardExaminer examiner = null;
     protected void setExaminer(BoardType boardType, Field field) throws PaintMEException {

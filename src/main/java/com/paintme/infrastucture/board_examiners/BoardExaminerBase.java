@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BoardExaminerBase implements BoardExaminer {
+    protected int winAmount;
+
     @Override
     public List<Integer> findFreeCells(String cells) {
         List<Integer> freeCells = new ArrayList<>();

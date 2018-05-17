@@ -1,25 +1,22 @@
 package com.paintme.infrastucture;
 
-import com.paintme.infrastucture.board_examiners.BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square5BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square9BoardExaminer;
+import com.paintme.infrastucture.board_examiners.*;
 
 public class BoardExaminerFactory{
     public BoardExaminer getBoardExaminer (BoardType boardType, Field field) {
-        BoardExaminer BoardExaminer = null;
+        BoardExaminer boardExaminer;
         
         switch (boardType) {
             case _2D:
                 switch (field) {
                     case THREE_BY_THREE:
-                        BoardExaminer = new Square3BoardExaminer();
+                        boardExaminer = new Square3BoardExaminer();
                         break;
                     case FIVE_BY_FIVE:
-                        BoardExaminer = new Square5BoardExaminer();
+                        boardExaminer = new Square5BoardExaminer();
                         break;
                     case NINE_BY_NINE:
-                        BoardExaminer = new Square9BoardExaminer();
+                        boardExaminer = new Square9BoardExaminer();
                         break;
                     default:
                         throw new IllegalArgumentException(
@@ -27,12 +24,26 @@ public class BoardExaminerFactory{
                 }
                 break;
             case CUBE:
-                //ToDo
+                switch (field) {
+                    case THREE_BY_THREE:
+                        boardExaminer = new Cube3BoardExaminer();
+                        break;
+                    case FIVE_BY_FIVE:
+                        boardExaminer = new Cube5BoardExaminer();
+                        break;
+                    case NINE_BY_NINE:
+                        boardExaminer = new Cube9BoardExaminer();
+                        break;
+                    default:
+                        throw new IllegalArgumentException(
+                                "Unknown field type.");
+                }
+                break;
             default:
                 throw new IllegalArgumentException(
                         "Unknown type of board.");
         }
 
-        return BoardExaminer;
+        return boardExaminer;
     }
 }

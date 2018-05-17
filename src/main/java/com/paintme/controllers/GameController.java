@@ -7,10 +7,7 @@ import com.paintme.infrastucture.BoardType;
 import com.paintme.infrastucture.Difficulty;
 import com.paintme.infrastucture.Field;
 import com.paintme.infrastucture.GameMode;
-import com.paintme.infrastucture.board_examiners.BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square3BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square5BoardExaminer;
-import com.paintme.infrastucture.board_examiners.Square9BoardExaminer;
+import com.paintme.infrastucture.board_examiners.*;
 import com.paintme.infrastucture.strategies.GameDifficultyStrategy;
 import com.paintme.services.GameService;
 import com.paintme.services.UserService;
@@ -210,17 +207,17 @@ public class GameController {
                     case THREE_BY_THREE:
                         this.setupCube(3, 3);
                         board.setCells(new String(new char[6 * 9]).replace("\0", "-"));
-                        this.examiner = new Square3BoardExaminer();
+                        this.examiner = new Cube3BoardExaminer();
                         break;
                     case FIVE_BY_FIVE:
                         this.setupCube(5, 5);
                         board.setCells(new String(new char[6 * 25]).replace("\0", "-"));
-                        this.examiner = new Square5BoardExaminer();
+                        this.examiner = new Cube5BoardExaminer();
                         break;
                     case NINE_BY_NINE:
                         this.setupCube(9, 9);
                         board.setCells(new String(new char[6 * 81]).replace("\0", "-"));
-                        this.examiner = new Square9BoardExaminer();
+                        this.examiner = new Cube9BoardExaminer();
                 }
         }
     }
