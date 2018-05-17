@@ -34,6 +34,9 @@ import java.util.List;
 @Component
 public class GameController {
 
+    //constraints
+    private static final int BOARD_SIZE = 270;
+
     //region Fields
     private boolean isToMove;
     private int numToMove;
@@ -59,11 +62,11 @@ public class GameController {
     private List<Button> buttonsList;
 
     private Group cube;
+
+    private List<GridPane> cubeSides;
     //endregion
 
     //region FXML Fields
-    @FXML
-    private GridPane grid;
 
     @FXML
     private ListView<String> team1ListView;
@@ -75,10 +78,16 @@ public class GameController {
     private VBox fieldVBox;
 
     @FXML
-    private HBox buttonsHBox;
+    private Button upButton;
 
     @FXML
-    private Button exitButton;
+    private Button rightButton;
+
+    @FXML
+    private Button downButton;
+
+    @FXML
+    private Button leftButton;
     //endregion
 
     //region Managers and Services
@@ -185,6 +194,10 @@ public class GameController {
 
         switch (this.boardType) {
             case _2D:
+                this.upButton.setVisible(false);
+                this.downButton.setVisible(false);
+                this.leftButton.setVisible(false);
+                this.rightButton.setVisible(false);
                 switch (this.boardField) {
                     case THREE_BY_THREE:
                         this.setButtonsGridPane(3, 3);
@@ -254,8 +267,8 @@ public class GameController {
             for (int c = 0; c < cols; c++) {
                 Button button = new Button();
                 button.setId(Integer.toString(r * rows + c));
-                button.setPrefHeight(225 / rows);
-                button.setPrefWidth(225 / cols);
+                button.setPrefHeight(BOARD_SIZE / rows);
+                button.setPrefWidth(BOARD_SIZE / cols);
                 button.setOnAction(this::cell);
                 this.buttonsList.add(button);
                 gridpane.add(button, c, r);
@@ -267,78 +280,105 @@ public class GameController {
 
     private void setupCube(int buttonRows, int buttonCols) {
         this.cube = new Group();
-        double cubeSize = 200;
         Color color = Color.AQUA;
 
-        List<GridPane> cubeSides = new LinkedList<GridPane>();
+        this.cubeSides = new LinkedList<GridPane>();
         for (int i = 0; i < 6; i++) {
             GridPane side = new GridPane();
             side.setVgap(0);
             side.setHgap(0);
-            side.setPrefWidth(cubeSize);
-            side.setPrefHeight(cubeSize);
-            cubeSides.add(side);
+            side.setPrefWidth(BOARD_SIZE);
+            side.setPrefHeight(BOARD_SIZE);
+            this.cubeSides.add(side);
         }
 
         //back
-        cubeSides.get(0).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(0).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(0).setTranslateZ(0.5 * cubeSize);
+        this.cubeSides.get(0).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(0).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(0).setTranslateZ(0.5 * BOARD_SIZE);
 
         //bottom
-        cubeSides.get(1).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(1).setTranslateY(0);
-        cubeSides.get(1).setRotationAxis(Rotate.X_AXIS);
-        cubeSides.get(1).setRotate(90);
+        this.cubeSides.get(1).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(1).setTranslateY(0);
+        this.cubeSides.get(1).setRotationAxis(Rotate.X_AXIS);
+        this.cubeSides.get(1).setRotate(90);
 
         //right
-        cubeSides.get(2).setTranslateX(-1 * cubeSize);
-        cubeSides.get(2).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(2).setRotationAxis(Rotate.Y_AXIS);
-        cubeSides.get(2).setRotate(90);
+        this.cubeSides.get(2).setTranslateX(-1 * BOARD_SIZE);
+        this.cubeSides.get(2).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(2).setRotationAxis(Rotate.Y_AXIS);
+        this.cubeSides.get(2).setRotate(90);
 
         //left
-        cubeSides.get(3).setTranslateX(0);
-        cubeSides.get(3).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(3).setRotationAxis(Rotate.Y_AXIS);
-        cubeSides.get(3).setRotate(90);
+        this.cubeSides.get(3).setTranslateX(0);
+        this.cubeSides.get(3).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(3).setRotationAxis(Rotate.Y_AXIS);
+        this.cubeSides.get(3).setRotate(90);
 
         //top
-        cubeSides.get(4).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(4).setTranslateY(-1 * cubeSize);
-        cubeSides.get(4).setRotationAxis(Rotate.X_AXIS);
-        cubeSides.get(4).setRotate(90);
+        this.cubeSides.get(4).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(4).setTranslateY(-1 * BOARD_SIZE);
+        this.cubeSides.get(4).setRotationAxis(Rotate.X_AXIS);
+        this.cubeSides.get(4).setRotate(90);
 
         //front
-        cubeSides.get(5).setTranslateX(-0.5 * cubeSize);
-        cubeSides.get(5).setTranslateY(-0.5 * cubeSize);
-        cubeSides.get(5).setTranslateZ(0.5 * cubeSize);
+        this.cubeSides.get(5).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(5).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(5).setTranslateZ(0.5 * BOARD_SIZE);
 
         this.buttonsList = new LinkedList<Button>();
 
-        for (int i = 0; i < cubeSides.size(); i++) {
+        for (int i = 0; i < this.cubeSides.size(); i++) {
             for (int r = 0; r < buttonRows; r++) {
                 for (int c = 0; c < buttonCols; c++) {
                     Button button = new Button();
                     button.setId(Integer.toString(i * buttonRows * buttonCols + r * buttonRows + c));
-                    button.setPrefHeight(cubeSize / buttonRows);
-                    button.setPrefWidth(cubeSize / buttonCols);
+                    button.setPrefHeight(BOARD_SIZE / buttonRows);
+                    button.setPrefWidth(BOARD_SIZE / buttonCols);
                     button.setOnAction(this::cell);
                     this.buttonsList.add(button);
-                    cubeSides.get(i).add(button, c, r);
+                    this.cubeSides.get(i).add(button, c, r);
                 }
             }
         }
 
-        for (GridPane side : cubeSides) {
+        for (GridPane side : this.cubeSides) {
             this.cube.getChildren().add(side);
         }
 
         this.cube.getTransforms().addAll(new Rotate(-30, Rotate.X_AXIS), new Rotate(30, Rotate.Y_AXIS));
 
         this.fieldVBox.getChildren().add(this.cube);
-        cubeSides.get(1).setVisible(false);
-        cubeSides.get(3).setVisible(false);
+    }
+
+    public void upButton(ActionEvent actionEvent) {
+        this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
+    }
+
+    public void rightButton(ActionEvent actionEvent) {
+        this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
+        if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
+            this.cubeSides.get(4).setVisible(false);
+            this.cubeSides.get(3).setVisible(false);
+        } else if (!this.cubeSides.get(4).isVisible() || !this.cubeSides.get(3).isVisible()) {
+            this.cubeSides.get(4).setVisible(true);
+            this.cubeSides.get(3).setVisible(true);
+        }
+    }
+
+    public void downButton(ActionEvent actionEvent) {
+        this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
+    }
+
+    public void leftButton(ActionEvent actionEvent) {
+        this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
+        if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
+            this.cubeSides.get(4).setVisible(false);
+            this.cubeSides.get(3).setVisible(false);
+        } else if (!this.cubeSides.get(4).isVisible() || !this.cubeSides.get(3).isVisible()) {
+            this.cubeSides.get(4).setVisible(true);
+            this.cubeSides.get(3).setVisible(true);
+        }
     }
 
     private void showEndGameAlert() {

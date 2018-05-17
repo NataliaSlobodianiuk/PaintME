@@ -12,15 +12,19 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.sun.javafx.scene.control.skin.ColorPalette.ColorPickerGrid?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <GridPane fx:id="grid" alignment="CENTER" gridLinesVisible="false" hgap="10" style="-fx-background-color: white" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.paintme.controllers.GameController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
-        <ColumnConstraints hgrow="SOMETIMES" prefWidth="250.0" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="25" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="55" />
+        <ColumnConstraints hgrow="ALWAYS" percentWidth="20" />
     </columnConstraints>
 
     <children>
 
-        <VBox fx:id="teams" maxWidth="200" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+        <VBox fx:id="teams" fillWidth="true" spacing="8" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
 
             <ListView fx:id="team1ListView">
                 <items>
@@ -47,6 +51,45 @@
             <Button fx:id="exitButton" alignment="CENTER" contentDisplay="CENTER" onAction="#exitButton" prefWidth="70" style="-fx-background-color: limegreen; -fx-font-weight: bold" text="Exit" textAlignment="CENTER" textFill="white">
             </Button>
         </HBox>
+
+        <GridPane fx:id="rotatioDirectionsGrid" alignment="CENTER_LEFT" gridLinesVisible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="rightButton" onAction="#rightButton" GridPane.rowIndex="1" GridPane.columnIndex="2" style="-fx-background-color: transparent; -fx-background-radius: 100;" text="">
+                <graphic>
+                    <ImageView fitHeight="25" fitWidth="25">
+                        <image>
+                            <Image fx:id="rigthButtonImage" url="/icons/RightArrow.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="upButton" onAction="#upButton" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-background-color: transparent; -fx-background-radius: 100;" text="">
+                <graphic>
+                    <ImageView fitHeight="25" fitWidth="25">
+                        <image>
+                            <Image fx:id="upButtonImage" url="/icons/UpArrow.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="downButton" onAction="#downButton" GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-background-color: transparent; -fx-background-radius: 100;" text="">
+                <graphic>
+                    <ImageView fitHeight="25" fitWidth="25">
+                        <image>
+                            <Image fx:id="downButtonImage" url="/icons/DownArrow.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="leftButton" onAction="#leftButton" GridPane.rowIndex="1" GridPane.columnIndex="0" style="-fx-background-color: transparent; -fx-background-radius: 100;" text="">
+                <graphic>
+                    <ImageView fitHeight="25" fitWidth="25">
+                        <image>
+                            <Image fx:id="leftButtonImage" url="/icons/LeftArrow.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </GridPane>
     </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
