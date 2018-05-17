@@ -77,16 +77,7 @@ public class GameController {
     private VBox fieldVBox;
 
     @FXML
-    private Button upButton;
-
-    @FXML
-    private Button rightButton;
-
-    @FXML
-    private Button downButton;
-
-    @FXML
-    private Button leftButton;
+    private Button reverseButton;
     //endregion
 
     //region Managers and Services
@@ -193,10 +184,7 @@ public class GameController {
 
         switch (this.boardType) {
             case _2D:
-                this.upButton.setVisible(false);
-                this.downButton.setVisible(false);
-                this.leftButton.setVisible(false);
-                this.rightButton.setVisible(false);
+                this.reverseButton.setVisible(false);
                 switch (this.boardField) {
                     case THREE_BY_THREE:
                         this.setButtonsGridPane(3, 3);
@@ -292,38 +280,25 @@ public class GameController {
         }
 
         //back
-        this.cubeSides.get(0).setTranslateX(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(0).setTranslateY(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(0).setTranslateZ(0.5 * BOARD_SIZE);
+        setToRight(0);
+        this.cubeSides.get(0).setVisible(false);
 
         //bottom
-        this.cubeSides.get(1).setTranslateX(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(1).setTranslateY(0);
-        this.cubeSides.get(1).setRotationAxis(Rotate.X_AXIS);
-        this.cubeSides.get(1).setRotate(90);
+        setToTop(1);
+        this.cubeSides.get(1).setVisible(false);
 
         //right
-        this.cubeSides.get(2).setTranslateX(-1 * BOARD_SIZE);
-        this.cubeSides.get(2).setTranslateY(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(2).setRotationAxis(Rotate.Y_AXIS);
-        this.cubeSides.get(2).setRotate(90);
+        setToRight(2);
 
         //left
-        this.cubeSides.get(3).setTranslateX(0);
-        this.cubeSides.get(3).setTranslateY(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(3).setRotationAxis(Rotate.Y_AXIS);
-        this.cubeSides.get(3).setRotate(90);
+        setToFront(3);
+        this.cubeSides.get(3).setVisible(false);
 
         //top
-        this.cubeSides.get(4).setTranslateX(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(4).setTranslateY(-1 * BOARD_SIZE);
-        this.cubeSides.get(4).setRotationAxis(Rotate.X_AXIS);
-        this.cubeSides.get(4).setRotate(90);
+        setToTop(4);
 
         //front
-        this.cubeSides.get(5).setTranslateX(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(5).setTranslateY(-0.5 * BOARD_SIZE);
-        this.cubeSides.get(5).setTranslateZ(0.5 * BOARD_SIZE);
+        setToFront(5);
 
         this.buttonsList = new LinkedList<Button>();
 
@@ -350,34 +325,42 @@ public class GameController {
         this.fieldVBox.getChildren().add(this.cube);
     }
 
-    public void upButton() {
-        this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
-    }
-
-    public void rightButton() {
-        this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
-        if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
+    public void reverseCubeButton() {
+        if (this.cubeSides.get(4).isVisible()) {
             this.cubeSides.get(4).setVisible(false);
-            this.cubeSides.get(3).setVisible(false);
-        } else if (!this.cubeSides.get(4).isVisible() || !this.cubeSides.get(3).isVisible()) {
-            this.cubeSides.get(4).setVisible(true);
+            this.cubeSides.get(2).setVisible(false);
+            this.cubeSides.get(5).setVisible(false);
+            this.cubeSides.get(0).setVisible(true);
+            this.cubeSides.get(1).setVisible(true);
             this.cubeSides.get(3).setVisible(true);
+        } else {
+            this.cubeSides.get(4).setVisible(true);
+            this.cubeSides.get(2).setVisible(true);
+            this.cubeSides.get(5).setVisible(true);
+            this.cubeSides.get(0).setVisible(false);
+            this.cubeSides.get(1).setVisible(false);
+            this.cubeSides.get(3).setVisible(false);
         }
     }
 
-    public void downButton() {
-        this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
+    private void setToTop(int index) {
+        this.cubeSides.get(index).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(index).setTranslateY(-1 * BOARD_SIZE);
+        this.cubeSides.get(index).setRotationAxis(Rotate.X_AXIS);
+        this.cubeSides.get(index).setRotate(90);
     }
 
-    public void leftButton() {
-        this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
-        if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
-            this.cubeSides.get(4).setVisible(false);
-            this.cubeSides.get(3).setVisible(false);
-        } else if (!this.cubeSides.get(4).isVisible() || !this.cubeSides.get(3).isVisible()) {
-            this.cubeSides.get(4).setVisible(true);
-            this.cubeSides.get(3).setVisible(true);
-        }
+    private void setToRight(int index) {
+        this.cubeSides.get(index).setTranslateX(-1 * BOARD_SIZE);
+        this.cubeSides.get(index).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(index).setRotationAxis(Rotate.Y_AXIS);
+        this.cubeSides.get(index).setRotate(90);
+    }
+
+    private void setToFront(int index) {
+        this.cubeSides.get(index).setTranslateX(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(index).setTranslateY(-0.5 * BOARD_SIZE);
+        this.cubeSides.get(index).setTranslateZ(0.5 * BOARD_SIZE);
     }
 
     private void showEndGameAlert() {
