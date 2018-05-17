@@ -20,7 +20,6 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
@@ -34,8 +33,9 @@ import java.util.List;
 @Component
 public class GameController {
 
-    //constraints
+    //region Constraints
     private static final int BOARD_SIZE = 270;
+    //endregion
 
     //region Fields
     private boolean isToMove;
@@ -67,7 +67,6 @@ public class GameController {
     //endregion
 
     //region FXML Fields
-
     @FXML
     private ListView<String> team1ListView;
 
@@ -176,11 +175,11 @@ public class GameController {
         }
     }
 
-    public void playAgainButton(ActionEvent actionEvent) {
+    public void playAgainButton() {
         this.stageManager.switchScene(FxmlView.GAME);
     }
 
-    public void exitButton(ActionEvent actionEvent) throws Exception{
+    public void exitButton() throws Exception{
         if (this.userService.getSessionUser() == null) {
             this.stageManager.switchScene(FxmlView.GAMEDETAILS);
         }
@@ -262,7 +261,7 @@ public class GameController {
         gridpane.setHgap(5);
         gridpane.setVgap(5);
 
-        buttonsList = new LinkedList<Button>();
+        buttonsList = new LinkedList<>();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
                 Button button = new Button();
@@ -351,11 +350,11 @@ public class GameController {
         this.fieldVBox.getChildren().add(this.cube);
     }
 
-    public void upButton(ActionEvent actionEvent) {
+    public void upButton() {
         this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
     }
 
-    public void rightButton(ActionEvent actionEvent) {
+    public void rightButton() {
         this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
         if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
             this.cubeSides.get(4).setVisible(false);
@@ -366,11 +365,11 @@ public class GameController {
         }
     }
 
-    public void downButton(ActionEvent actionEvent) {
+    public void downButton() {
         this.cube.getTransforms().add(new Rotate(180, Rotate.X_AXIS));
     }
 
-    public void leftButton(ActionEvent actionEvent) {
+    public void leftButton() {
         this.cube.getTransforms().add(new Rotate(180, Rotate.Y_AXIS));
         if (this.cubeSides.get(4).isVisible() && this.cubeSides.get(3).isVisible()) {
             this.cubeSides.get(4).setVisible(false);
